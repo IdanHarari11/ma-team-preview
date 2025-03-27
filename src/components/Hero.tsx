@@ -3,7 +3,6 @@
 import { useRef, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
-import Image from 'next/image'
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -34,7 +33,7 @@ export default function Hero() {
       })
     }
   }, [])
-  
+
   return (
     <section ref={containerRef} className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Video Background with futuristic overlay */}
@@ -68,7 +67,7 @@ export default function Hero() {
         {/* Futuristic geometric elements */}
         <motion.div 
           style={{ scale: circleScale, opacity: circleOpacity }}
-          className="absolute top-1/4 -right-40 w-96 h-96 rounded-full bg-ma-primary/20 backdrop-blur-lg"
+          className="absolute top-1/4 -right-40 w-96 h-96 rounded-full bg-[#8BA888]/20 backdrop-blur-lg"
         />
         <motion.div 
           style={{ scale: circleScale, opacity: circleOpacity }}
@@ -111,7 +110,7 @@ export default function Hero() {
           className="relative h-64 w-40"
         >
           {/* Pilates silhouette */}
-          <div className="absolute inset-0 bg-ma-primary/70 mask-silhouette-pilates backdrop-blur-sm rounded-lg"></div>
+          <div className="absolute inset-0 bg-[#8BA888]/70 mask-silhouette-pilates backdrop-blur-sm rounded-lg"></div>
           <div className="absolute inset-0 flex items-center justify-center text-white text-xs font-bold opacity-60">
             פילאטיס
           </div>
@@ -135,7 +134,7 @@ export default function Hero() {
           </div>
         </motion.div>
       </motion.div>
-      
+
       {/* Content */}
       <motion.div 
         style={{ opacity, y }} 
@@ -149,7 +148,7 @@ export default function Hero() {
         >
           {/* Tech lines in background */}
           <div className="absolute inset-0 rounded-3xl overflow-hidden">
-            <motion.div 
+            <motion.div
               animate={{ 
                 backgroundPosition: ['0% 0%', '100% 100%'] 
               }}
@@ -169,7 +168,7 @@ export default function Hero() {
           
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 relative">
             <motion.span 
-              className="text-ma-primary block mb-1"
+              className="text-[#8BA888] block mb-1"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -206,7 +205,7 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <Link 
               href="#contact"
-              className="group relative px-8 py-4 bg-white/10 backdrop-blur-md text-white font-medium rounded-full border border-white/30 shadow-xl transition-all transform hover:shadow-ma-primary/20 hover:bg-white/20 hover:scale-105 hover:border-white/50 overflow-hidden"
+              className="group relative px-8 py-4 bg-white/10 backdrop-blur-md text-white font-medium rounded-full border border-white/30 shadow-xl transition-all transform hover:shadow-[#8BA888]/20 hover:bg-white/20 hover:scale-105 hover:border-white/50 overflow-hidden"
             >
               {/* Button glow effect */}
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-white/0 via-white/30 to-white/0 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
@@ -215,7 +214,7 @@ export default function Hero() {
             
             <Link 
               href="#branches"
-              className="group relative px-8 py-4 bg-ma-primary/80 backdrop-blur-md text-white font-medium rounded-full border border-ma-primary/30 shadow-xl transition-all transform hover:shadow-ma-primary/50 hover:bg-ma-primary hover:scale-105 hover:border-ma-primary/50 overflow-hidden"
+              className="group relative px-8 py-4 bg-[#8BA888]/80 backdrop-blur-md text-white font-medium rounded-full border border-[#8BA888]/30 shadow-xl transition-all transform hover:shadow-[#8BA888]/50 hover:bg-[#8BA888] hover:scale-105 hover:border-[#8BA888]/50 overflow-hidden"
             >
               {/* Button glow effect */}
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
@@ -224,16 +223,16 @@ export default function Hero() {
           </div>
         </motion.div>
       </motion.div>
-      
+
       {/* Scroll indicator */}
-      <motion.div 
+      <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
       >
-        <div className="w-12 h-20 border-2 border-white/30 rounded-full flex justify-center pt-3 backdrop-blur-sm bg-white/5">
+        <div className="w-16 h-16 flex items-center justify-center">
           <motion.div 
-            className="w-2 h-4 bg-white/70 rounded-full"
+            className="text-2xl font-bold text-white/70"
             animate={{ 
               y: [0, 8, 0],
               opacity: [0.4, 1, 0.4]
@@ -243,7 +242,9 @@ export default function Hero() {
               duration: 1.5,
               ease: "easeInOut"
             }}
-          />
+          >
+            MA
+          </motion.div>
         </div>
       </motion.div>
     </section>

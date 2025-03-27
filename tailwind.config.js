@@ -11,10 +11,10 @@ module.exports = {
         rubik: ["var(--font-rubik)", "sans-serif"],
       },
       colors: {
-        'ma-primary': '#E8A04B', // Golden accent color
+        'ma-primary': '#8BA888', // Olive green color
         'ma-black': '#1A1A1A',  // Dark color for text
         'ma-gray': '#E5E5E5',   // Light gray for backgrounds
-        'ma-light': '#FAFAFA',  // Very light color for main backgrounds
+        'ma-light': '#F5F2EA',  // Cream color for main backgrounds
       },
       animation: {
         'slow-pulse': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',

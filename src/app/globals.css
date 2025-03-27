@@ -4,6 +4,9 @@
 
 :root {
   --font-rubik: 'Rubik', sans-serif;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 245, 242, 234;
+  --background-end-rgb: 245, 242, 234;
 }
 
 html {
@@ -12,14 +15,22 @@ html {
 
 body {
   direction: rtl;
-  background-color: white;
-  color: #1A1A1A;
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+  color: rgb(var(--foreground-rgb));
   font-family: var(--font-rubik), sans-serif;
+  min-height: 100vh;
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/70 backdrop-blur-md;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
   
   .glass-dark {
@@ -59,4 +70,62 @@ body {
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
   mask-position: center;
+}
+
+/* Hover animations for all interactive elements */
+button, a, .interactive {
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+button:hover, a:hover, .interactive:hover {
+  transform: scale(1.05);
+}
+
+/* Card hover effects */
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid #8BA888;
+  outline-offset: 2px;
+}
+
+/* Loading animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
