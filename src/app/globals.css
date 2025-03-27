@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-rubik: 'Rubik', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  direction: rtl;
+  background-color: white;
+  color: #1A1A1A;
+  font-family: var(--font-rubik), sans-serif;
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-md;
+  }
+  
+  .glass-dark {
+    @apply bg-ma-black/70 backdrop-blur-md;
+  }
+}
+
+/* Add mask styles for athlete silhouettes */
+.mask-silhouette-pilates {
+  -webkit-mask-image: url('/images/silhouettes/pilates.png');
+  mask-image: url('/images/silhouettes/pilates.png');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.mask-silhouette-yoga {
+  -webkit-mask-image: url('/images/silhouettes/yoga.png');
+  mask-image: url('/images/silhouettes/yoga.png');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.mask-silhouette-functional {
+  -webkit-mask-image: url('/images/silhouettes/functional.png');
+  mask-image: url('/images/silhouettes/functional.png');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
