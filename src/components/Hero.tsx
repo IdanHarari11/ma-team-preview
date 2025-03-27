@@ -183,6 +183,7 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               הסטודיו לאימונים אישיים
+            <br/>
               בחסות ההוא מהישרדות
             </motion.span>
             
