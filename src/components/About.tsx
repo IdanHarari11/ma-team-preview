@@ -59,17 +59,24 @@ export default function About() {
       opacity: 1,
       transition: { 
         when: "beforeChildren",
-        staggerChildren: 0.1
+        staggerChildren: 0.2,
+        duration: 0.5,
+        ease: "easeOut"
       }
     }
   }
   
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: { 
       y: 0, 
       opacity: 1,
-      transition: { type: "spring", stiffness: 300, damping: 24 }
+      transition: { 
+        type: "spring", 
+        stiffness: 100,
+        damping: 20,
+        duration: 0.6
+      }
     }
   }
   
@@ -99,7 +106,7 @@ export default function About() {
   }
   
   return (
-    <div ref={ref} className="w-full py-16">
+    <div ref={ref} className="w-full py-16 bg-[#F5F2EA]">
       <motion.div 
         variants={containerVariants}
         initial="hidden"
@@ -107,46 +114,41 @@ export default function About() {
         className="max-w-6xl mx-auto px-4"
       >
         {/* About Studio */}
-        <motion.div variants={itemVariants} className="mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-ma-black mb-6 text-center">
+        <motion.div variants={itemVariants} className="mb-20">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#2C3338] mb-8 text-center">
             קצת עלינו
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-            <div className="order-2 md:order-1">
-              <h3 className="text-2xl font-semibold text-ma-black mb-4">סטודיו MA TEAM</h3>
-              <p className="text-ma-black/80 mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1 space-y-6">
+              <h3 className="text-2xl font-semibold text-[#2C3338]">סטודיו MA TEAM</h3>
+              <p className="text-[#4A5568] leading-relaxed">
                 סטודיו MA TEAM הוקם ב-2016 מתוך אהבה לפילאטיס ותשוקה לעזור לאנשים לחיות חיים בריאים יותר. המטרה שלנו היא להעניק חוויית אימון אישית, מקצועית ומותאמת לצרכים של כל מתאמן ומתאמנת.
               </p>
-              <p className="text-ma-black/80 mb-6">
+              <p className="text-[#4A5568] leading-relaxed">
                 הסטודיו שלנו מציע מגוון רחב של שיעורים בקבוצות קטנות ואימונים אישיים, תוך שימוש בשיטות מתקדמות ומכשור חדשני. צוות המדריכים המוסמך והמנוסה שלנו מלווה את המתאמנים בדרך להשגת היעדים שלהם, בין אם מדובר בשיפור היציבה, הקלה בכאבים, חיזוק והארכת השרירים או פשוט הרגשה טובה יותר בגוף.
               </p>
               
-              <div className="flex flex-wrap gap-4">
-                <a 
-                  href="#branches"
-                  className="inline-flex items-center px-5 py-2.5 bg-ma-primary text-white rounded-full font-medium shadow-md hover:shadow-lg hover:bg-ma-primary/90 transition-all"
-                >
-                  הסניפים שלנו
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </a>
-                
-                <a 
-                  href="#training"
-                  className="inline-flex items-center px-5 py-2.5 bg-white border border-ma-gray/30 text-ma-black rounded-full font-medium shadow-md hover:shadow-lg hover:bg-ma-gray/10 transition-all"
-                >
-                  סוגי האימונים
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </a>
-              </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-10 py-4 text-lg bg-[#8BA888] text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all relative group overflow-hidden w-full md:w-auto"
+                onClick={() => {
+                  const branchesSection = document.getElementById('branches');
+                  if (branchesSection) {
+                    branchesSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                <span className="relative z-10">הסניפים שלנו</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#8BA888] to-[#9DB89A] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </motion.button>
             </div>
             
-            <div className="order-1 md:order-2 relative">
+            <motion.div 
+              variants={itemVariants}
+              className="order-1 md:order-2 relative"
+            >
               <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
                 <Image 
                   src="https://images.unsplash.com/photo-1576678927484-cc907957088c?q=80&w=800" 
@@ -156,14 +158,14 @@ export default function About() {
                   className="w-full h-auto object-cover"
                 />
               </div>
-              <div className="absolute top-0 right-0 w-full h-full -mr-4 -mt-4 rounded-2xl bg-ma-primary/20 -z-10" />
-            </div>
+              <div className="absolute top-0 right-0 w-full h-full -mr-4 -mt-4 rounded-2xl bg-[#8BA888]/20 -z-10" />
+            </motion.div>
           </div>
         </motion.div>
         
         {/* Team */}
-        <motion.div variants={itemVariants} className="mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-ma-black mb-10 text-center">
+        <motion.div variants={itemVariants} className="mb-20">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#2C3338] mb-12 text-center">
             הצוות שלנו
           </h2>
           
@@ -172,7 +174,7 @@ export default function About() {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <div className="relative h-72">
                   <Image 
@@ -183,19 +185,19 @@ export default function About() {
                   />
                 </div>
                 
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-ma-black mb-1">{member.name}</h3>
-                  <p className="text-ma-primary font-medium mb-4">{member.role}</p>
-                  <p className="text-ma-black/70 mb-5">{member.bio}</p>
+                <div className="p-8 space-y-4">
+                  <h3 className="text-xl font-semibold text-[#2C3338]">{member.name}</h3>
+                  <p className="text-[#8BA888] font-medium">{member.role}</p>
+                  <p className="text-[#4A5568] leading-relaxed">{member.bio}</p>
                   
                   {member.socialMedia && (
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-4 pt-2">
                       {member.socialMedia.instagram && (
                         <a 
                           href={member.socialMedia.instagram}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-ma-black/60 hover:text-pink-500 transition-colors"
+                          className="text-[#4A5568] hover:text-[#8BA888] transition-colors"
                         >
                           <SocialIcon type="instagram" />
                         </a>
@@ -205,19 +207,9 @@ export default function About() {
                           href={member.socialMedia.facebook}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-ma-black/60 hover:text-blue-600 transition-colors"
+                          className="text-[#4A5568] hover:text-[#8BA888] transition-colors"
                         >
                           <SocialIcon type="facebook" />
-                        </a>
-                      )}
-                      {member.socialMedia.linkedin && (
-                        <a 
-                          href={member.socialMedia.linkedin}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-ma-black/60 hover:text-blue-700 transition-colors"
-                        >
-                          <SocialIcon type="linkedin" />
                         </a>
                       )}
                     </div>
@@ -230,46 +222,46 @@ export default function About() {
         
         {/* Values */}
         <motion.div variants={itemVariants}>
-          <h2 className="text-3xl md:text-4xl font-bold text-ma-black mb-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#2C3338] mb-12 text-center">
             הערכים שלנו
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-2xl shadow-lg">
-              <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-full bg-ma-primary/10 text-ma-primary">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div variants={itemVariants} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#8BA888]/10 text-[#8BA888]">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-ma-black mb-2">התאמה אישית</h3>
-              <p className="text-ma-black/70">
+              <h3 className="text-xl font-semibold text-[#2C3338] mb-4">התאמה אישית</h3>
+              <p className="text-[#4A5568] leading-relaxed">
                 אנו מאמינים שכל אדם הוא ייחודי, ולכן מתאימים את האימונים באופן אישי לצרכים, למטרות וליכולות של כל מתאמן.
               </p>
-            </div>
+            </motion.div>
             
-            <div className="bg-white p-6 rounded-2xl shadow-lg">
-              <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-full bg-ma-primary/10 text-ma-primary">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <motion.div variants={itemVariants} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#8BA888]/10 text-[#8BA888]">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-ma-black mb-2">בטיחות ומקצועיות</h3>
-              <p className="text-ma-black/70">
+              <h3 className="text-xl font-semibold text-[#2C3338] mb-4">בטיחות ומקצועיות</h3>
+              <p className="text-[#4A5568] leading-relaxed">
                 הבטיחות של המתאמנים שלנו היא בראש סדר העדיפויות. המדריכים שלנו מוסמכים ומתעדכנים באופן שוטף בשיטות האימון החדשות ביותר.
               </p>
-            </div>
+            </motion.div>
             
-            <div className="bg-white p-6 rounded-2xl shadow-lg">
-              <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-full bg-ma-primary/10 text-ma-primary">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <motion.div variants={itemVariants} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#8BA888]/10 text-[#8BA888]">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-ma-black mb-2">קהילתיות</h3>
-              <p className="text-ma-black/70">
+              <h3 className="text-xl font-semibold text-[#2C3338] mb-4">קהילתיות</h3>
+              <p className="text-[#4A5568] leading-relaxed">
                 בסטודיו שלנו אנחנו מטפחים קהילה תומכת ומעצימה, שבה כל אחד מרגיש שייך ומקבל עידוד להתקדם ולהתפתח.
               </p>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </motion.div>

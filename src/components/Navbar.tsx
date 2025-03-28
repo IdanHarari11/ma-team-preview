@@ -3,25 +3,38 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('')
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
+      const sections = ['hero', 'about', 'branches', 'schedule', 'testimonials', 'contact']
+      const currentSection = sections.find(section => {
+        const element = document.getElementById(section)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          return rect.top <= 100 && rect.bottom >= 100
+        }
+        return false
+      })
+      
+      setActiveSection(currentSection || '')
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const navItems = [
-    { name: 'בית', href: '#home' },
-    { name: 'עלינו', href: '#about' },
-    { name: 'הסניפים שלנו', href: '#branches' },
-    { name: 'המלצות', href: '#testimonials' },
-    { name: 'צור קשר', href: '#contact' }
+    { id: 'about', label: 'עלינו' },
+    { id: 'branches', label: 'סניפים' },
+    { id: 'schedule', label: 'לוח זמנים' },
+    { id: 'testimonials', label: 'המלצות' },
+    { id: 'contact', label: 'צור קשר' },
   ]
 
   return (
@@ -43,27 +56,34 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8 space-x-reverse">
-            {navItems.map((item) => (
+            {navItems.map(item => (
               <Link
-                key={item.name}
-                href={item.href}
-                className="text-ma-black/80 hover:text-ma-black font-medium transition-colors duration-200 hover:scale-105"
+                key={item.id}
+                href={`#${item.id}`}
+                className={`px-4 py-2 rounded-lg font-medium transition-all relative group overflow-hidden ${
+                  activeSection === item.id
+                    ? 'bg-[#8BA888] text-white shadow-lg shadow-[#8BA888]/20'
+                    : 'text-[#8BA888] hover:bg-[#8BA888]/10'
+                }`}
+                onClick={() => {
+                  const section = document.getElementById(item.id)
+                  if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}
               >
-                {item.name}
+                <span className="relative z-10">{item.label}</span>
+                {activeSection === item.id && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#8BA888] to-[#9DB89A] opacity-50 blur-sm"></div>
+                )}
               </Link>
             ))}
-            <Link
-              href="#contact"
-              className="px-6 py-2.5 bg-[#8BA888] text-white rounded-xl font-medium shadow-lg hover:bg-[#8BA888]/90 transition-all hover:scale-105"
-            >
-              צור קשר
-            </Link>
           </div>
 
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors"
+            className="md:hidden p-2 rounded-lg text-[#8BA888] hover:bg-[#8BA888]/10 transition-colors"
           >
             <svg
               className="w-6 h-6"
@@ -92,35 +112,44 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu */}
-      <div
+      <motion.div
+        initial={false}
+        animate={isMenuOpen ? "open" : "closed"}
+        variants={{
+          open: { height: "auto", opacity: 1 },
+          closed: { height: 0, opacity: 0 }
+        }}
         className={`md:hidden transition-all duration-300 ease-in-out ${
-          isMenuOpen
-            ? 'max-h-screen opacity-100'
-            : 'max-h-0 opacity-0 overflow-hidden'
-        }`}
-      >
+          isMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
+        }`}>
         <div className="bg-white/95 backdrop-blur-md shadow-lg px-4 py-4">
           <div className="flex flex-col space-y-4">
-            {navItems.map((item) => (
+            {navItems.map(item => (
               <Link
-                key={item.name}
-                href={item.href}
-                className="text-ma-black/80 hover:text-ma-black font-medium transition-colors duration-200 hover:scale-105"
-                onClick={() => setIsMenuOpen(false)}
+                key={item.id}
+                href={`#${item.id}`}
+                className={`block px-4 py-2 rounded-lg font-medium transition-all relative group overflow-hidden ${
+                  activeSection === item.id
+                    ? 'bg-[#8BA888] text-white shadow-lg shadow-[#8BA888]/20'
+                    : 'text-[#8BA888] hover:bg-[#8BA888]/10'
+                }`}
+                onClick={() => {
+                  setIsMenuOpen(false)
+                  const section = document.getElementById(item.id)
+                  if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}
               >
-                {item.name}
+                <span className="relative z-10">{item.label}</span>
+                {activeSection === item.id && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#8BA888] to-[#9DB89A] opacity-50 blur-sm"></div>
+                )}
               </Link>
             ))}
-            <Link
-              href="#contact"
-              className="px-6 py-2.5 bg-[#8BA888] text-white rounded-xl font-medium shadow-lg hover:bg-[#8BA888]/90 transition-all hover:scale-105 text-center"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              צור קשר
-            </Link>
           </div>
         </div>
-      </div>
+      </motion.div>
     </nav>
   )
 } 

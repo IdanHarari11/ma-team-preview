@@ -3,6 +3,7 @@
 import { useRef, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -35,34 +36,25 @@ export default function Hero() {
   }, [])
 
   return (
-    <section ref={containerRef} className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Video Background with futuristic overlay */}
+    <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image with overlays */}
       <div className="absolute inset-0 z-0">
         <motion.div style={{ scale }} className="w-full h-full">
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute min-w-full min-h-full object-cover"
-            poster="/images/hero-poster.jpg"
-          >
-            <source src="/videos/pilates-background.mp4" type="video/mp4" />
-          </video>
+          <Image
+            src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=2000&auto=format&fit=crop"
+            alt="MA TEAM Studio"
+            fill
+            priority
+            className="object-cover"
+          />
         </motion.div>
         
-        {/* Futuristic overlay grid */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60 backdrop-blur-[2px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.4)_70%)]" />
+        {/* Overlay gradients */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.5)_70%)]" />
         
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0 opacity-20" 
-             style={{ 
-               backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)', 
-               backgroundSize: '40px 40px'
-             }} 
-        />
+        {/* Contrast overlay */}
+        <div className="absolute inset-0 bg-[#8BA888]/20 mix-blend-multiply" />
         
         {/* Futuristic geometric elements */}
         <motion.div 
@@ -96,7 +88,43 @@ export default function Hero() {
         />
         
         {/* Flowing particle effect */}
-        <div className="absolute inset-0 bg-[url('/images/noise.png')] opacity-5 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-[url('/images/noise.png')] opacity-10 mix-blend-overlay" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4">
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 md:p-12 shadow-2xl [box-shadow:_0_0_30px_rgba(139,168,136,0.3)]">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="space-y-6 flex flex-col items-center text-center"
+          >
+            <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg [text-shadow:_0_0_15px_rgba(139,168,136,0.5)]">
+              MA TEAM
+            </h1>
+            <p className="text-xl md:text-2xl text-white/90 drop-shadow-lg [text-shadow:_0_0_10px_rgba(139,168,136,0.3)]">
+              סטודיו לפילאטיס, יוגה ואימון פונקציונלי
+            </p>
+            <div className="flex justify-center">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 bg-white text-[#2C3338] rounded-xl font-medium shadow-lg hover:shadow-xl transition-all relative group overflow-hidden"
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                <span className="relative z-10">לאימון ניסיון</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#8BA888] to-[#9DB89A] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 rounded-xl bg-white/20 blur-xl group-hover:bg-white/40 transition-all duration-300"></div>
+              </motion.button>
+            </div>
+          </motion.div>
+        </div>
       </div>
       
       {/* Athlete silhouettes - Left side */}
@@ -131,95 +159,6 @@ export default function Hero() {
           <div className="absolute inset-0 bg-white/30 mask-silhouette-yoga backdrop-blur-sm rounded-lg"></div>
           <div className="absolute inset-0 flex items-center justify-center text-white text-xs font-bold opacity-60">
             יוגה
-          </div>
-        </motion.div>
-      </motion.div>
-
-      {/* Content */}
-      <motion.div 
-        style={{ opacity, y }} 
-        className="container relative z-10 px-4 text-center"
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mx-auto max-w-3xl backdrop-blur-md bg-black/20 p-8 rounded-3xl border border-white/10 shadow-2xl"
-        >
-          {/* Tech lines in background */}
-          <div className="absolute inset-0 rounded-3xl overflow-hidden">
-            <motion.div
-              animate={{ 
-                backgroundPosition: ['0% 0%', '100% 100%'] 
-              }}
-              transition={{ 
-                duration: 15, 
-                ease: "linear", 
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
-              className="absolute inset-0 opacity-20"
-              style={{
-                backgroundImage: 'linear-gradient(45deg, transparent 90%, rgba(255, 255, 255, 0.5) 95%, transparent 100%), linear-gradient(-45deg, transparent 90%, rgba(255, 255, 255, 0.5) 95%, transparent 100%)',
-                backgroundSize: '300px 300px'
-              }}
-            />
-          </div>
-          
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 relative">
-            <motion.span 
-              className="text-[#8BA888] block mb-1"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              MA TEAM
-            </motion.span>
-            <motion.span 
-              className="text-2xl md:text-3xl font-light tracking-wider"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              הסטודיו לאימונים אישיים
-            </motion.span>
-            
-            {/* Decorative lines */}
-            <motion.div 
-              initial={{ width: 0 }}
-              animate={{ width: '30%' }}
-              transition={{ duration: 1, delay: 0.8 }}
-              className="h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent absolute -bottom-2 left-[35%]"
-            />
-          </h1>
-          
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.8 }}
-            className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto mb-8"
-          >
-            פילאטיס, יוגה ואימון פונקציונלי בהתאמה אישית ובאווירה משפחתית
-          </motion.p>
-          
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <Link 
-              href="#contact"
-              className="group relative px-8 py-4 bg-white/10 backdrop-blur-md text-white font-medium rounded-full border border-white/30 shadow-xl transition-all transform hover:shadow-[#8BA888]/20 hover:bg-white/20 hover:scale-105 hover:border-white/50 overflow-hidden"
-            >
-              {/* Button glow effect */}
-              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-white/0 via-white/30 to-white/0 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
-              קבע שיעור ניסיון
-            </Link>
-            
-            <Link 
-              href="#branches"
-              className="group relative px-8 py-4 bg-[#8BA888]/80 backdrop-blur-md text-white font-medium rounded-full border border-[#8BA888]/30 shadow-xl transition-all transform hover:shadow-[#8BA888]/50 hover:bg-[#8BA888] hover:scale-105 hover:border-[#8BA888]/50 overflow-hidden"
-            >
-              {/* Button glow effect */}
-              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
-              מידע על הסניפים
-            </Link>
           </div>
         </motion.div>
       </motion.div>

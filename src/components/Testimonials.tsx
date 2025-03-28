@@ -145,14 +145,20 @@ export default function Testimonials() {
   return (
     <div className="w-full py-16 bg-[#F5F2EA]" id="testimonials">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-ma-black mb-8">
-            מה הלקוחות אומרים
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          ref={ref}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-[#2C3338] mb-8">
+            הלקוחות של MA TEAM מדברים
           </h2>
-          <p className="text-ma-black/70 text-lg max-w-2xl mx-auto">
-            אנחנו גאים לשמוע את המשוב החיוביתאמנים שלנו. הנה מה שיש להם לומר על החוויה שלהם ב-MA TEAM.
+          <p className="text-[#4A5568] max-w-2xl mx-auto">
+            מה המתאמנים שלנו אומרים על החוויה בסטודיו MA TEAM
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {reviews.map((review, index) => (
@@ -162,7 +168,7 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white rounded-2xl p-8 shadow-lg"
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all"
             >
               <div className="flex items-center mb-6">
                 <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
@@ -179,24 +185,14 @@ export default function Testimonials() {
                   <p className="text-ma-black/60 text-sm">סניף {review.branch === 'tel-aviv' ? 'תל אביב' : 'אשדוד'}</p>
                 </div>
               </div>
+              
               <p className="text-ma-black/80 mb-6">{review.text}</p>
+              
               <div className="flex text-[#8BA888]">
                 {renderStars(review.rating)}
               </div>
             </motion.div>
           ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <Link
-            href="/testimonials"
-            className="inline-flex items-center gap-4 px-8 py-4 bg-[#8BA888] text-white rounded-xl font-medium shadow-lg hover:bg-[#8BA888]/90 transition-all"
-          >
-            <span>לכל הביקורות</span>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </Link>
         </div>
       </div>
     </div>
