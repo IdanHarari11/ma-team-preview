@@ -1,19 +1,14 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
-
-interface FaqItem {
-  question: string
-  answer: string
-}
+import { motion, useInView } from 'framer-motion'
 
 export default function Faq() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
-  
-  const faqItems: FaqItem[] = [
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+
+  const faqs = [
     {
       question: "האם צריך ניסיון קודם באימוני פילאטיס?",
       answer: "לא, אין צורך בניסיון קודם. המדריכים שלנו מותאמים לכל רמות הניסיון, מתחילים ועד מתקדמים. בשיעור הראשון תקבלו הדרכה אישית והכוונה מותאמת לרמתכם."
@@ -39,109 +34,91 @@ export default function Faq() {
       answer: "כן, ניתן לבטל או לדחות שיעור עד 12 שעות לפני מועד השיעור ללא חיוב. ביטול בהתראה קצרה יותר עשוי להיות כרוך בחיוב מלא עבור השיעור. אנו מבינים שלפעמים יש אילוצים, ולכן במקרים חריגים נשמח לבחון כל מקרה לגופו."
     }
   ]
-  
-  const toggleItem = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index)
-  }
-  
-  // Animation variants
+
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
-      transition: { 
-        when: "beforeChildren",
+      transition: {
         staggerChildren: 0.1
       }
     }
   }
-  
+
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { 
-      y: 0, 
+    hidden: { opacity: 0, y: 20 },
+    visible: {
       opacity: 1,
-      transition: { type: "spring", stiffness: 300, damping: 24 }
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100
+      }
     }
   }
-  
+
   return (
-    <div ref={ref} className="w-full py-12 bg-gradient-to-br from-ma-gray/20 to-transparent">
-      <motion.div 
-        variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        className="max-w-3xl mx-auto px-4"
-      >
-        <motion.div variants={itemVariants} className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-ma-black mb-4">שאלות נפוצות</h2>
-          <p className="text-ma-black/70 max-w-xl mx-auto">
-            כאן תוכלו למצוא תשובות לשאלות הנפוצות ביותר. אם לא מצאתם תשובה לשאלה שלכם, אל תהססו ליצור קשר.
-          </p>
-        </motion.div>
-        
-        <div className="space-y-4">
-          {faqItems.map((item, index) => (
-            <motion.div 
-              key={index}
-              variants={itemVariants}
-              className={`bg-white rounded-2xl overflow-hidden shadow-md transition-all duration-300 ${
-                openIndex === index ? 'shadow-xl' : 'hover:shadow-lg'
-              }`}
-            >
-              <button
-                onClick={() => toggleItem(index)}
-                className="w-full px-6 py-5 flex justify-between items-center text-right"
-                aria-expanded={openIndex === index}
-              >
-                <span className="font-semibold text-ma-black text-lg">{item.question}</span>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center bg-ma-gray/10 transition-transform duration-300 ${
-                  openIndex === index ? 'rotate-180' : ''
-                }`}>
-                  <svg 
-                    className="w-4 h-4 text-ma-black/70" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24" 
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-              </button>
-              
-              <AnimatePresence>
-                {openIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-6 pb-5 text-ma-black/80 border-t border-ma-gray/10 pt-4">
-                      {item.answer}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
-        </div>
-        
-        <motion.div variants={itemVariants} className="mt-12 text-center">
-          <p className="text-ma-black/70 mb-4">יש לכם שאלה נוספת?</p>
-          <a 
-            href="#contact"
-            className="inline-flex items-center px-6 py-3 bg-ma-primary text-white rounded-full font-medium shadow-lg shadow-ma-primary/20 hover:shadow-ma-primary/30 hover:bg-ma-primary/90 transition-all"
+    <div ref={ref} className="w-full py-16 bg-[#F5F2EA]" id="faq">
+      <div className="max-w-4xl mx-auto px-4">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="space-y-8"
+        >
+          <motion.h2
+            variants={itemVariants} 
+            className="text-3xl md:text-4xl font-bold text-ma-black text-center mb-12"
           >
-            צרו קשר עכשיו
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </a>
+            הלקוחות מדברים
+          </motion.h2>
+
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="bg-white rounded-2xl shadow-lg overflow-hidden"
+              >
+                <button
+                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                  className="w-full px-6 py-4 flex items-center justify-between text-right hover:bg-white/50 transition-colors"
+                >
+                  <span className="text-lg font-medium text-ma-black">
+                    {faq.question}
+                  </span>
+                  <svg
+                    className={`w-5 h-5 transform transition-transform ${
+                      openIndex === index ? 'rotate-180' : ''
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                <div
+                  className={`px-6 transition-all duration-300 ease-in-out ${
+                    openIndex === index
+                      ? 'max-h-48 py-4 opacity-100'
+                      : 'max-h-0 py-0 opacity-0'
+                  }`}
+                >
+                  <p className="text-ma-black/80">
+                    {faq.answer}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   )
 } 

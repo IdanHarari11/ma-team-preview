@@ -1,8 +1,38 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
+
+const CountUp = ({ end, duration = 2000 }: { end: number, duration?: number }) => {
+  const [count, setCount] = useState(0)
+  const countRef = useRef<NodeJS.Timeout>()
+  const startTimeRef = useRef<number>()
+
+  useEffect(() => {
+    startTimeRef.current = Date.now()
+    const step = () => {
+      const now = Date.now()
+      const progress = Math.min((now - startTimeRef.current!) / duration, 1)
+      
+      setCount(Math.floor(progress * end))
+      
+      if (progress < 1) {
+        countRef.current = setTimeout(step, 1000 / 60)
+      }
+    }
+    
+    step()
+    
+    return () => {
+      if (countRef.current) {
+        clearTimeout(countRef.current)
+      }
+    }
+  }, [end, duration])
+
+  return <>{count}</>
+}
 
 export default function Stats() {
   const ref = useRef(null)
@@ -10,19 +40,23 @@ export default function Stats() {
 
   const stats = [
     {
-      number: '3+',
+      number: 3,
+      suffix: '+',
       label: 'שנות ניסיון'
     },
     {
-      number: '100%',
+      number: 100,
+      suffix: '%',
       label: 'שביעות רצון'
     },
     {
-      number: '5+',
+      number: 5,
+      suffix: '+',
       label: 'מאמנים'
     },
     {
-      number: '10+',
+      number: 10,
+      suffix: '+',
       label: 'מאמנים מוסמכים'
     }
   ]
@@ -73,7 +107,12 @@ export default function Stats() {
                 className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow"
               >
                 <div className="text-4xl md:text-5xl font-bold text-[#8BA888] mb-2">
-                  {stat.number}
+                  {isInView && (
+                    <>
+                      <CountUp end={stat.number} />
+                      {stat.suffix}
+                    </>
+                  )}
                 </div>
                 <div className="text-ma-black/80">
                   {stat.label}

@@ -24,7 +24,6 @@ export default function Gallery() {
     { src: "/images/about-main.jpg", alt: "אימון פונקציונלי", width: 600, height: 800 },
     { src: "/images/about-main.jpg", alt: "מאמנת עם מתאמנת", width: 800, height: 533 },
     { src: "/images/about-main.jpg", alt: "יוגה בסטודיו", width: 800, height: 600 },
-    { src: "/images/about-main.jpg", alt: "אווירה בסטודיו", width: 600, height: 800 },
   ]
   
   // Animation variants

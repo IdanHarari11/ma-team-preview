@@ -1,135 +1,355 @@
 'use client'
 
-import { useState, useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+
+interface FormData {
+  fullName: string
+  phone: string
+  email: string
+  city: 'tel-aviv' | 'ashdod'
+  studio: string
+  trainingType: string
+  message: string
+  preferredTime: string
+}
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
+  const [formData, setFormData] = useState<FormData>({
+    fullName: '',
     phone: '',
     email: '',
-    message: ''
+    city: 'tel-aviv',
+    studio: '',
+    trainingType: '',
+    message: '',
+    preferredTime: ''
   })
-  
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
+  const studios = {
+    'tel-aviv': [
+      { id: 'telaviv', name: 'סניף תל אביב - המסגר 42' }
+    ],
+    'ashdod': [
+      { id: 'ashdod-pilates', name: 'סטודיו פילאטיס ויוגה - האורגים 7' },
+      { id: 'ashdod-functional', name: 'סטודיו פונקציונלי - האורגים 7' }
+    ]
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const trainingTypes = {
+    'tel-aviv': ['פילאטיס מכשירים', 'פילאטיס מזרן', 'אימוני כושר אישיים', 'אימוני TRX', 'אימוני כושר קבוצתיים'],
+    'ashdod-pilates': ['פילאטיס מכשירים', 'פילאטיס מזרן', 'יוגה'],
+    'ashdod-functional': ['אימוני כושר אישיים', 'אימוני TRX', 'אימוני כושר קבוצתיים']
+  }
+
+  const preferredTimes = [
+    'בוקר מוקדם (06:00-09:00)',
+    'בוקר (09:00-12:00)',
+    'צהריים (12:00-16:00)',
+    'אחר הצהריים (16:00-19:00)',
+    'ערב (19:00-22:00)'
+  ]
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would normally submit the form to your backend
+    // Here you would typically send the form data to your server
     console.log('Form submitted:', formData)
-    alert('תודה שפנית אלינו! נציג יחזור אליך בהקדם.')
-    setFormData({ name: '', phone: '', email: '', message: '' })
+    setIsSubmitted(true)
+    
+    // Reset form after 3 seconds
+    setTimeout(() => {
+      setIsSubmitted(false)
+      setFormData({
+        fullName: '',
+        phone: '',
+        email: '',
+        city: 'tel-aviv',
+        studio: '',
+        trainingType: '',
+        message: '',
+        preferredTime: ''
+      })
+    }, 3000)
   }
 
-  // Animation variants
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => {
+      const newData = { ...prev, [name]: value }
+      
+      // Reset dependent fields when city changes
+      if (name === 'city') {
+        newData.studio = ''
+        newData.trainingType = ''
+      }
+      
+      // Reset training type when studio changes
+      if (name === 'studio') {
+        newData.trainingType = ''
+      }
+      
+      return newData
+    })
+  }
+
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
-      transition: { 
-        when: "beforeChildren",
-        staggerChildren: 0.1
+      transition: {
+        staggerChildren: 0.15
       }
     }
   }
 
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { 
-      y: 0, 
+  const titleVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: {
       opacity: 1,
-      transition: { type: "spring", stiffness: 300, damping: 24 }
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  const formContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  }
+
+  const formItemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  const buttonVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    },
+    hover: {
+      scale: 1.02,
+      transition: {
+        duration: 0.2
+      }
+    },
+    tap: {
+      scale: 0.98
     }
   }
 
   return (
-    <div ref={ref} className="w-full py-16" id="contact">
-      <motion.div 
-        variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        className="max-w-6xl mx-auto px-4"
-      >
-        <motion.div variants={itemVariants} className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-ma-black mb-8">
-            צרו איתנו קשר
-          </h2>
-          <p className="text-ma-black/70 max-w-xl mx-auto">
-            השאירו פרטים ונחזור אליכם בהקדם
-          </p>
-        </motion.div>
+    <section className="w-full py-16 bg-[#F5F2EA]" id="contact">
+      <div className="max-w-4xl mx-auto px-4">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={containerVariants}
+          className="space-y-8"
+        >
+          <motion.div 
+            className="text-center"
+            variants={titleVariants}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-ma-black mb-4">
+              צרו איתנו קשר
+            </h2>
+            <p className="text-ma-black/70">
+              השאירו פרטים ונחזור אליכם בהקדם
+            </p>
+          </motion.div>
 
-        <motion.div variants={itemVariants}>
-          <form onSubmit={handleSubmit} className="max-w-xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label htmlFor="name" className="block text-ma-black/80 text-sm mb-2">שם מלא</label>
+          <motion.form 
+            onSubmit={handleSubmit} 
+            className="space-y-6"
+            variants={formContainerVariants}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <motion.div className="space-y-2" variants={formItemVariants}>
+                <label htmlFor="fullName" className="block text-sm font-medium text-ma-black">
+                  שם מלא
+                </label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
+                  id="fullName"
+                  name="fullName"
                   required
-                  className="w-full px-4 py-3 rounded-xl border border-ma-gray/50 focus:outline-none focus:ring-2 focus:ring-ma-primary/30 focus:border-ma-primary/50"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 rounded-lg bg-white border border-gray-200 focus:border-ma-primary focus:ring-2 focus:ring-ma-primary/20 transition-colors"
+                  placeholder="הכניסו את שמכם המלא"
                 />
-              </div>
-              
-              <div>
-                <label htmlFor="phone" className="block text-ma-black/80 text-sm mb-2">טלפון</label>
+              </motion.div>
+
+              <motion.div className="space-y-2" variants={formItemVariants}>
+                <label htmlFor="phone" className="block text-sm font-medium text-ma-black">
+                  טלפון
+                </label>
                 <input
                   type="tel"
                   id="phone"
                   name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 rounded-xl border border-ma-gray/50 focus:outline-none focus:ring-2 focus:ring-ma-primary/30 focus:border-ma-primary/50"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 rounded-lg bg-white border border-gray-200 focus:border-ma-primary focus:ring-2 focus:ring-ma-primary/20 transition-colors"
+                  placeholder="הכניסו מספר טלפון"
                 />
-              </div>
+              </motion.div>
+
+              <motion.div className="space-y-2" variants={formItemVariants}>
+                <label htmlFor="email" className="block text-sm font-medium text-ma-black">
+                  אימייל
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 rounded-lg bg-white border border-gray-200 focus:border-ma-primary focus:ring-2 focus:ring-ma-primary/20 transition-colors"
+                  placeholder="הכניסו כתובת אימייל"
+                />
+              </motion.div>
+
+              <motion.div className="space-y-2" variants={formItemVariants}>
+                <label htmlFor="city" className="block text-sm font-medium text-ma-black">
+                  עיר
+                </label>
+                <select
+                  id="city"
+                  name="city"
+                  required
+                  value={formData.city}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 rounded-lg bg-white border border-gray-200 focus:border-ma-primary focus:ring-2 focus:ring-ma-primary/20 transition-colors"
+                >
+                  <option value="">בחרו עיר</option>
+                  <option value="tel-aviv">תל אביב</option>
+                  <option value="ashdod">אשדוד</option>
+                </select>
+              </motion.div>
+
+              <motion.div className="space-y-2" variants={formItemVariants}>
+                <label htmlFor="studio" className="block text-sm font-medium text-ma-black">
+                  סטודיו
+                </label>
+                <select
+                  id="studio"
+                  name="studio"
+                  required
+                  value={formData.studio}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 rounded-lg bg-white border border-gray-200 focus:border-ma-primary focus:ring-2 focus:ring-ma-primary/20 transition-colors"
+                >
+                  <option value="">בחרו סטודיו</option>
+                  {formData.city && studios[formData.city].map(studio => (
+                    <option key={studio.id} value={studio.id}>
+                      {studio.name}
+                    </option>
+                  ))}
+                </select>
+              </motion.div>
+
+              <motion.div className="space-y-2" variants={formItemVariants}>
+                <label htmlFor="trainingType" className="block text-sm font-medium text-ma-black">
+                  סוג אימון
+                </label>
+                <select
+                  id="trainingType"
+                  name="trainingType"
+                  required
+                  value={formData.trainingType}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 rounded-lg bg-white border border-gray-200 focus:border-ma-primary focus:ring-2 focus:ring-ma-primary/20 transition-colors"
+                >
+                  <option value="">בחרו סוג אימון</option>
+                  {formData.studio && trainingTypes[formData.studio as keyof typeof trainingTypes]?.map(type => (
+                    <option key={type} value={type}>
+                      {type}
+                    </option>
+                  ))}
+                </select>
+              </motion.div>
+
+              <motion.div className="space-y-2" variants={formItemVariants}>
+                <label htmlFor="preferredTime" className="block text-sm font-medium text-ma-black">
+                  שעות מועדפות
+                </label>
+                <select
+                  id="preferredTime"
+                  name="preferredTime"
+                  required
+                  value={formData.preferredTime}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 rounded-lg bg-white border border-gray-200 focus:border-ma-primary focus:ring-2 focus:ring-ma-primary/20 transition-colors"
+                >
+                  <option value="">בחרו שעות מועדפות</option>
+                  {preferredTimes.map(time => (
+                    <option key={time} value={time}>
+                      {time}
+                    </option>
+                  ))}
+                </select>
+              </motion.div>
             </div>
 
-            <div className="mb-6">
-              <label htmlFor="email" className="block text-ma-black/80 text-sm mb-2">אימייל</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 rounded-xl border border-ma-gray/50 focus:outline-none focus:ring-2 focus:ring-ma-primary/30 focus:border-ma-primary/50"
-              />
-            </div>
-
-            <div className="mb-6">
-              <label htmlFor="message" className="block text-ma-black/80 text-sm mb-2">הודעה</label>
+            <motion.div className="space-y-2" variants={formItemVariants}>
+              <label htmlFor="message" className="block text-sm font-medium text-ma-black">
+                הודעה (אופציונלי)
+              </label>
               <textarea
                 id="message"
                 name="message"
-                value={formData.message}
-                onChange={handleInputChange}
                 rows={4}
-                className="w-full px-4 py-3 rounded-xl border border-ma-gray/50 focus:outline-none focus:ring-2 focus:ring-ma-primary/30 focus:border-ma-primary/50"
+                value={formData.message}
+                onChange={handleChange}
+                className="w-full px-4 py-2.5 rounded-lg bg-white border border-gray-200 focus:border-ma-primary focus:ring-2 focus:ring-ma-primary/20 transition-colors"
+                placeholder="הוסיפו הודעה או בקשה מיוחדת"
               />
-            </div>
+            </motion.div>
 
-            <motion.button
-              type="submit"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full bg-[#8BA888] text-white py-3 px-6 rounded-xl font-medium shadow-lg hover:bg-[#8BA888]/90 transition-all"
+            <motion.div 
+              className="flex justify-center"
+              variants={formItemVariants}
             >
-              שליחה
-            </motion.button>
-          </form>
+              <motion.button
+                type="submit"
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+                className="px-8 py-3 bg-ma-primary text-white rounded-xl font-medium shadow-lg shadow-ma-primary/20 hover:shadow-ma-primary/30 hover:bg-ma-primary/90 transition-all"
+              >
+                {isSubmitted ? 'ההודעה נשלחה בהצלחה!' : 'שליחה'}
+              </motion.button>
+            </motion.div>
+          </motion.form>
         </motion.div>
-      </motion.div>
-    </div>
+      </div>
+    </section>
   )
 } 
