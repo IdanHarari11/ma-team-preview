@@ -17,13 +17,48 @@ export default function Gallery() {
   const isInView = useInView(ref, { once: true, amount: 0.1 })
   
   const images: GalleryImage[] = [
-    { src: "/images/about-main.jpg", alt: "סטודיו MA TEAM", width: 800, height: 600 },
-    { src: "/images/about-main.jpg", alt: "אימון פילאטיס", width: 600, height: 800 },
-    { src: "/images/about-main.jpg", alt: "שיעור קבוצתי", width: 800, height: 533 },
-    { src: "/images/about-main.jpg", alt: "ציוד פילאטיס", width: 800, height: 600 },
-    { src: "/images/about-main.jpg", alt: "אימון פונקציונלי", width: 600, height: 800 },
-    { src: "/images/about-main.jpg", alt: "מאמנת עם מתאמנת", width: 800, height: 533 },
-    { src: "/images/about-main.jpg", alt: "יוגה בסטודיו", width: 800, height: 600 },
+    { 
+      src: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200",
+      alt: "סטודיו פילאטיס מודרני", 
+      width: 1200, 
+      height: 800 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800",
+      alt: "אימון פילאטיס על מכשירים", 
+      width: 800, 
+      height: 1200 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1200",
+      alt: "שיעור יוגה קבוצתי", 
+      width: 1200, 
+      height: 800 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=1200",
+      alt: "ציוד פילאטיס מקצועי", 
+      width: 1200, 
+      height: 800 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=800",
+      alt: "אימון פונקציונלי", 
+      width: 800, 
+      height: 1200 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1603988363607-e1e4a66962c6?q=80&w=1200",
+      alt: "מאמנת עם מתאמנת", 
+      width: 1200, 
+      height: 800 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1593810450967-f9c42742e326?q=80&w=1200",
+      alt: "יוגה בסטודיו", 
+      width: 1200, 
+      height: 800 
+    }
   ]
   
   // Animation variants

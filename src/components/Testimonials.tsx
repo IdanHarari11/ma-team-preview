@@ -35,7 +35,7 @@ export default function Testimonials() {
       rating: 5,
       text: 'אימוני הפילאטיס במכון הם ברמה גבוהה מאוד. המדריכים מקצועיים, והאווירה נעימה וביתית. מומלץ בחום!',
       date: '15.04.2023',
-      photoUrl: 'https://randomuser.me/api/portraits/women/44.jpg',
+      photoUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200',
       branch: 'tel-aviv'
     },
     {
@@ -44,7 +44,7 @@ export default function Testimonials() {
       rating: 5,
       text: 'אימוני היוגה שינו לי את החיים. גמישות, כוח וריכוז - הכל השתפר. צוות מקצועי שתמיד מקשיב ועוזר.',
       date: '03.02.2023',
-      photoUrl: 'https://randomuser.me/api/portraits/men/32.jpg',
+      photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200',
       branch: 'tel-aviv'
     },
     {
@@ -53,7 +53,7 @@ export default function Testimonials() {
       rating: 4,
       text: 'מקום מעולה לאימונים, הסניף נקי, מאובזר היטב ונוח להגעה. מנויים יקרים מעט אבל שווים את המחיר.',
       date: '27.12.2022',
-      photoUrl: 'https://randomuser.me/api/portraits/women/68.jpg',
+      photoUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200',
       branch: 'ashdod'
     },
     {
@@ -62,7 +62,7 @@ export default function Testimonials() {
       rating: 5,
       text: 'מתאמן במסגרת אימונים פונקציונליים כבר שנה. התוצאות מדהימות! המאמנים מעולים ומותאמים אישית לכל מתאמן.',
       date: '05.03.2023',
-      photoUrl: 'https://randomuser.me/api/portraits/men/52.jpg',
+      photoUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200',
       branch: 'tel-aviv'
     },
     {
@@ -71,7 +71,7 @@ export default function Testimonials() {
       rating: 5,
       text: 'הצטרפתי לחוגי פילאטיס אחרי לידה והתוצאות מדהימות. המדריכות מקצועיות ותומכות. מומלץ לכל אישה!',
       date: '19.01.2023',
-      photoUrl: 'https://randomuser.me/api/portraits/women/22.jpg',
+      photoUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200',
       branch: 'ashdod'
     },
     {
@@ -80,7 +80,7 @@ export default function Testimonials() {
       rating: 4,
       text: 'מגיע לאימוני יוגה פעמיים בשבוע. האווירה רגועה ונעימה והמדריכים ברמה גבוהה. מיקום מעולה במרכז העיר.',
       date: '08.05.2023',
-      photoUrl: 'https://randomuser.me/api/portraits/men/67.jpg',
+      photoUrl: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=200',
       branch: 'tel-aviv'
     }
   ]
@@ -91,14 +91,14 @@ export default function Testimonials() {
       id: 'v1',
       title: 'איך הפילאטיס שינה את חיי',
       description: 'רותי מספרת על השינוי שעברה בעקבות אימוני הפילאטיס',
-      thumbnailSrc: '/images/about-main.jpg',
+      thumbnailSrc: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800',
       videoSrc: '/videos/hero-background.mp4'
     },
     {
       id: 'v2',
       title: 'איך חזרתי לכושר אחרי לידה',
       description: 'מיכל מספרת על החזרה לכושר אחרי לידה עם המאמנים שלנו',
-      thumbnailSrc: '/images/about-main.jpg',
+      thumbnailSrc: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800',
       videoSrc: '/videos/hero-background.mp4'
     }
   ]

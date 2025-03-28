@@ -25,7 +25,7 @@ export default function About() {
       name: 'מור אטיאס',
       role: 'מייסדת ומנהלת מקצועית',
       bio: 'מדריכת פילאטיס מוסמכת עם יותר מ-8 שנות ניסיון. בוגרת תואר ראשון בחינוך גופני ותעודת הוראה מטעם מכון וינגייט. התמחות בשיקום פציעות ספורט ובעיות יציבה.',
-      imageSrc: '/images/about-main.jpg',
+      imageSrc: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=800',
       socialMedia: {
         instagram: 'https://www.instagram.com/',
         facebook: 'https://www.facebook.com/'
@@ -35,7 +35,7 @@ export default function About() {
       name: 'אריאל כהן',
       role: 'מדריך בכיר',
       bio: 'מדריך פילאטיס ויוגה בעל ניסיון של 6 שנים. בוגר קורס פילאטיס מכשירים ומזרן, וקורס מדריכי יוגה. מתמחה בשיפור יציבה ואיזון גוף-נפש.',
-      imageSrc: '/images/about-main.jpg',
+      imageSrc: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=800',
       socialMedia: {
         instagram: 'https://www.instagram.com/'
       }
@@ -44,7 +44,7 @@ export default function About() {
       name: 'שירה לוי',
       role: 'מדריכת פילאטיס ויוגה',
       bio: 'מדריכת פילאטיס מזרן ומכשירים, ומדריכת יוגה מוסמכת. בעלת 5 שנות ניסיון בהדרכה. מתמחה בעבודה עם נשים בהריון ולאחר לידה.',
-      imageSrc: '/images/about-main.jpg',
+      imageSrc: 'https://images.unsplash.com/photo-1597347343908-2937e7dcc560?q=80&w=800',
       socialMedia: {
         instagram: 'https://www.instagram.com/',
         facebook: 'https://www.facebook.com/'
@@ -149,7 +149,7 @@ export default function About() {
             <div className="order-1 md:order-2 relative">
               <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
                 <Image 
-                  src="/images/about-main.jpg" 
+                  src="https://images.unsplash.com/photo-1576678927484-cc907957088c?q=80&w=800" 
                   alt="סטודיו MA TEAM" 
                   width={600} 
                   height={450}

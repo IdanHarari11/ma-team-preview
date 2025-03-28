@@ -16,7 +16,7 @@ export default function BranchSelector() {
         name: 'סניף תל אביב',
         address: 'רחוב המסגר 42, תל אביב',
         phone: '054-7454897',
-        image: '/images/telaviv-branch.jpg',
+        image: 'https://images.unsplash.com/photo-1637666062717-1c6bcfa4a4df?q=80&w=1200',
         trainingTypes: [
           'אימוני כושר אישיים',
           'אימוני TRX',
@@ -32,7 +32,7 @@ export default function BranchSelector() {
         name: 'סטודיו פילאטיס ויוגה',
         address: 'רחוב האורגים 7, אשדוד',
         phone: '054-7454897',
-        image: '/images/ashdod-pilates.jpg',
+        image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200',
         trainingTypes: [
           'פילאטיס מכשירים',
           'פילאטיס מזרן',
@@ -44,7 +44,7 @@ export default function BranchSelector() {
         name: 'סטודיו פונקציונלי',
         address: 'רחוב האורגים 7, אשדוד',
         phone: '054-7454897',
-        image: '/images/ashdod-functional.jpg',
+        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200',
         trainingTypes: [
           'אימוני כושר אישיים',
           'אימוני TRX',
