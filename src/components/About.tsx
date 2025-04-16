@@ -116,23 +116,46 @@ export default function About() {
         {/* About Studio */}
         <motion.div variants={itemVariants} className="mb-20">
           <h2 className="text-3xl md:text-4xl font-bold text-[#2C3338] mb-8 text-center">
-            קצת עלינו
+            הסיפור שלנו
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1 space-y-6">
+            <div className="order-2 md:order-1 space-y-4">
               <h3 className="text-2xl font-semibold text-[#2C3338]">סטודיו MA TEAM</h3>
               <p className="text-[#4A5568] leading-relaxed">
-                סטודיו MA TEAM הוקם ב-2016 מתוך אהבה לפילאטיס ותשוקה לעזור לאנשים לחיות חיים בריאים יותר. המטרה שלנו היא להעניק חוויית אימון אישית, מקצועית ומותאמת לצרכים של כל מתאמן ומתאמנת.
+                איזה כיף שהגעתם למשפחה שלנו!
+                אנחנו מעוז ואיה – אחים, משפחה על אמת.
+                את הרשת שלנו - M.A (כן, שם די מקורי…), הקמנו ב-2020.
               </p>
-              <p className="text-[#4A5568] leading-relaxed">
-                הסטודיו שלנו מציע מגוון רחב של שיעורים בקבוצות קטנות ואימונים אישיים, תוך שימוש בשיטות מתקדמות ומכשור חדשני. צוות המדריכים המוסמך והמנוסה שלנו מלווה את המתאמנים בדרך להשגת היעדים שלהם, בין אם מדובר בשיפור היציבה, הקלה בכאבים, חיזוק והארכת השרירים או פשוט הרגשה טובה יותר בגוף.
+              <p className="text-[#4A5568] leading-relaxed md:block hidden">
+                הסטודיו הראשון נולד מתוך תחביב בזמן הקורונה, ממש בבית שלנו – בלי תוכניות גדולות, רק עם רצון לתת מקום לתנועה, לחיבור ולאנשים.
+                מסתבר שהקלישאה "תעשה מה שאתה אוהב – וזה יצליח" באמת עבדה.
+                בלי לשים לב, גדלנו - שלושה סניפים, אלפי מתאמנים, קהילה עצומה, ואהבה אחת גדולה שממשיכה להניע אותנו כל יום מחדש.
+              </p>
+              <p className="text-[#4A5568] leading-relaxed block md:hidden">
+                הסטודיו הראשון נולד מתוך תחביב בזמן הקורונה, ובלי לשים לב, גדלנו לשלושה סניפים, אלפי מתאמנים וקהילה עצומה.
+              </p>
+              <p className="text-[#4A5568] leading-relaxed md:block hidden">
+                אנחנו מאמינים באיכות על פני כמות.
+                לכן אנחנו עובדים בקבוצות קטנות, עם צוות מאמנים שעבר הכשרה ייחודית – כדי שנוכל באמת לגעת בכל אחד ואחת, להתאים את האימון לצרכים שלך, וללוות אותך עם היחס הכי אישי שניתן לאורך כל הדרך.
+              </p>
+              <p className="text-[#4A5568] leading-relaxed block md:hidden">
+                אנחנו מאמינים באיכות על פני כמות - קבוצות קטנות, צוות מיומן, ויחס אישי לכל מתאמן.
+              </p>
+              <p className="text-[#4A5568] leading-relaxed md:block hidden">
+                אצלנו לא תמצאו הבטחות לתוצאות תוך שבועיים.
+                מה שכן תמצאו, זו דרך – כזו שתגרום לך להנות מהאימונים כמו שמעולם לא חווית.
+                ובזכות ההנאה הזו, לאמץ אורח חיים בריא, ספורטיבי ומאוזן – כזה שיביא אותך בדיוק להרגשה ולגוף שתמיד חלמת.
+                בזמן שלך, בקצב שלך, ובאהבה גדולה.
+              </p>
+              <p className="text-[#4A5568] leading-relaxed block md:hidden">
+                אצלנו תמצאו דרך להנות מאימונים כמו שמעולם לא חווית, ולאמץ אורח חיים בריא ומאוזן - בזמן שלך, בקצב שלך, ובאהבה גדולה.
               </p>
               
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-10 py-4 text-lg bg-[#8BA888] text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all relative group overflow-hidden w-full md:w-auto"
+                className="mt-4 px-10 py-4 text-lg bg-[#8BA888] text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all relative group overflow-hidden w-full md:w-auto"
                 onClick={() => {
                   const branchesSection = document.getElementById('branches');
                   if (branchesSection) {
@@ -151,7 +174,7 @@ export default function About() {
             >
               <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
                 <Image 
-                  src="https://images.unsplash.com/photo-1576678927484-cc907957088c?q=80&w=800" 
+                  src="/images/studio/about-studio.png" 
                   alt="סטודיו MA TEAM" 
                   width={600} 
                   height={450}
@@ -163,62 +186,6 @@ export default function About() {
           </div>
         </motion.div>
         
-        {/* Team */}
-        <motion.div variants={itemVariants} className="mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2C3338] mb-12 text-center">
-            הצוות שלנו
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {teamMembers.map((member, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <div className="relative h-72">
-                  <Image 
-                    src={member.imageSrc} 
-                    alt={member.name} 
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                
-                <div className="p-8 space-y-4">
-                  <h3 className="text-xl font-semibold text-[#2C3338]">{member.name}</h3>
-                  <p className="text-[#8BA888] font-medium">{member.role}</p>
-                  <p className="text-[#4A5568] leading-relaxed">{member.bio}</p>
-                  
-                  {member.socialMedia && (
-                    <div className="flex space-x-4 pt-2">
-                      {member.socialMedia.instagram && (
-                        <a 
-                          href={member.socialMedia.instagram}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[#4A5568] hover:text-[#8BA888] transition-colors"
-                        >
-                          <SocialIcon type="instagram" />
-                        </a>
-                      )}
-                      {member.socialMedia.facebook && (
-                        <a 
-                          href={member.socialMedia.facebook}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[#4A5568] hover:text-[#8BA888] transition-colors"
-                        >
-                          <SocialIcon type="facebook" />
-                        </a>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
         
         {/* Values */}
         <motion.div variants={itemVariants}>
