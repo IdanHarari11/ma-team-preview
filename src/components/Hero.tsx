@@ -93,7 +93,7 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4">
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-10 md:p-16 shadow-2xl [box-shadow:_0_0_30px_rgba(139,168,136,0.3)]">
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-10 md:p-14 shadow-2xl [box-shadow:_0_0_30px_rgba(139,168,136,0.3)]" style={{paddingBottom: '6rem'}}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
