@@ -93,24 +93,36 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4">
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 md:p-12 shadow-2xl [box-shadow:_0_0_30px_rgba(139,168,136,0.3)]">
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-10 md:p-16 shadow-2xl [box-shadow:_0_0_30px_rgba(139,168,136,0.3)]">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-6 flex flex-col items-center text-center"
+            className="space-y-8 flex flex-col items-center text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg [text-shadow:_0_0_15px_rgba(139,168,136,0.5)]">
-              MA TEAM
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 drop-shadow-lg [text-shadow:_0_0_10px_rgba(139,168,136,0.3)]">
-              סטודיו לפילאטיס, יוגה ואימון פונקציונלי
+            <div className="relative flex flex-col items-center">
+              <Image 
+                src="/images/heroimage.png" 
+                alt="MA TEAM" 
+                width={350} 
+                height={175} 
+                className="shadow-2xl border-2 border-white/20 hover:scale-105 transition-transform duration-300"
+                style={{
+                  maskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%), linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)',
+                  WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%), linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)',
+                  maskComposite: 'intersect',
+                  WebkitMaskComposite: 'source-in'
+                }}
+              />
+            </div>
+            <p className="text-xl md:text-3xl text-white/90 drop-shadow-lg [text-shadow:_0_0_8px_rgba(139,168,136,0.4)] max-w-lg leading-relaxed tracking-wide" style={{ marginTop: '-2rem'}}>
+              ברוכים הבאים לבית החדש שלך.<br/>רשת הבוטיק המשלבת את כל העולמות – באווירה משפחתית ואינטימית
             </p>
-            <div className="flex justify-center">
+            <div className="mt-10 flex justify-center">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-3 bg-white text-[#2C3338] rounded-xl font-medium shadow-lg hover:shadow-xl transition-all relative group overflow-hidden"
+                className="px-10 py-4 bg-white text-[#2C3338] rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all relative group overflow-hidden text-lg md:text-xl"
                 onClick={() => {
                   const contactSection = document.getElementById('contact');
                   if (contactSection) {
@@ -127,41 +139,6 @@ export default function Hero() {
         </div>
       </div>
       
-      {/* Athlete silhouettes - Left side */}
-      <motion.div 
-        style={{ x: athleteX1, y: athleteY, rotate: athleteRotate }}
-        className="absolute left-[5%] bottom-[15%] z-5 hidden md:block"
-      >
-        <motion.div
-          animate={{ y: [0, -10, 0] }}
-          transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-          className="relative h-64 w-40"
-        >
-          {/* Pilates silhouette */}
-          <div className="absolute inset-0 bg-[#8BA888]/70 mask-silhouette-pilates backdrop-blur-sm rounded-lg"></div>
-          <div className="absolute inset-0 flex items-center justify-center text-white text-xs font-bold opacity-60">
-            פילאטיס
-          </div>
-        </motion.div>
-      </motion.div>
-      
-      {/* Athlete silhouettes - Right side */}
-      <motion.div 
-        style={{ x: athleteX2, y: athleteY, rotate: athleteRotate }}
-        className="absolute right-[5%] bottom-[25%] z-5 hidden md:block"
-      >
-        <motion.div
-          animate={{ y: [0, -15, 0] }}
-          transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 0.5 }}
-          className="relative h-64 w-40"
-        >
-          {/* Yoga silhouette */}
-          <div className="absolute inset-0 bg-white/30 mask-silhouette-yoga backdrop-blur-sm rounded-lg"></div>
-          <div className="absolute inset-0 flex items-center justify-center text-white text-xs font-bold opacity-60">
-            יוגה
-          </div>
-        </motion.div>
-      </motion.div>
 
       {/* Scroll indicator */}
       <motion.div
@@ -169,21 +146,21 @@ export default function Hero() {
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
       >
-        <div className="w-16 h-16 flex items-center justify-center">
-          <motion.div 
-            className="text-2xl font-bold text-white/70"
-            animate={{ 
+        {/* Mouse outline */}
+        <div className="w-8 h-12 border-2 border-white/70 rounded-full flex justify-center items-start pt-2.5">
+          {/* Inner scrolling wheel */}
+          <motion.div
+            className="w-1.5 h-3 bg-white/70 rounded-full"
+            animate={{
               y: [0, 8, 0],
-              opacity: [0.4, 1, 0.4]
+              opacity: [1, 1, 0]
             }}
-            transition={{ 
-              repeat: Infinity, 
+            transition={{
+              repeat: Infinity,
               duration: 1.5,
               ease: "easeInOut"
             }}
-          >
-            MA
-          </motion.div>
+          />
         </div>
       </motion.div>
     </section>

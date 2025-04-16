@@ -33,21 +33,34 @@ export default function Header() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-28">
           {/* Logo */}
-          <Link href="/" className="relative z-10">
-            <span className={`text-2xl font-['Quicksand'] font-bold transition-colors duration-300 ${
-              isScrolled ? 'text-[#8BA888]' : 'text-white'
-            }`}>
-              MA
-            </span>
-          </Link>
-          
+        {isScrolled ? 
+          <Link href="/" className="flex items-center">
+          <Image
+            src="/images/logo-green.png"
+            alt="MA TEAM"
+            width={180}
+            height={60}
+            className="h-16 w-auto [filter:drop-shadow(0_0_3px_rgba(255,255,255,0.7))] transition-all duration-300"
+            />
+        </Link>
+        :
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/images/ma-logo.png"
+            alt="MA TEAM"
+            width={180}
+            height={60}
+            className="h-16 w-auto"
+          />
+        </Link>
+        }
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6 space-x-reverse">
+          <nav className="hidden md:flex items-center space-x-10 space-x-reverse">
             <Link 
               href="#about"
-              className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
+              className={`text-lg font-medium transition-all duration-300 hover:scale-105 ${
                 isScrolled ? 'text-ma-black hover:text-ma-primary' : 'text-white hover:text-ma-primary'
               }`}
             >
@@ -55,7 +68,7 @@ export default function Header() {
             </Link>
             <Link 
               href="#training-types"
-              className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
+              className={`text-lg font-medium transition-all duration-300 hover:scale-105 ${
                 isScrolled ? 'text-ma-black hover:text-ma-primary' : 'text-white hover:text-ma-primary'
               }`}
             >
@@ -63,7 +76,7 @@ export default function Header() {
             </Link>
             <Link 
               href="#branches"
-              className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
+              className={`text-lg font-medium transition-all duration-300 hover:scale-105 ${
                 isScrolled ? 'text-ma-black hover:text-ma-primary' : 'text-white hover:text-ma-primary'
               }`}
             >
@@ -71,7 +84,7 @@ export default function Header() {
             </Link>
             <Link 
               href="#schedule"
-              className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
+              className={`text-lg font-medium transition-all duration-300 hover:scale-105 ${
                 isScrolled ? 'text-ma-black hover:text-ma-primary' : 'text-white hover:text-ma-primary'
               }`}
             >
@@ -79,7 +92,7 @@ export default function Header() {
             </Link>
             <Link 
               href="#testimonials"
-              className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
+              className={`text-lg font-medium transition-all duration-300 hover:scale-105 ${
                 isScrolled ? 'text-ma-black hover:text-ma-primary' : 'text-white hover:text-ma-primary'
               }`}
             >
@@ -87,7 +100,7 @@ export default function Header() {
             </Link>
             <Link 
               href="#contact"
-              className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
+              className={`text-lg font-medium transition-all duration-300 hover:scale-105 ${
                 isScrolled ? 'text-ma-black hover:text-ma-primary' : 'text-white hover:text-ma-primary'
               }`}
             >
@@ -97,7 +110,7 @@ export default function Header() {
               href="https://app.arboxapp.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className={`py-2 px-4 rounded-xl ${
+              className={`py-3 px-6 rounded-xl text-lg ${
                 isScrolled 
                   ? 'bg-ma-primary text-white shadow-lg' 
                   : 'bg-white/20 backdrop-blur-md text-white border border-white/30'
@@ -113,9 +126,9 @@ export default function Header() {
             className="md:hidden relative z-10 p-2 transition-all duration-300 hover:scale-110"
             aria-label={isMenuOpen ? 'סגור תפריט' : 'פתח תפריט'}
           >
-            <div className={`w-6 h-0.5 ${isScrolled ? 'bg-ma-black' : 'bg-white'} transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
-            <div className={`w-6 h-0.5 ${isScrolled ? 'bg-ma-black' : 'bg-white'} transition-all duration-300 mt-1.5 ${isMenuOpen ? 'opacity-0' : ''}`} />
-            <div className={`w-6 h-0.5 ${isScrolled ? 'bg-ma-black' : 'bg-white'} transition-all duration-300 mt-1.5 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`} />
+            <div className={`w-7 h-0.5 ${isScrolled ? 'bg-ma-black' : 'bg-white'} transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+            <div className={`w-7 h-0.5 ${isScrolled ? 'bg-ma-black' : 'bg-white'} transition-all duration-300 my-1.5 ${isMenuOpen ? 'opacity-0' : ''}`} />
+            <div className={`w-7 h-0.5 ${isScrolled ? 'bg-ma-black' : 'bg-white'} transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
           </button>
           
           {/* Mobile Menu */}
@@ -126,48 +139,48 @@ export default function Header() {
                 animate={{ opacity: 1, backdropFilter: 'blur(10px)' }}
                 exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
                 transition={{ duration: 0.3 }}
-                className="md:hidden fixed inset-0 top-0 bg-white/80 z-0 flex flex-col items-center justify-center pt-20"
+                className="md:hidden fixed inset-0 top-0 bg-white/90 z-0 flex flex-col items-center justify-center pt-28"
               >
-                <nav className="flex flex-col items-center space-y-6 text-center">
+                <nav className="flex flex-col items-center space-y-8 text-center">
                   <Link
                     href="#about"
                     onClick={handleMenuItemClick}
-                    className="text-lg font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
+                    className="text-xl font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
                   >
                     אודות
                   </Link>
                   <Link
                     href="#training-types"
                     onClick={handleMenuItemClick}
-                    className="text-lg font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
+                    className="text-xl font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
                   >
                     סוגי אימונים
                   </Link>
                   <Link
                     href="#branches"
                     onClick={handleMenuItemClick}
-                    className="text-lg font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
+                    className="text-xl font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
                   >
                     הסניפים שלנו
                   </Link>
                   <Link
                     href="#schedule"
                     onClick={handleMenuItemClick}
-                    className="text-lg font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
+                    className="text-xl font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
                   >
                     לוח שיעורים
                   </Link>
                   <Link
                     href="#testimonials"
                     onClick={handleMenuItemClick}
-                    className="text-lg font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
+                    className="text-xl font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
                   >
                     המלצות
                   </Link>
                   <Link
                     href="#contact"
                     onClick={handleMenuItemClick}
-                    className="text-lg font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
+                    className="text-xl font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
                   >
                     צור קשר
                   </Link>
@@ -175,7 +188,7 @@ export default function Header() {
                     href="https://app.arboxapp.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="py-3 px-8 rounded-xl bg-ma-primary text-white font-medium shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105"
+                    className="py-3 px-10 rounded-xl bg-ma-primary text-white text-lg font-medium shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105"
                   >
                     רכישת מנוי
                   </a>

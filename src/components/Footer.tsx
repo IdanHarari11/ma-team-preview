@@ -40,7 +40,7 @@ export default function Footer() {
           <div>
             <Link href="/" className="block mb-6">
               <Image 
-                src="/images/logo-white.png"
+                src="/images/ma-logo.png"
                 alt="MA TEAM"
                 width={140}
                 height={50}

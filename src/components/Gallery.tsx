@@ -93,7 +93,7 @@ export default function Gallery() {
   }
   
   return (
-    <div ref={ref} className="w-full py-12">
+    <div ref={ref} id='gallery' className="w-full py-12">
       <div className="max-w-6xl mx-auto px-4">
         <motion.div 
           variants={containerVariants}
