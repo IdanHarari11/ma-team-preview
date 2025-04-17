@@ -12,11 +12,31 @@ export default function Header() {
   // Handle scroll event to change header style
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+      // רק במסכים רחבים (דסקטופ) שנה את הסגנון בזמן גלילה
+      const isMobile = window.innerWidth < 768; // md breakpoint in Tailwind
+      if (!isMobile) {
+        setIsScrolled(window.scrollY > 50)
+      } else {
+        setIsScrolled(false) // תמיד ישאר כמו בהתחלה במובייל
+      }
+    }
+    
+    // האזנה לשינוי גודל החלון
+    const handleResize = () => {
+      handleScroll();
     }
     
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('resize', handleResize)
+    
+    // הפעל את בדיקת גודל המסך מיד בטעינה
+    handleScroll()
+    
+    // נקה את האירועים בעת unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleResize)
+    }
   }, [])
   
   // Handle menu item click - close mobile menu
@@ -126,9 +146,9 @@ export default function Header() {
             className="md:hidden relative z-10 p-2 transition-all duration-300 hover:scale-110"
             aria-label={isMenuOpen ? 'סגור תפריט' : 'פתח תפריט'}
           >
-            <div className={`w-7 h-0.5 ${isScrolled ? 'bg-ma-black' : 'bg-white'} transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
-            <div className={`w-7 h-0.5 ${isScrolled ? 'bg-ma-black' : 'bg-white'} transition-all duration-300 my-1.5 ${isMenuOpen ? 'opacity-0' : ''}`} />
-            <div className={`w-7 h-0.5 ${isScrolled ? 'bg-ma-black' : 'bg-white'} transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+            <div className={`w-7 h-0.5 bg-white transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+            <div className={`w-7 h-0.5 bg-white transition-all duration-300 my-1.5 ${isMenuOpen ? 'opacity-0' : ''}`} />
+            <div className={`w-7 h-0.5 bg-white transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
           </button>
           
           {/* Mobile Menu */}
