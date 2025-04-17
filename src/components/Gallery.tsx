@@ -43,19 +43,31 @@ export default function Gallery({ selectedBranchId }: GalleryProps) {
       profileImage: 'https://randomuser.me/api/portraits/women/44.jpg',
       images: [
         { 
-          src: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200",
+          src: "/images/new/DSC_8175.JPG",
           alt: "סטודיו פילאטיס מודרני - תל אביב", 
           width: 1200, 
           height: 800 
         },
         { 
-          src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800",
+          src: "/images/new/DSC_8266.JPG",
           alt: "אימון פילאטיס על מכשירים - תל אביב", 
           width: 800, 
           height: 1200 
         },
         { 
-          src: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1200",
+          src: "/images/new/DSC_8332.JPG",
+          alt: "שיעור יוגה קבוצתי - תל אביב", 
+          width: 1200, 
+          height: 800 
+        },
+        { 
+          src: "/images/new/pilatismachines.JPG",
+          alt: "שיעור יוגה קבוצתי - תל אביב", 
+          width: 1200, 
+          height: 800 
+        },
+        { 
+          src: "/images/new/pilatismachinewomen.jpg",
           alt: "שיעור יוגה קבוצתי - תל אביב", 
           width: 1200, 
           height: 800 
@@ -69,13 +81,31 @@ export default function Gallery({ selectedBranchId }: GalleryProps) {
       profileImage: 'https://randomuser.me/api/portraits/men/32.jpg',
       images: [
         { 
-          src: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=1200",
+          src: "/images/new/men.jpg",
           alt: "ציוד פילאטיס מקצועי - אשדוד", 
           width: 1200, 
           height: 800 
         },
         { 
-          src: "https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=800",
+          src: "/images/new/men2.jpg",
+          alt: "אימון פונקציונלי - אשדוד", 
+          width: 800, 
+          height: 1200 
+        },
+        { 
+          src: "/images/new/weight.jpg",
+          alt: "אימון פונקציונלי - אשדוד", 
+          width: 800, 
+          height: 1200 
+        },
+        { 
+          src: "/images/new/balls.jpg",
+          alt: "אימון פונקציונלי - אשדוד", 
+          width: 800, 
+          height: 1200 
+        },
+        { 
+          src: "/images/new/steps.jpg",
           alt: "אימון פונקציונלי - אשדוד", 
           width: 800, 
           height: 1200 
@@ -269,7 +299,7 @@ export default function Gallery({ selectedBranchId }: GalleryProps) {
     <div className="w-full bg-black py-8 md:py-12">
       <div id='gallery' dir="ltr" className="w-full max-w-5xl mx-auto h-[80vh] bg-black overflow-hidden relative px-6 sm:px-10 md:px-16 rounded-lg shadow-2xl">
         {/* Progress indicators - Forced LTR direction */}
-        <div dir="ltr" className="absolute top-3 left-6 right-6 z-20 flex" style={{ direction: 'ltr' }}>
+        <div dir="ltr" className="absolute left-6 right-6 z-20 flex" style={{ direction: 'ltr' }}>
           {[...currentImages].map((_, index) => (
             <div key={index} className="h-1 flex-1 bg-white/30 rounded-full overflow-hidden mx-0.5">
               {index < currentImageIndex && (

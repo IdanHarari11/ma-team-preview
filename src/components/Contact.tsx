@@ -11,7 +11,6 @@ interface FormData {
   studio: string
   trainingType: string
   message: string
-  preferredTime: string
 }
 
 export default function Contact() {
@@ -23,7 +22,6 @@ export default function Contact() {
     studio: '',
     trainingType: '',
     message: '',
-    preferredTime: ''
   })
 
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -44,14 +42,6 @@ export default function Contact() {
     'ashdod-functional': ['אימוני כושר אישיים', 'אימוני TRX', 'אימוני כושר קבוצתיים']
   }
 
-  const preferredTimes = [
-    'בוקר מוקדם (06:00-09:00)',
-    'בוקר (09:00-12:00)',
-    'צהריים (12:00-16:00)',
-    'אחר הצהריים (16:00-19:00)',
-    'ערב (19:00-22:00)'
-  ]
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     // Here you would typically send the form data to your server
@@ -69,7 +59,6 @@ export default function Contact() {
         studio: '',
         trainingType: '',
         message: '',
-        preferredTime: ''
       })
     }, 3000)
   }
@@ -291,27 +280,6 @@ export default function Contact() {
                   {formData.studio && trainingTypes[formData.studio as keyof typeof trainingTypes]?.map(type => (
                     <option key={type} value={type}>
                       {type}
-                    </option>
-                  ))}
-                </select>
-              </motion.div>
-
-              <motion.div className="space-y-2" variants={formItemVariants}>
-                <label htmlFor="preferredTime" className="block text-sm font-medium text-ma-black">
-                  שעות מועדפות
-                </label>
-                <select
-                  id="preferredTime"
-                  name="preferredTime"
-                  required
-                  value={formData.preferredTime}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2.5 rounded-lg bg-white border border-gray-200 focus:border-ma-primary focus:ring-2 focus:ring-ma-primary/20 transition-colors"
-                >
-                  <option value="">בחרו שעות מועדפות</option>
-                  {preferredTimes.map(time => (
-                    <option key={time} value={time}>
-                      {time}
                     </option>
                   ))}
                 </select>
