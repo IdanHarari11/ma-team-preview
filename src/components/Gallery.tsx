@@ -296,8 +296,8 @@ export default function Gallery({ selectedBranchId }: GalleryProps) {
   }
   
   return (
-    <div className="w-full bg-black py-8 md:py-12">
-      <div id='gallery' dir="ltr" className="w-full max-w-5xl mx-auto h-[80vh] bg-black overflow-hidden relative px-6 sm:px-10 md:px-16 rounded-lg shadow-2xl">
+    <div className="w-full bg-ma-black py-8 md:py-12">
+      <div id='gallery' dir="ltr" className="w-full max-w-5xl mx-auto h-[80vh] bg-ma-black overflow-hidden relative px-6 sm:px-10 md:px-16 rounded-lg shadow-2xl">
         {/* Progress indicators - Forced LTR direction */}
         <div dir="ltr" className="absolute left-6 right-6 z-20 flex" style={{ direction: 'ltr' }}>
           {[...currentImages].map((_, index) => (
@@ -321,7 +321,7 @@ export default function Gallery({ selectedBranchId }: GalleryProps) {
         
         {/* Instagram-like header - moved to left side */}
         <div className="absolute top-8 left-6 z-20 flex items-center">
-          <div dir="rtl" className="flex items-center bg-black/50 backdrop-blur-sm p-1.5 pr-4 rounded-full">
+          <div dir="rtl" className="flex items-center bg-ma-black/50 backdrop-blur-sm p-1.5 pr-4 rounded-full">
             <div dir="rtl" className="text-white ml-2">
               {/* Instagram handle first without @ and in bold */}
               <p className="text-sm font-bold text-right">{currentBranch.instagramHandle}</p>
@@ -385,7 +385,7 @@ export default function Gallery({ selectedBranchId }: GalleryProps) {
         
         {/* Pause/Play indicator */}
         {paused && (
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 bg-black/50 p-4 rounded-full">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 bg-ma-black/50 p-4 rounded-full">
             <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M8 5v14l11-7z" />
             </svg>

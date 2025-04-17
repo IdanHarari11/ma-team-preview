@@ -58,7 +58,7 @@ export default function Faq() {
   }
 
   return (
-    <div ref={ref} className="w-full py-16 bg-[#F5F2EA]" id="faq">
+    <div ref={ref} className="w-full py-16 bg-ma-primary" id="faq">
       <div className="max-w-4xl mx-auto px-4">
         <motion.div
           variants={containerVariants}
@@ -68,9 +68,9 @@ export default function Faq() {
         >
           <motion.h2
             variants={itemVariants} 
-            className="text-3xl md:text-4xl font-bold text-ma-black text-center mb-12"
+            className="text-3xl md:text-4xl font-bold text-ma-light text-center mb-12"
           >
-            הלקוחות מדברים
+            שאלות נפוצות
           </motion.h2>
 
           <div className="space-y-4">
@@ -78,7 +78,7 @@ export default function Faq() {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden"
+                className="bg-ma-light rounded-2xl shadow-lg overflow-hidden"
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}

@@ -100,7 +100,7 @@ export default function BranchSelector() {
   }
 
   return (
-    <section ref={ref} className="w-full py-16 bg-white" id="branches">
+    <section ref={ref} className="w-full py-16 bg-ma-light" id="branches">
       <div className="max-w-7xl mx-auto px-4">
         <motion.div
           variants={containerVariants}
@@ -266,7 +266,7 @@ export default function BranchSelector() {
                           <div className="p-2 bg-white/80 backdrop-blur-sm rounded-xl shadow-xl w-full h-full border border-ma-primary/20">
                             <div className="mb-2 flex items-center justify-between">
                               <h4 className="text-lg font-medium text-ma-black">לוח שיעורים - {branch.name}</h4>
-                              <div className="bg-ma-primary text-white text-sm px-3 py-1 rounded-full">מתעדכן אוטומטית</div>
+                              <div className="bg-ma-primary text-white text-center text-sm px-3 py-1 rounded-full">מתעדכן אוטומטית</div>
                             </div>
                             <iframe 
                               src={branch.scheduleEmbed}
@@ -289,7 +289,7 @@ export default function BranchSelector() {
                           <div className="p-2 bg-white/80 backdrop-blur-sm rounded-xl shadow-xl w-full h-full border border-ma-primary/20">
                             <div className="mb-2 flex items-center justify-between">
                               <h4 className="text-lg font-medium text-ma-black">מחירון - {branch.name}</h4>
-                              <div className="bg-ma-primary text-white text-sm px-3 py-1 rounded-full">מתעדכן אוטומטית</div>
+                              <div className="bg-ma-primary text-white text-center text-sm px-3 py-1 rounded-full">מתעדכן אוטומטית</div>
                             </div>
                             <iframe 
                               src={branch.priceListEmbed}
