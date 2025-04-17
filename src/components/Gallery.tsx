@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 interface GalleryImage {
   src: string
@@ -11,198 +11,349 @@ interface GalleryImage {
   height: number
 }
 
-export default function Gallery() {
-  const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.1 })
+interface BranchGallery {
+  id: string
+  name: string
+  instagramHandle: string
+  profileImage: string
+  images: GalleryImage[]
+}
+
+interface GalleryProps {
+  selectedBranchId?: string
+}
+
+export default function Gallery({ selectedBranchId }: GalleryProps) {
+  const [currentBranchIndex, setCurrentBranchIndex] = useState(0)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const [progressWidth, setProgressWidth] = useState(0)
+  const [direction, setDirection] = useState(1) // 1 for forward, -1 for backward
+  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const longPressTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const STORY_DURATION = 5000 // 5 seconds per image
+  const LONG_PRESS_DURATION = 200 // 200ms to detect a long press
   
-  const images: GalleryImage[] = [
-    { 
-      src: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200",
-      alt: "סטודיו פילאטיס מודרני", 
-      width: 1200, 
-      height: 800 
+  // Mock data - this would be replaced with actual data from your application
+  const branchGalleries: BranchGallery[] = [
+    {
+      id: 'tel-aviv',
+      name: 'תל אביב',
+      instagramHandle: 'ma_team_telaviv',
+      profileImage: 'https://randomuser.me/api/portraits/women/44.jpg',
+      images: [
+        { 
+          src: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200",
+          alt: "סטודיו פילאטיס מודרני - תל אביב", 
+          width: 1200, 
+          height: 800 
+        },
+        { 
+          src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800",
+          alt: "אימון פילאטיס על מכשירים - תל אביב", 
+          width: 800, 
+          height: 1200 
+        },
+        { 
+          src: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1200",
+          alt: "שיעור יוגה קבוצתי - תל אביב", 
+          width: 1200, 
+          height: 800 
+        },
+      ]
     },
-    { 
-      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800",
-      alt: "אימון פילאטיס על מכשירים", 
-      width: 800, 
-      height: 1200 
+    {
+      id: 'ashdod',
+      name: 'אשדוד',
+      instagramHandle: 'ma_team_ashdod',
+      profileImage: 'https://randomuser.me/api/portraits/men/32.jpg',
+      images: [
+        { 
+          src: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=1200",
+          alt: "ציוד פילאטיס מקצועי - אשדוד", 
+          width: 1200, 
+          height: 800 
+        },
+        { 
+          src: "https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=800",
+          alt: "אימון פונקציונלי - אשדוד", 
+          width: 800, 
+          height: 1200 
+        },
+      ]
     },
-    { 
-      src: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1200",
-      alt: "שיעור יוגה קבוצתי", 
-      width: 1200, 
-      height: 800 
-    },
-    { 
-      src: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=1200",
-      alt: "ציוד פילאטיס מקצועי", 
-      width: 1200, 
-      height: 800 
-    },
-    { 
-      src: "https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=800",
-      alt: "אימון פונקציונלי", 
-      width: 800, 
-      height: 1200 
-    },
-    { 
-      src: "https://images.unsplash.com/photo-1603988363607-e1e4a66962c6?q=80&w=1200",
-      alt: "מאמנת עם מתאמנת", 
-      width: 1200, 
-      height: 800 
-    },
-    { 
-      src: "https://images.unsplash.com/photo-1593810450967-f9c42742e326?q=80&w=1200",
-      alt: "יוגה בסטודיו", 
-      width: 1200, 
-      height: 800 
+    {
+      id: 'haifa',
+      name: 'חיפה',
+      instagramHandle: 'ma_team_haifa',
+      profileImage: 'https://randomuser.me/api/portraits/women/68.jpg',
+      images: [
+        { 
+          src: "https://images.unsplash.com/photo-1603988363607-e1e4a66962c6?q=80&w=1200",
+          alt: "מאמנת עם מתאמנת - חיפה", 
+          width: 1200, 
+          height: 800 
+        },
+        { 
+          src: "https://images.unsplash.com/photo-1593810450967-f9c42742e326?q=80&w=1200",
+          alt: "יוגה בסטודיו - חיפה", 
+          width: 1200, 
+          height: 800 
+        }
+      ]
     }
   ]
   
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: { 
-        when: "beforeChildren",
-        staggerChildren: 0.05
+  // Find the correct branch to display based on selectedBranchId
+  useEffect(() => {
+    if (selectedBranchId) {
+      const branchIndex = branchGalleries.findIndex(branch => branch.id === selectedBranchId)
+      if (branchIndex !== -1) {
+        setCurrentBranchIndex(branchIndex)
+        setCurrentImageIndex(0) // Reset to first image when branch changes
+        resetProgress() // Reset progress bar
       }
     }
-  }
+  }, [selectedBranchId])
   
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { 
-      y: 0, 
-      opacity: 1,
-      transition: { type: "spring", stiffness: 300, damping: 24 }
+  const currentBranch = branchGalleries[currentBranchIndex]
+  const currentImages = currentBranch?.images || []
+  
+  // Handle progress and auto-advancement
+  useEffect(() => {
+    resetProgress()
+    return () => clearProgressInterval()
+  }, [currentImageIndex, currentBranchIndex])
+  
+  const resetProgress = () => {
+    clearProgressInterval()
+    setProgressWidth(0)
+    
+    if (!paused) {
+      progressIntervalRef.current = setInterval(() => {
+        setProgressWidth(prev => {
+          const newWidth = prev + (100 / (STORY_DURATION / 100))
+          
+          if (newWidth >= 100) {
+            goToNextImage()
+            return 0
+          }
+          
+          return newWidth
+        })
+      }, 100)
     }
   }
   
-  const handleOpenLightbox = (image: GalleryImage) => {
-    setSelectedImage(image)
-    document.body.style.overflow = 'hidden'
+  const clearProgressInterval = () => {
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current)
+      progressIntervalRef.current = null
+    }
   }
   
-  const handleCloseLightbox = () => {
-    setSelectedImage(null)
-    document.body.style.overflow = 'auto'
+  const clearLongPressTimer = () => {
+    if (longPressTimerRef.current) {
+      clearTimeout(longPressTimerRef.current)
+      longPressTimerRef.current = null
+    }
+  }
+  
+  // Navigate to next image with elegant looping
+  const goToNextImage = () => {
+    // Set direction to forward
+    setDirection(1)
+    
+    if (currentImageIndex < currentImages.length - 1) {
+      // More images in current branch
+      setCurrentImageIndex(prev => prev + 1)
+    } else if (currentBranchIndex < branchGalleries.length - 1) {
+      // Move to next branch
+      setCurrentBranchIndex(prev => prev + 1)
+      setCurrentImageIndex(0)
+    } else {
+      // Loop back to first branch and image with elegant transition
+      setCurrentBranchIndex(0)
+      setCurrentImageIndex(0)
+    }
+  }
+  
+  const goToPrevImage = () => {
+    // Set direction to backward
+    setDirection(-1)
+    
+    if (currentImageIndex > 0) {
+      // Previous image in current branch
+      setCurrentImageIndex(prev => prev - 1)
+    } else if (currentBranchIndex > 0) {
+      // Move to previous branch, last image
+      setCurrentBranchIndex(prev => prev - 1)
+      setCurrentImageIndex(branchGalleries[currentBranchIndex - 1].images.length - 1)
+    } else {
+      // Loop to the last image of the last branch
+      setCurrentBranchIndex(branchGalleries.length - 1)
+      setCurrentImageIndex(branchGalleries[branchGalleries.length - 1].images.length - 1)
+    }
+  }
+  
+  const handlePause = () => {
+    setPaused(true)
+    clearProgressInterval()
+  }
+  
+  const handleResume = () => {
+    setPaused(false)
+    resetProgress()
+  }
+  
+  const handlePointerDown = () => {
+    // Start a timer for long press
+    longPressTimerRef.current = setTimeout(() => {
+      handlePause()
+    }, LONG_PRESS_DURATION)
+  }
+  
+  const handlePointerUp = () => {
+    clearLongPressTimer()
+    
+    // If it was a short press and paused, resume
+    if (paused) {
+      handleResume()
+    }
+  }
+
+  const handlePointerLeave = () => {
+    clearLongPressTimer()
+  }
+  
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        goToPrevImage() // Changed direction - left arrow goes to previous image
+      } else if (e.key === 'ArrowRight') {
+        goToNextImage() // Changed direction - right arrow goes to next image
+      } else if (e.key === ' ') {
+        if (paused) {
+          handleResume()
+        } else {
+          handlePause()
+        }
+      }
+    }
+    
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [paused, currentImageIndex, currentBranchIndex])
+  
+  // Clean up timers when component unmounts
+  useEffect(() => {
+    return () => {
+      clearProgressInterval()
+      clearLongPressTimer()
+    }
+  }, [])
+  
+  if (!currentBranch || currentImages.length === 0) {
+    return <div className="flex items-center justify-center h-96">אין תמונות זמינות</div>
+  }
+  
+  // Define smooth transition for the animation
+  const transition = {
+    type: "tween", 
+    ease: "easeInOut", 
+    duration: 0.4
   }
   
   return (
-    <div ref={ref} id='gallery' className="w-full py-12">
-      <div className="max-w-6xl mx-auto px-4">
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="text-center mb-10"
-        >
-          <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold text-ma-black mb-4">
-            גלריית התמונות שלנו
-          </motion.h2>
-          <motion.p variants={itemVariants} className="text-ma-black/70 max-w-xl mx-auto">
-            הצצה אל המתחם המפנק והאווירה המיוחדת בסטודיו MA TEAM
-          </motion.p>
-        </motion.div>
+    <div className="w-full bg-black py-8 md:py-12">
+      <div id='gallery' dir="ltr" className="w-full max-w-5xl mx-auto h-[80vh] bg-black overflow-hidden relative px-6 sm:px-10 md:px-16 rounded-lg shadow-2xl">
+        {/* Progress indicators - Forced LTR direction */}
+        <div dir="ltr" className="absolute top-3 left-6 right-6 z-20 flex" style={{ direction: 'ltr' }}>
+          {[...currentImages].map((_, index) => (
+            <div key={index} className="h-1 flex-1 bg-white/30 rounded-full overflow-hidden mx-0.5">
+              {index < currentImageIndex && (
+                <div className="h-full w-full bg-white" />
+              )}
+              {index === currentImageIndex && (
+                <div 
+                  className="h-full bg-white transition-all duration-100 ease-linear"
+                  style={{ 
+                    width: `${progressWidth}%`,
+                    transformOrigin: 'left',
+                    direction: 'ltr'
+                  }}
+                />
+              )}
+            </div>
+          ))}
+        </div>
         
-        <motion.div 
-          variants={containerVariants}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-        >
-          {images.map((image, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              className={`relative overflow-hidden rounded-xl cursor-pointer transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl ${
-                image.height > image.width 
-                  ? 'row-span-2'
-                  : index % 3 === 0 
-                    ? 'col-span-2' 
-                    : ''
-              }`}
-              onClick={() => handleOpenLightbox(image)}
-            >
-              <div className="absolute inset-0 bg-ma-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                </svg>
-              </div>
+        {/* Instagram-like header - moved to left side */}
+        <div className="absolute top-8 left-6 z-20 flex items-center">
+          <div dir="rtl" className="flex items-center bg-black/50 backdrop-blur-sm p-1.5 pr-4 rounded-full">
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-pink-500 ml-2 mr-0">
               <Image 
-                src={image.src}
-                alt={image.alt}
-                width={image.width}
-                height={image.height}
+                src={currentBranch.profileImage} 
+                alt={currentBranch.name}
+                width={50}
+                height={50}
                 className="w-full h-full object-cover"
               />
-            </motion.div>
-          ))}
-        </motion.div>
+            </div>
+            <div dir="rtl" className="text-white">
+              <p className="text-sm font-medium text-right">{currentBranch.name}</p>
+              <p className="text-xs opacity-70 text-right">@{currentBranch.instagramHandle}</p>
+            </div>
+          </div>
+        </div>
         
-        <motion.div 
-          variants={itemVariants} 
-          className="mt-12 text-center"
-        >
-          <a 
-            href="https://www.instagram.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-medium shadow-lg hover:shadow-xl transition-all"
-          >
-            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.668.072 4.948c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-            </svg>
-            עקבו אחרינו באינסטגרם
-          </a>
-        </motion.div>
-      </div>
-      
-      {/* Lightbox */}
-      <AnimatePresence>
-        {selectedImage && (
+        {/* Main image with smooth slide animation */}
+        <AnimatePresence mode="wait" initial={false}>
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-ma-black/90 z-50 p-4 flex items-center justify-center"
-            onClick={handleCloseLightbox}
+            key={`${currentBranchIndex}-${currentImageIndex}`}
+            initial={{ opacity: 0, x: direction > 0 ? 300 : -300 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: direction > 0 ? -300 : 300 }}
+            transition={transition}
+            className="w-full h-full flex items-center justify-center"
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerUp}
+            onPointerLeave={handlePointerLeave}
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="relative max-w-4xl max-h-[90vh] overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                src={selectedImage.src}
-                alt={selectedImage.alt}
-                width={selectedImage.width}
-                height={selectedImage.height}
-                className="w-full h-auto"
+            <div className="relative w-full h-full">
+              <Image 
+                src={currentImages?.[currentImageIndex]?.src}
+                alt={currentImages?.[currentImageIndex]?.alt}
+                fill
+                className="object-contain"
+                priority
               />
-              
-              <button
-                onClick={handleCloseLightbox}
-                className="absolute top-4 right-4 w-10 h-10 rounded-full bg-ma-black/50 text-white flex items-center justify-center hover:bg-ma-black transition-colors"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-              
-              <div className="absolute bottom-0 left-0 right-0 bg-ma-black/70 backdrop-blur-sm px-4 py-3 text-white">
-                <p className="text-lg">{selectedImage.alt}</p>
-              </div>
-            </motion.div>
+            </div>
           </motion.div>
+        </AnimatePresence>
+        
+        {/* Touch navigation areas - Left to right navigation */}
+        <div className="absolute inset-0 z-10 flex pointer-events-none">
+          <div 
+            className="w-1/2 h-full pointer-events-auto"
+            onClick={goToPrevImage}
+          />
+          <div 
+            className="w-1/2 h-full pointer-events-auto" 
+            onClick={goToNextImage}
+          />
+        </div>
+        
+        {/* Pause/Play indicator */}
+        {paused && (
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 bg-black/50 p-4 rounded-full">
+            <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </div>
         )}
-      </AnimatePresence>
+      </div>
     </div>
   )
 } 
