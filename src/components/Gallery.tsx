@@ -292,7 +292,19 @@ export default function Gallery({ selectedBranchId }: GalleryProps) {
         {/* Instagram-like header - moved to left side */}
         <div className="absolute top-8 left-6 z-20 flex items-center">
           <div dir="rtl" className="flex items-center bg-black/50 backdrop-blur-sm p-1.5 pr-4 rounded-full">
-            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-pink-500 ml-2 mr-0">
+            <div dir="rtl" className="text-white ml-2">
+              {/* Instagram handle first without @ and in bold */}
+              <p className="text-sm font-bold text-right">{currentBranch.instagramHandle}</p>
+              {/* Location tag style */}
+              <p className="text-xs opacity-70 text-right flex items-center">
+                <svg className="w-3 h-3 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                </svg>
+                {currentBranch.name}
+              </p>
+            </div>
+            {/* Image moved to the far left */}
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-pink-500">
               <Image 
                 src={currentBranch.profileImage} 
                 alt={currentBranch.name}
@@ -300,10 +312,6 @@ export default function Gallery({ selectedBranchId }: GalleryProps) {
                 height={50}
                 className="w-full h-full object-cover"
               />
-            </div>
-            <div dir="rtl" className="text-white">
-              <p className="text-sm font-medium text-right">{currentBranch.name}</p>
-              <p className="text-xs opacity-70 text-right">@{currentBranch.instagramHandle}</p>
             </div>
           </div>
         </div>
