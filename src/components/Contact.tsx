@@ -203,14 +203,14 @@ export default function Contact() {
   }
 
   return (
-    <section className="w-full py-16 bg-[#F5F2EA]" id="contact">
-      <div className="max-w-3xl mx-auto px-4">
+    <section id="contact" className="py-16 md:py-24 bg-ma-light">
+      <div className="container mx-auto px-4">
         <motion.div
+          variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          variants={containerVariants}
-          className="space-y-6"
+          className="max-w-4xl mx-auto"
         >
           <motion.div 
             className="text-center"
@@ -244,8 +244,8 @@ export default function Contact() {
           ) : (
             <motion.form 
               onSubmit={handleSubmit}
-              className="relative rounded-3xl overflow-hidden shadow-xl bg-white/70 backdrop-blur-md p-6 md:p-8"
               variants={formContainerVariants}
+              className="bg-white p-6 md:p-8 rounded-2xl shadow-lg"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <motion.div variants={formItemVariants} className="space-y-2">

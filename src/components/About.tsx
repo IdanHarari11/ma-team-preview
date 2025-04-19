@@ -135,7 +135,7 @@ export default function About() {
   ];
   
   return (
-    <div ref={ref} id='about' className="w-full py-16 bg-[#F5F2EA]">
+    <div ref={ref} id='about' className="w-full py-16 bg-ma-light">
       <motion.div 
         variants={containerVariants}
         initial="hidden"
