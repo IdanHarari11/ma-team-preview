@@ -1,8 +1,8 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import Image from 'next/image'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
 
 interface TeamMember {
   name: string
@@ -19,6 +19,7 @@ interface TeamMember {
 export default function About() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.1 })
+  const [activeClass, setActiveClass] = useState(0)
   
   const teamMembers: TeamMember[] = [
     {
@@ -105,6 +106,34 @@ export default function About() {
     }
   }
   
+  // Class types data
+  const classTypes = [
+    {
+      name: "פילאטיס מכשירים",
+      image: "/images/studio/placeholder-pilates.jpg",
+      description: "האימון הכי מדויק שיש – על מיטות רפורמר מקצועיות מבית align. כאן עובדים על חיזוק עמוק, ייצוב, טווחי תנועה גמישות ושרירי ליבה. מתאים לכל רמות הכושר, גם למי שצריכה שיקום או התאמות. שורף לאורך כל השיעור, אבל ההרגשה אחרי זה שווה הכל!",
+      locations: "זמין בסניפי אשדוד ותל אביב"
+    },
+    {
+      name: "פילאטיס מזרן",
+      image: "/images/studio/placeholder-mat.jpg",
+      description: "בלי מכשירים – רק את/ה, המזרן, והנשימה שלך. אך אל תתנו למזרן להטעות אתכם, יש האומרים שזה השיעור הקשה והמהנה ביותר. עובדים על ליבה חזקה, גמישות, יציבה ודיוק בתנועה. זה שיעור שמחזק מבפנים, ומרגיש קצת כמו מדיטציה בתנועה.",
+      locations: "זמין בסניפי אשדוד ותל אביב"
+    },
+    {
+      name: "יוגה",
+      image: "/images/studio/placeholder-yoga.jpg",
+      description: "כאן כל הקסם קורה, בעזרת הסטודיואים הנעימים שהכנו עבורכם בשילוב המדריכות המיוחדות ביותר תחוו שיעור שמחזק, מגמיש ומחזיר לגוף שלך את מה שהוא צריך. עובדים על תנועות זורמות, נשימה נכונה, שיווי משקל ויציבה – בקצב נעים שמתאים לכולם. זה הזמן שלך לעצור רגע, להזיז את הגוף, ולהרגיש יותר קליל, פתוח ונינוח – גם בגוף וגם בראש. מתאים לכל רמה ומומלץ לכל מי שאומר עכשיו ״אולי זה לא בשבילי״",
+      locations: "זמין בסניפי אשדוד ותל אביב"
+    },
+    {
+      name: "מוביליטי",
+      image: "/images/studio/placeholder-mobility.jpg",
+      description: "תנועה, שחרור וטווחים פתוחים יותר. זה שיעור שמשפר את התנועה שלך באימונים, במדרגות, ואפילו כשתרים את הקניות. עובדים על מפרקים, גידים וטווחי תנועה – בצורה בטוחה ונעימה. קליל, אפקטיבי, והכי חשוב – מרגישים תוצאות.",
+      locations: "זמין בסניפי אשדוד"
+    }
+  ];
+  
   return (
     <div ref={ref} id='about' className="w-full py-16 bg-[#F5F2EA]">
       <motion.div 
@@ -186,49 +215,138 @@ export default function About() {
           </div>
         </motion.div>
         
-        
-        {/* Values */}
-        <motion.div variants={itemVariants}>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2C3338] mb-12 text-center">
-            הערכים שלנו
+        {/* Class Types */}
+        <motion.div variants={itemVariants} className="mb-10 relative" id="training">
+          <div className="absolute -inset-4 bg-gradient-to-r from-[#8BA888]/10 via-[#9DB89A]/30 to-[#8BA888]/10 rounded-3xl blur-xl -z-10"></div>
+          <div className="absolute -inset-8 bg-[url('/images/noise.png')] opacity-30 mix-blend-soft-light"></div>
+          
+          <h2 className="text-3xl md:text-4xl font-bold text-[#2C3338] mb-8 text-center flex items-center justify-center gap-0 relative">
+            <span className="drop-shadow-[0_0_15px_rgba(139,168,136,0.3)]">סוגי השיעורים ב</span>
+            <Image 
+              src="/images/logo-green.png"
+              alt="MA Team Logo"
+              width={140}
+              height={140}
+              className="h-auto w-auto max-h-[2.5em] -mr-2 drop-shadow-[0_0_10px_rgba(139,168,136,0.5)]"
+            />
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <motion.div variants={itemVariants} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-              <div className="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#8BA888]/10 text-[#8BA888]">
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-[#2C3338] mb-4">התאמה אישית</h3>
-              <p className="text-[#4A5568] leading-relaxed">
-                אנו מאמינים שכל אדם הוא ייחודי, ולכן מתאימים את האימונים באופן אישי לצרכים, למטרות וליכולות של כל מתאמן.
-              </p>
-            </motion.div>
+          <div className="bg-white/40 backdrop-blur-xl backdrop-filter rounded-2xl shadow-lg p-4 md:p-8 overflow-hidden border border-white/50 relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-white/20 pointer-events-none"></div>
+            <div className="absolute -inset-1 bg-gradient-to-r from-[#8BA888]/10 via-white/5 to-[#8BA888]/10 rounded-2xl blur-md -z-10"></div>
             
-            <motion.div variants={itemVariants} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-              <div className="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#8BA888]/10 text-[#8BA888]">
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
+            {/* Tab Navigation */}
+            <div className="relative z-10">
+              <div className="hidden sm:flex flex-wrap justify-center mb-8 gap-3">
+                {classTypes.map((classType, index) => (
+                  <motion.button
+                    key={index}
+                    className={`px-4 py-3 md:px-6 md:py-3 rounded-xl text-base md:text-lg font-medium relative overflow-hidden transition-all duration-300 ${
+                      activeClass === index 
+                        ? 'text-white shadow-lg' 
+                        : 'text-[#8BA888] hover:bg-white/50 backdrop-blur-sm'
+                    }`}
+                    onClick={() => setActiveClass(index)}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    <span className="relative z-10">{classType.name}</span>
+                    {activeClass === index && (
+                      <motion.div 
+                        className="absolute inset-0 bg-gradient-to-r from-[#8BA888] to-[#9DB89A]"
+                        layoutId="activeClassBackground"
+                        initial={false}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                  </motion.button>
+                ))}
               </div>
-              <h3 className="text-xl font-semibold text-[#2C3338] mb-4">בטיחות ומקצועיות</h3>
-              <p className="text-[#4A5568] leading-relaxed">
-                הבטיחות של המתאמנים שלנו היא בראש סדר העדיפויות. המדריכים שלנו מוסמכים ומתעדכנים באופן שוטף בשיטות האימון החדשות ביותר.
-              </p>
-            </motion.div>
+              
+              {/* מובייל - מבנה גריד 2x2 */}
+              <div className="grid grid-cols-2 gap-3 sm:hidden mb-8">
+                {classTypes.map((classType, index) => (
+                  <motion.button
+                    key={index}
+                    className={`px-3 py-3 rounded-xl text-sm font-medium relative overflow-hidden transition-all duration-300 ${
+                      activeClass === index 
+                        ? 'text-white shadow-lg' 
+                        : 'text-[#8BA888] hover:bg-white/50 backdrop-blur-sm'
+                    }`}
+                    onClick={() => setActiveClass(index)}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    <span className="relative z-10">{classType.name}</span>
+                    {activeClass === index && (
+                      <motion.div 
+                        className="absolute inset-0 bg-gradient-to-r from-[#8BA888] to-[#9DB89A]"
+                        layoutId="activeClassBackgroundMobile"
+                        initial={false}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                  </motion.button>
+                ))}
+              </div>
+            </div>
             
-            <motion.div variants={itemVariants} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-              <div className="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#8BA888]/10 text-[#8BA888]">
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-[#2C3338] mb-4">קהילתיות</h3>
-              <p className="text-[#4A5568] leading-relaxed">
-                בסטודיו שלנו אנחנו מטפחים קהילה תומכת ומעצימה, שבה כל אחד מרגיש שייך ומקבל עידוד להתקדם ולהתפתח.
-              </p>
-            </motion.div>
+            {/* Content Area */}
+            <div className="relative min-h-[400px] md:min-h-[450px] z-10">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeClass}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+                >
+                  {/* Image Side */}
+                  <div className="relative rounded-xl overflow-hidden shadow-lg h-64 md:h-96 group">
+                    <Image
+                      src={classTypes[activeClass].image}
+                      alt={classTypes[activeClass].name}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#8BA888]/20 to-transparent mix-blend-overlay"></div>
+                  </div>
+                  
+                  {/* Content Side */}
+                  <div className="space-y-6 backdrop-blur-sm bg-white/30 p-6 rounded-xl border border-white/40 shadow-sm">
+                    <h3 className="text-2xl font-bold text-[#2C3338] flex items-center">
+                      {classTypes[activeClass].name}
+                      <div className="h-1 w-16 bg-gradient-to-r from-[#8BA888] to-[#9DB89A] rounded-full mr-4"></div>
+                    </h3>
+                    
+                    <p className="text-[#4A5568] leading-relaxed">
+                      {classTypes[activeClass].description}
+                    </p>
+                    
+                    <div className="pt-4 flex items-center gap-2 text-[#8BA888] font-medium">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      {classTypes[activeClass].locations}
+                    </div>
+                    
+                    <motion.a
+                      href="#contact"
+                      whileHover={{ scale: 1.03, boxShadow: "0 0 20px rgba(139, 168, 136, 0.5)" }}
+                      whileTap={{ scale: 0.97 }}
+                      className="inline-block mt-4 px-6 py-3 bg-gradient-to-r from-[#8BA888]/90 to-[#9DB89A]/90 text-white rounded-xl font-medium shadow-md hover:shadow-xl transition-all relative group overflow-hidden backdrop-blur-md"
+                    >
+                      <span className="relative z-10">לשיעור ניסיון חינם</span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#8BA888] to-[#9DB89A] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+                    </motion.a>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
         </motion.div>
       </motion.div>

@@ -84,10 +84,10 @@ export default function Header() {
                 isScrolled ? 'text-ma-black hover:text-ma-primary' : 'text-white hover:text-ma-primary'
               }`}
             >
-              אודות
+              מי אנחנו
             </Link>
             <Link 
-              href="#training-types"
+              href="#training"
               className={`text-lg font-medium transition-all duration-300 hover:scale-105 ${
                 isScrolled ? 'text-ma-black hover:text-ma-primary' : 'text-white hover:text-ma-primary'
               }`}
@@ -103,20 +103,12 @@ export default function Header() {
               הסניפים שלנו
             </Link>
             <Link 
-              href="#schedule"
+              href="#gallery"
               className={`text-lg font-medium transition-all duration-300 hover:scale-105 ${
                 isScrolled ? 'text-ma-black hover:text-ma-primary' : 'text-white hover:text-ma-primary'
               }`}
             >
-              לוח שיעורים
-            </Link>
-            <Link 
-              href="#testimonials"
-              className={`text-lg font-medium transition-all duration-300 hover:scale-105 ${
-                isScrolled ? 'text-ma-black hover:text-ma-primary' : 'text-white hover:text-ma-primary'
-              }`}
-            >
-              המלצות
+              גלריה
             </Link>
             <Link 
               href="#contact"
@@ -127,16 +119,14 @@ export default function Header() {
               צור קשר
             </Link>
             <a 
-              href="https://app.arboxapp.com/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#contact"
               className={`py-3 px-6 rounded-xl text-lg ${
                 isScrolled 
                   ? 'bg-ma-primary text-white shadow-lg' 
                   : 'bg-white/20 backdrop-blur-md text-white border border-white/30'
               } font-medium transition-all duration-300 hover:scale-105 hover:shadow-xl`}
             >
-              רכישת מנוי
+              בואו נתחיל
             </a>
           </nav>
           
@@ -167,10 +157,10 @@ export default function Header() {
                     onClick={handleMenuItemClick}
                     className="text-xl font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
                   >
-                    אודות
+                    מי אנחנו
                   </Link>
                   <Link
-                    href="#training-types"
+                    href="#training"
                     onClick={handleMenuItemClick}
                     className="text-xl font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
                   >
@@ -184,18 +174,11 @@ export default function Header() {
                     הסניפים שלנו
                   </Link>
                   <Link
-                    href="#schedule"
+                    href="#gallery"
                     onClick={handleMenuItemClick}
                     className="text-xl font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
                   >
-                    לוח שיעורים
-                  </Link>
-                  <Link
-                    href="#testimonials"
-                    onClick={handleMenuItemClick}
-                    className="text-xl font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
-                  >
-                    המלצות
+                    גלריה
                   </Link>
                   <Link
                     href="#contact"
@@ -205,12 +188,10 @@ export default function Header() {
                     צור קשר
                   </Link>
                   <a
-                    href="https://app.arboxapp.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#contact"
                     className="py-3 px-10 rounded-xl bg-ma-primary text-white text-lg font-medium shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105"
                   >
-                    רכישת מנוי
+                    בואו נתחיל
                   </a>
                 </nav>
               </motion.div>
