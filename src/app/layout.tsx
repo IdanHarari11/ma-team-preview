@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import WhatsAppCircle from "@/components/WhatsAppCircle";
 
 const rubik = Rubik({
   subsets: ["latin", "hebrew"],
@@ -29,6 +30,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <ScrollToTop />
+        <WhatsAppCircle />
       </body>
     </html>
   );
