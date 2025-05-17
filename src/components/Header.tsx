@@ -52,8 +52,8 @@ export default function Header() {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="flex items-center justify-between h-28">
+      <div className="w-full max-w-6xl mx-auto px-4">
+        <div className="flex items-center justify-between h-28 w-full">
         {/* Logo */}
         {isScrolled ? 
           <Link href="/" className="flex items-center">

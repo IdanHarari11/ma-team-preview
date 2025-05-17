@@ -9,11 +9,8 @@
   --background-end-rgb: 245, 242, 234;
 }
 
-html {
+html, body {
   scroll-behavior: smooth;
-}
-
-body {
   direction: rtl;
   background: linear-gradient(
     to bottom,
@@ -23,6 +20,9 @@ body {
   color: rgb(var(--foreground-rgb));
   font-family: var(--font-rubik), sans-serif;
   min-height: 100vh;
+  overflow-x: hidden !important;
+  width: 100vw;
+  max-width: 100vw;
 }
 
 @layer utilities {

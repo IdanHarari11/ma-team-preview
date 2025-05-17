@@ -367,17 +367,17 @@ export default function Gallery({ selectedBranchId }: GalleryProps) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: direction > 0 ? -300 : 300 }}
             transition={transition}
-            className="w-full h-full flex items-center justify-center"
+            className="w-full flex items-center justify-center"
             onPointerDown={handlePointerDown}
             onPointerUp={handlePointerUp}
             onPointerLeave={handlePointerLeave}
           >
-            <div className="relative w-full h-full">
+            <div className="relative w-full aspect-[9/16] max-w-[400px] max-h-[90vh] mx-auto bg-black rounded-xl overflow-hidden shadow-lg">
               <Image 
                 src={currentImages?.[currentImageIndex]?.src}
                 alt={currentImages?.[currentImageIndex]?.alt}
                 fill
-                className="object-contain"
+                className="object-cover"
                 priority
               />
             </div>

@@ -61,9 +61,9 @@ export default function Hero() {
   }, [slideshowImages.length]);
 
   return (
-    <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden w-full">
       {/* Background Slideshow with overlays */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 w-full h-full">
         {/* Slideshow images */}
         {slideshowImages.map((src, idx) => (
           <motion.div
@@ -122,7 +122,7 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 w-full flex justify-center items-center px-4">
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 shadow-2xl [box-shadow:_0_0_30px_rgba(139,168,136,0.3)] max-w-xl mx-auto" style={{paddingBottom: '2.5rem'}}>
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 shadow-2xl [box-shadow:_0_0_30px_rgba(139,168,136,0.3)] max-w-xl mx-auto w-full" style={{paddingBottom: '2.5rem'}}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
