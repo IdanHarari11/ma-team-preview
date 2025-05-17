@@ -27,20 +27,20 @@ export default function BranchSelector() {
   const branches = {
     'tel-aviv': [
       {
-        id: 'telaviv-pilates',
+        id: 'telaviv',
         name: 'סטודיו פילאטיס ויוגה תל אביב',
         address: 'מקווה ישראל 4, תל אביב',
-        details: '100 מטר מרוטשילד, צמוד לתחנת הרכבת הקלה "אלנבי"',
-        phone: '050-9222062',
-        image: '/images/classes/pilatis.jpeg',
+        details: 'בניין בוטיק, חניה בשפע בתשלום, קרוב לרכבת',
+        phone: '03-1234567',
+        image: '/pilates tlv/RASHTA-09094.jpg',
         trainingTypes: [
           'פילאטיס מכשירים',
-          'פילאטיס בר',
           'פילאטיס מזרן',
-          'יוגה'
+          'יוגה',
+          'מוביליטי'
         ],
-        scheduleEmbed: 'https://gvJCXnmN.web.arboxapp.com/group?whitelabel=Arbox&lang=he&location=18873&referrer=PLUGIN',
-        priceListEmbed: 'https://gvJCXnmN.web.arboxapp.com/membership?whitelabel=Arbox&lang=he&location=18873&referrer=PLUGIN'
+        scheduleEmbed: '',
+        priceListEmbed: ''
       }
     ],
     'ashdod': [
@@ -50,7 +50,7 @@ export default function BranchSelector() {
         address: 'רחוב היידן 3, אשדוד',
         details: 'בית קרקע, חניה בשפע ללא עלות',
         phone: '052-3139677',
-        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200',
+        image: '/function ashdod/IMG_0524_Facetune_26-10-2022-15-52-19_Original.jpg',
         trainingTypes: [
           'אימון כוח פונקציונלי',
           'מוביליטי'
@@ -64,7 +64,7 @@ export default function BranchSelector() {
         address: 'רחוב התאנה, אשדוד',
         details: 'בית קרקע, חנייה ללא עלות בבית קפה דוגה/פארינו והסביבה - לא בתוך הרחוב',
         phone: '052-3139677',
-        image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200',
+        image: '/pilates ashdod/DSC_8603.JPG',
         trainingTypes: [
           'פילאטיס מכשירים',
           'פילאטיס מזרן',

@@ -145,13 +145,13 @@ export default function Testimonials() {
   return (
     <div className="w-full py-16 bg-[#F5F2EA]" id="testimonials">
       <div className="max-w-6xl mx-auto px-4">
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
           ref={ref}
           className="text-center mb-16"
-        >
+      >
           <h2 className="text-3xl md:text-4xl font-bold text-[#2C3338] mb-8">
             הלקוחות של MA TEAM מדברים
           </h2>
@@ -159,7 +159,7 @@ export default function Testimonials() {
             מה המתאמנים שלנו אומרים על החוויה בסטודיו MA TEAM
           </p>
         </motion.div>
-
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {reviews.map((review, index) => (
             <motion.div
@@ -169,31 +169,31 @@ export default function Testimonials() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
               className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all"
-            >
+              >
               <div className="flex items-center mb-6">
                 <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-                  <Image
-                    src={review.photoUrl}
-                    alt={review.name}
+                    <Image
+                      src={review.photoUrl}
+                      alt={review.name}
                     width={48}
                     height={48}
-                    className="object-cover"
-                  />
-                </div>
-                <div>
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
                   <h3 className="font-bold text-ma-black">{review.name}</h3>
                   <p className="text-ma-black/60 text-sm">סניף {review.branch === 'tel-aviv' ? 'תל אביב' : 'אשדוד'}</p>
                 </div>
               </div>
               
               <p className="text-ma-black/80 mb-6">{review.text}</p>
-              
+                
               <div className="flex text-[#8BA888]">
                 {renderStars(review.rating)}
               </div>
             </motion.div>
-          ))}
-        </div>
+            ))}
+          </div>
       </div>
     </div>
   )
