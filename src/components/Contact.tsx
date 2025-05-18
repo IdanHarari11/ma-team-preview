@@ -29,6 +29,7 @@ export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [errors, setErrors] = useState<Partial<FormData>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   const studios = {
     'tel-aviv': [
@@ -74,6 +75,7 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setSubmitError(null)
     
     if (!validateForm()) {
       return
@@ -81,13 +83,52 @@ export default function Contact() {
     
     setIsSubmitting(true)
     
-    // Here you would typically send the form data to your server
-    console.log('Form submitted:', formData)
-    
-    setTimeout(() => {
-      setIsSubmitting(false)
+    try {
+      // מציאת מידע הסטודיו
+      const studioInfo = formData.city && formData.studio ? 
+        studios[formData.city].find(s => s.id === formData.studio) : null
+      
+      // בניית אובייקט הנתונים לשליחה
+      const emailData = {
+        // פרטים בסיסיים
+        name: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        
+        // פרטי פעילות
+        city: formData.city === "tel-aviv" ? "תל אביב" : 
+              formData.city === "ashdod" ? "אשדוד" : "",
+        studio: studioInfo?.name || "",
+        trainingType: formData.trainingType,
+        
+        // מיקום
+        businessName: studioInfo?.name || '',
+        businessLocation: studioInfo?.address || '',
+        
+        // פרטים נוספים
+        wantConsultation: formData.wantConsultation,
+        notes: formData.message || ""
+      }
+
+      // שליחת הנתונים ל-API
+      const response = await fetch('/api/email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(emailData),
+      })
+
+      const result = await response.json()
+      
+      if (!response.ok) {
+        throw new Error(result.error || 'אירעה שגיאה בשליחת הטופס')
+      }
+      
+      console.log('Form submitted successfully:', result)
       setIsSubmitted(true)
       
+      // איפוס הטופס לאחר 5 שניות
       setTimeout(() => {
         setIsSubmitted(false)
         setFormData({
@@ -101,7 +142,12 @@ export default function Contact() {
           wantConsultation: false
         })
       }, 5000)
-    }, 1000)
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      setSubmitError(error instanceof Error ? error.message : 'אירעה שגיאה בשליחת הטופס')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -247,6 +293,13 @@ export default function Contact() {
               variants={formContainerVariants}
               className="bg-white p-6 md:p-8 rounded-2xl shadow-lg"
             >
+              {submitError && (
+                <div className="bg-red-50 text-red-700 p-4 rounded-xl mb-6 border border-red-200">
+                  <p className="font-medium">שגיאה בשליחת הטופס</p>
+                  <p className="text-sm">{submitError}</p>
+                </div>
+              )}
+            
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <motion.div variants={formItemVariants} className="space-y-2">
                   <label htmlFor="fullName" className="block text-sm font-medium text-ma-black">
@@ -362,6 +415,20 @@ export default function Contact() {
                   </select>
                 </motion.div>
               </div>
+
+              <motion.div variants={formItemVariants} className="mt-5">
+                <label htmlFor="message" className="block text-sm font-medium text-ma-black mb-2">
+                  הערות נוספות
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={3}
+                  className="w-full px-4 py-3 rounded-xl bg-white/70 backdrop-blur-sm border border-gray-200 focus:border-[#8BA888] focus:ring-2 focus:ring-[#8BA888]/20 transition-colors"
+                ></textarea>
+              </motion.div>
 
               <motion.div variants={formItemVariants} className="mt-5 flex items-center">
                 <input
