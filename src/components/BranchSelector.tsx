@@ -31,7 +31,8 @@ export default function BranchSelector() {
         name: 'סטודיו פילאטיס ויוגה תל אביב',
         address: 'מקווה ישראל 4, תל אביב',
         details: 'בניין בוטיק, חניה בשפע בתשלום, קרוב לרכבת',
-        phone: '03-1234567',
+        phone: '050-9222062',
+        whatsapp: '050-9222062',
         image: '/pilates tlv/RASHTA-09094.jpg',
         trainingTypes: [
           'פילאטיס מכשירים',
@@ -50,6 +51,7 @@ export default function BranchSelector() {
         address: 'רחוב היידן 3, אשדוד',
         details: 'בית קרקע, חניה בשפע ללא עלות',
         phone: '052-3139677',
+        whatsapp: '052-3139677',
         image: '/function ashdod/IMG_0524_Facetune_26-10-2022-15-52-19_Original.jpg',
         trainingTypes: [
           'אימון כוח פונקציונלי',
@@ -64,6 +66,7 @@ export default function BranchSelector() {
         address: 'רחוב התאנה, אשדוד',
         details: 'בית קרקע, חנייה ללא עלות בבית קפה דוגה/פארינו והסביבה - לא בתוך הרחוב',
         phone: '052-3139677',
+        whatsapp: '052-3139677',
         image: '/pilates ashdod/DSC_8603.JPG',
         trainingTypes: [
           'פילאטיס מכשירים',
