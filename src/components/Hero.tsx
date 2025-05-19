@@ -32,6 +32,12 @@ export default function Hero() {
     '/hero/RASHTA-00456.jpg',
     '/hero/RASHTA-00555.jpg',
     '/hero/RASHTA-00647.jpg',
+    '/ashdod function/RASHTA-00215.jpg',
+    '/ashdod function/RASHTA-00244.jpg',
+    '/ashdod function/RASHTA-00256.jpg',
+    '/tlv p y/RASHTA-08836.jpg',
+    '/tlv p y/RASHTA-08859.jpg',
+    '/tlv p y/RASHTA-09041.jpg',
   ];
   const [currentImage, setCurrentImage] = useState(0);
   const [prevImage, setPrevImage] = useState<number|null>(null);

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 
@@ -110,29 +110,63 @@ export default function About() {
   const classTypes = [
     {
       name: "פילאטיס מכשירים",
-      image: "/pilates tlv/RASHTA-08863.jpg",
+      images: ["/pilates/RASHTA-00526.jpg"],
       description: "האימון הכי מדויק שיש – על מיטות רפורמר מקצועיות מבית align. כאן עובדים על חיזוק עמוק, ייצוב, טווחי תנועה גמישות ושרירי ליבה. מתאים לכל רמות הכושר, גם למי שצריכה שיקום או התאמות. שורף לאורך כל השיעור, אבל ההרגשה אחרי זה שווה הכל!",
       locations: "זמין בסניפי אשדוד ותל אביב"
     },
     {
-      name: "פילאטיס מזרן",
-      image: "/pilates tlv/RASHTA-09087.jpg",
-      description: "בלי מכשירים – רק את/ה, המזרן, והנשימה שלך. אך אל תתנו למזרן להטעות אתכם, יש האומרים שזה השיעור הקשה והמהנה ביותר. עובדים על ליבה חזקה, גמישות, יציבה ודיוק בתנועה. זה שיעור שמחזק מבפנים, ומרגיש קצת כמו מדיטציה בתנועה.",
+      name: "פונקציונלי",
+      images: ["/function/RASHTA-00254.jpg"],
+      description: "אימון פונקציונלי המשלב תרגילים מגוונים לשיפור כוח, סיבולת, יציבות ותנועה יומיומית. מתאים לכל הרמות, משפר ביצועים ומונע פציעות.",
       locations: "זמין בסניפי אשדוד ותל אביב"
     },
     {
       name: "יוגה",
-      image: "/pilates tlv/RASHTA-08996.jpg",
-      description: "כאן כל הקסם קורה, בעזרת הסטודיואים הנעימים שהכנו עבורכם בשילוב המדריכות המיוחדות ביותר תחוו שיעור שמחזק, מגמיש ומחזיר לגוף שלך את מה שהוא צריך. עובדים על תנועות זורמות, נשימה נכונה, שיווי משקל ויציבה – בקצב נעים שמתאים לכולם. זה הזמן שלך לעצור רגע, להזיז את הגוף, ולהרגיש יותר קליל, פתוח ונינוח – גם בגוף וגם בראש. מתאים לכל רמה ומומלץ לכל מי שאומר עכשיו ״אולי זה לא בשבילי״",
+      images: ["/yoga/RASHTA-09041.jpg", "/yoga/RASHTA-00594.jpg"],
+      description: 'כאן כל הקסם קורה, בעזרת הסטודיואים הנעימים שהכנו עבורכם בשילוב המדריכות המיוחדות ביותר תחוו שיעור שמחזק, מגמיש ומחזיר לגוף שלך את מה שהוא צריך. עובדים על תנועות זורמות, נשימה נכונה, שיווי משקל ויציבה – בקצב נעים שמתאים לכולם. זה הזמן שלך לעצור רגע, להזיז את הגוף, ולהרגיש יותר קליל, פתוח ונינוח – גם בגוף וגם בראש. מתאים לכל רמה ומומלץ לכל מי שאומר עכשיו ״אולי זה לא בשבילי"',
+      locations: "זמין בסניפי אשדוד ותל אביב"
+    },
+    {
+      name: "פילאטיס מזרן",
+      images: [
+        "/pilates tlv/RASHTA-09094.jpg",
+        "/pilates tlv/RASHTA-09093.jpg",
+        "/pilates tlv/RASHTA-09089.jpg",
+        "/pilates tlv/RASHTA-09088.jpg",
+        "/pilates tlv/RASHTA-09087.jpg",
+        "/pilates tlv/RASHTA-09086.jpg",
+        "/pilates tlv/RASHTA-09085.jpg",
+        "/pilates tlv/RASHTA-09083.jpg",
+        "/pilates tlv/RASHTA-09080.jpg"
+      ],
+      description: "בלי מכשירים – רק את/ה, המזרן, והנשימה שלך. אך אל תתנו למזרן להטעות אתכם, יש האומרים שזה השיעור הקשה והמהנה ביותר. עובדים על ליבה חזקה, גמישות, יציבה ודיוק בתנועה. זה שיעור שמחזק מבפנים, ומרגיש קצת כמו מדיטציה בתנועה.",
       locations: "זמין בסניפי אשדוד ותל אביב"
     },
     {
       name: "מוביליטי",
-      image: "/function ashdod/Facetune_26-10-2022-16-47-38_Original.jpg",
+      images: ["/mobility/RASHTA-00416.jpg"],
       description: "תנועה, שחרור וטווחים פתוחים יותר. זה שיעור שמשפר את התנועה שלך באימונים, במדרגות, ואפילו כשתרים את הקניות. עובדים על מפרקים, גידים וטווחי תנועה – בצורה בטוחה ונעימה. קליל, אפקטיבי, והכי חשוב – מרגישים תוצאות.",
       locations: "זמין בסניפי אשדוד"
     }
   ];
+  
+  // קרוסלה פנימית לכל שיעור עם יותר מתמונה אחת
+  const [classImageIndexes, setClassImageIndexes] = useState(classTypes.map(() => 0));
+  useEffect(() => {
+    const intervals: NodeJS.Timeout[] = [];
+    classTypes.forEach((type, idx) => {
+      if (type.images.length > 1) {
+        intervals[idx] = setInterval(() => {
+          setClassImageIndexes(prev => {
+            const copy = [...prev];
+            copy[idx] = (copy[idx] + 1) % type.images.length;
+            return copy;
+          });
+        }, 3000);
+      }
+    });
+    return () => intervals.forEach(i => i && clearInterval(i));
+  }, []);
   
   return (
     <div ref={ref} id='about' className="w-full py-16 bg-ma-light">
@@ -304,14 +338,34 @@ export default function About() {
                 >
                   {/* Image Side */}
                   <div className="relative rounded-xl overflow-hidden shadow-lg h-64 md:h-96 group">
-                    <Image
-                      src={classTypes[activeClass].image}
-                      alt={classTypes[activeClass].name}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#8BA888]/20 to-transparent mix-blend-overlay"></div>
+                    {classTypes[activeClass].images.length > 1 ? (
+                      <AnimatePresence mode="wait">
+                        <motion.div
+                          key={classImageIndexes[activeClass]}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.8 }}
+                          className="w-full h-full absolute inset-0"
+                        >
+                          <Image
+                            src={classTypes[activeClass].images[classImageIndexes[activeClass]]}
+                            alt={classTypes[activeClass].name}
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                          <div className="absolute inset-0 bg-gradient-to-r from-[#8BA888]/20 to-transparent mix-blend-overlay"></div>
+                        </motion.div>
+                      </AnimatePresence>
+                    ) : (
+                      <Image
+                        src={classTypes[activeClass].images[0]}
+                        alt={classTypes[activeClass].name}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    )}
                   </div>
                   
                   {/* Content Side */}
