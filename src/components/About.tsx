@@ -129,15 +129,8 @@ export default function About() {
     {
       name: "פילאטיס מזרן",
       images: [
-        "/pilates tlv/RASHTA-09094.jpg",
-        "/pilates tlv/RASHTA-09093.jpg",
-        "/pilates tlv/RASHTA-09089.jpg",
-        "/pilates tlv/RASHTA-09088.jpg",
-        "/pilates tlv/RASHTA-09087.jpg",
-        "/pilates tlv/RASHTA-09086.jpg",
-        "/pilates tlv/RASHTA-09085.jpg",
-        "/pilates tlv/RASHTA-09083.jpg",
-        "/pilates tlv/RASHTA-09080.jpg"
+        "/RASHTA-00476.jpg",
+        "/RASHTA-08927.jpg"
       ],
       description: "בלי מכשירים – רק את/ה, המזרן, והנשימה שלך. אך אל תתנו למזרן להטעות אתכם, יש האומרים שזה השיעור הקשה והמהנה ביותר. עובדים על ליבה חזקה, גמישות, יציבה ודיוק בתנועה. זה שיעור שמחזק מבפנים, ומרגיש קצת כמו מדיטציה בתנועה.",
       locations: "זמין בסניפי אשדוד ותל אביב"
@@ -167,6 +160,15 @@ export default function About() {
     });
     return () => intervals.forEach(i => i && clearInterval(i));
   }, []);
+
+  // Reset carousel index when changing class type
+  useEffect(() => {
+    setClassImageIndexes(prev => {
+      const copy = [...prev];
+      copy[activeClass] = 0;
+      return copy;
+    });
+  }, [activeClass]);
   
   return (
     <div ref={ref} id='about' className="w-full py-16 bg-ma-light">
@@ -351,8 +353,10 @@ export default function About() {
                           <Image
                             src={classTypes[activeClass].images[classImageIndexes[activeClass]]}
                             alt={classTypes[activeClass].name}
-                            fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                            width={600}
+                            height={800}
+                            className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
+                            onError={e => { e.currentTarget.style.display = 'none'; }}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                           <div className="absolute inset-0 bg-gradient-to-r from-[#8BA888]/20 to-transparent mix-blend-overlay"></div>
@@ -362,8 +366,10 @@ export default function About() {
                       <Image
                         src={classTypes[activeClass].images[0]}
                         alt={classTypes[activeClass].name}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        width={600}
+                        height={800}
+                        className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
+                        onError={e => { e.currentTarget.style.display = 'none'; }}
                       />
                     )}
                   </div>

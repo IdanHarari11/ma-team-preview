@@ -44,8 +44,20 @@ export default function RootLayout({
         {children}
         <Footer />
         <ScrollToTop />
-        <WhatsAppCircle />
-        <NagishLi />
+        <div className="fixed bottom-6 left-6 z-50">
+          <a
+            href="https://linktr.ee/M.A_STUDIO_LINKS"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="כל הלינקים של MA TEAM"
+            className="flex items-center justify-center w-14 h-14 rounded-full bg-[#8BA888] shadow-lg hover:bg-[#6e8c6e] transition-colors duration-200 text-white text-2xl border-4 border-white"
+            style={{ boxShadow: '0 4px 24px 0 rgba(139,168,136,0.25)' }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-3A2.25 2.25 0 008.25 5.25V9m7.5 0v10.5A2.25 2.25 0 0113.5 21h-3a2.25 2.25 0 01-2.25-2.25V9m7.5 0H6.75" />
+            </svg>
+          </a>
+        </div>
       </body>
     </html>
   );
