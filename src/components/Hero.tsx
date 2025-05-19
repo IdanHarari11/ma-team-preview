@@ -29,19 +29,9 @@ export default function Hero() {
   
   // Slideshow images from the new folders
   const slideshowImages = [
-    '/pilates ashdod/DSC_8894.JPG',
-    '/pilates ashdod/DSC_8747.JPG',
-    '/pilates ashdod/DSC_8673.JPG',
-    '/pilates ashdod/DSC_8603.JPG',
-    '/function ashdod/Facetune_26-10-2022-16-47-38_Original.jpg',
-    '/function ashdod/DANI2854_Original.jpg',
-    '/function ashdod/IMG_0524_Facetune_26-10-2022-15-52-19_Original.jpg',
-    '/function ashdod/DANI2735_Original.jpg',
-    '/pilates tlv/RASHTA-09094.jpg',
-    '/pilates tlv/RASHTA-09087.jpg',
-    '/pilates tlv/RASHTA-09086.jpg',
-    '/pilates tlv/RASHTA-09083.jpg',
-    '/pilates tlv/RASHTA-09080.jpg',
+    '/hero/RASHTA-00456.jpg',
+    '/hero/RASHTA-00555.jpg',
+    '/hero/RASHTA-00647.jpg',
   ];
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -68,19 +58,21 @@ export default function Hero() {
         {slideshowImages.map((src, idx) => (
           <motion.div
             key={src}
-            initial={{ opacity: 0 }}
+            style={{ zIndex: currentImage === idx ? 2 : 1 }}
+            initial={false}
             animate={{ opacity: currentImage === idx ? 1 : 0 }}
-            transition={{ duration: 0.8 }}
-            className="w-full h-full absolute inset-0"
-            style={{ zIndex: idx }}
+            transition={{ duration: 0.8, ease: 'easeInOut' }}
+            className={`w-full h-full absolute inset-0 ${currentImage === idx ? 'pointer-events-auto' : 'pointer-events-none'}`}
           >
-            <Image
-              src={src}
-              alt="MA TEAM Studio Slide"
-              fill
-              priority={idx === 0}
-              className="object-cover transition-opacity duration-700"
-            />
+            {currentImage === idx && (
+              <Image
+                src={src}
+                alt="MA TEAM Studio Slide"
+                fill
+                priority
+                className="object-cover transition-opacity duration-700"
+              />
+            )}
           </motion.div>
         ))}
         {/* Overlay gradients */}

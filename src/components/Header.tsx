@@ -58,21 +58,35 @@ export default function Header() {
         {isScrolled ? 
           <Link href="/" className="flex items-center">
           <Image
+            src="/logo white/MA PPILATES & YOGA.pdf.png"
+            alt="MA TEAM"
+            width={390}
+            height={120}
+            className="h-36 w-auto [filter:drop-shadow(0_0_3px_rgba(255,255,255,0.7))] transition-all duration-300 hidden md:block"
+          />
+          <Image
             src="/images/logo-green.png"
             alt="MA TEAM"
-            width={180}
+            width={210}
             height={60}
-            className="h-16 w-auto [filter:drop-shadow(0_0_3px_rgba(255,255,255,0.7))] transition-all duration-300"
-            />
+            className="h-18 w-auto [filter:drop-shadow(0_0_3px_rgba(255,255,255,0.7))] transition-all duration-300 md:hidden"
+          />
         </Link>
         :
         <Link href="/" className="flex items-center">
           <Image 
-            src="/images/ma-logo.png"
+            src="/logo white/MA PPILATES & YOGA.pdf.png"
             alt="MA TEAM" 
-            width={180}
+            width={390}
+            height={120}
+            className="h-36 w-auto hidden md:block"
+          />
+          <Image
+            src="/images/ma-logo.png"
+            alt="MA TEAM"
+            width={210}
             height={60}
-            className="h-16 w-auto"
+            className="h-18 w-auto md:hidden"
           />
         </Link>
         }

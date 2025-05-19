@@ -203,9 +203,9 @@ export default function About() {
             >
               <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
                 <Image 
-                  src="/images/studio/about-studio.png" 
-                  alt="סטודיו MA TEAM" 
-                  width={600} 
+                  src="/our story/RASHTA-00323.jpg"
+                  alt="סטודיו MA TEAM"
+                  width={600}
                   height={450}
                   className="w-full h-auto object-cover"
                 />
