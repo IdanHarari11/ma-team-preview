@@ -182,10 +182,8 @@ export default function Faq() {
           className="object-cover opacity-60"
           priority
         />
-        {/* שכבת overlay כהה ועדינה */}
-        <div className="absolute inset-0 bg-black/30" />
-        {/* שכבת overlay לבהירות */}
-        <div className="absolute inset-0 bg-white/60 bg-gradient-to-b from-white/80 to-white/60" />
+        {/* שכבת overlay לבהירות בלבד */}
+        <div className="absolute inset-0 bg-white/60" />
       </motion.div>
       <div className="max-w-4xl mx-auto px-4 relative z-10">
         <motion.div

@@ -269,11 +269,11 @@ export default function Contact() {
           src={require('../../public/galleryi tlv p y/RASHTA-08886.jpg')}
           alt="רקע מגניב תל אביב"
           fill
-          className="object-cover opacity-60"
+          className="object-cover"
           priority
         />
-        {/* שכבת overlay כהה ועדינה */}
-        <div className="absolute inset-0 bg-black/30" />
+        {/* שכבת overlay כהה מאוד */}
+        <div className="absolute inset-0 bg-black/80" />
         {/* שכבת overlay לבהירות */}
         <div className="absolute inset-0 bg-white/60 bg-gradient-to-b from-white/80 to-white/60" />
       </motion.div>
