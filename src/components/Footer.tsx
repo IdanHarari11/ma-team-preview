@@ -54,7 +54,7 @@ export default function Footer() {
             <div className="flex items-center justify-center md:justify-start space-x-4 space-x-reverse">
               <div className="flex items-center gap-4">
                 <a
-                  href="https://instagram.com/ma.studio"
+                  href="https://www.instagram.com/m.a_functional_studio?igsh=MWcwN3hrd2llMzgxOA%3D%3D"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition-all"
@@ -122,13 +122,13 @@ export default function Footer() {
               <li>
                 <p className="font-medium mb-1">דוא"ל</p>
                 <a 
-                  href="mailto:info@mateam.co.il" 
+                  href="mailto:mafstudio3@gmail.com" 
                   className="text-white/70 hover:text-white transition-colors text-sm inline-flex items-center"
                 >
                   <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  info@mateam.co.il
+                  mafstudio3@gmail.com
                 </a>
               </li>
             </ul>

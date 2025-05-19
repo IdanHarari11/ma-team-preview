@@ -347,13 +347,14 @@ export default function Gallery({ selectedBranchId }: GalleryProps) {
               </p>
             </div>
             {/* Image moved to the far left */}
-            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-pink-500">
-              <Image 
-                src={currentBranch.profileImage} 
-                alt={currentBranch.name}
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-pink-500 bg-white flex items-center justify-center">
+              <Image
+                src="/MA PPILATES & YOGA.pdf (5).png"
+                alt="MA TEAM LOGO"
                 width={50}
                 height={50}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
+                priority
               />
             </div>
           </div>
