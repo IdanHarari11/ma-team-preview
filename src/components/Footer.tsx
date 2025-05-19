@@ -27,8 +27,8 @@ export default function Footer() {
   
   // Branch info
   const branches = [
-    { name: 'תל אביב', address: 'רחוב הברזל 30, תל אביב', phone: '03-1234567' },
-    { name: 'אשדוד', address: 'רחוב האורגים 15, אשדוד', phone: '08-9876543' },
+    { name: 'תל אביב', address: 'רחוב הברזל 30, תל אביב', phone: '050-9222062', whatsapp: '050-9222062' },
+    { name: 'אשדוד', address: 'רחוב האורגים 15, אשדוד', phone: '052-3139677', whatsapp: '052-3139677' },
   ]
   
   return (
@@ -106,6 +106,18 @@ export default function Footer() {
                     </svg>
                     {branch.phone}
                   </a>
+                  <a
+                    href={`https://wa.me/972${branch.whatsapp.replace(/^0/, '')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 mt-1 text-[#25D366] hover:text-[#128C7E] text-sm"
+                    aria-label={`שלח הודעת וואטסאפ לסניף ${branch.name}`}
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path fillRule="evenodd" clipRule="evenodd" d="M17.415 14.382c-.298-.149-1.759-.867-2.031-.967-.272-.099-.47-.148-.669.149-.198.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.57-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M11.999 1C5.869 1 1 5.869 1 12s4.869 11 10.999 11C18.131 23 23 18.131 23 12S18.131 1 11.999 1M12 21.5c-5.246 0-9.5-4.253-9.5-9.5S6.754 2.5 12 2.5 21.5 6.754 21.5 12s-4.254 9.5-9.5 9.5" />
+                    </svg>
+                    וואטסאפ
+                  </a>
                 </li>
               ))}
               <li>
@@ -142,6 +154,14 @@ export default function Footer() {
                 הרשמה
               </button>
             </form>
+          </div>
+        </div>
+        
+        {/* Branch Galleries Placeholder */}
+        <div className="mt-10">
+          <h4 className="text-lg font-semibold mb-4">גלריה מהסניפים</h4>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 min-h-[120px] bg-white/5 rounded-lg p-4">
+            {/* כאן ייכנסו תמונות הגלריה של כל סניף */}
           </div>
         </div>
         

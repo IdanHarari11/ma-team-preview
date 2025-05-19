@@ -33,12 +33,12 @@ export default function Contact() {
 
   const studios = {
     'tel-aviv': [
-      { id: 'telaviv', name: 'סטודיו פילאטיס ויוגה תל אביב', address: 'מקווה ישראל 4, תל אביב' }
+      { id: 'telaviv', name: 'סטודיו פילאטיס ויוגה תל אביב', address: 'מקווה ישראל 4, תל אביב', phone: '050-9222062', whatsapp: '050-9222062' }
     ],
     'ashdod': [
-      { id: 'ashdod-pilates', name: 'סטודיו פילאטיס ויוגה', address: 'רחוב התאנה, אשדוד' },
-      { id: 'ashdod-functional', name: 'פונקציונלי אשדוד', address: 'רחוב היידן 3, אשדוד' },
-      { id: 'ashdod-combined', name: 'מנוי משולב סניפים', address: 'כל הסניפים באשדוד' }
+      { id: 'ashdod-pilates', name: 'סטודיו פילאטיס ויוגה', address: 'רחוב התאנה, אשדוד', phone: '052-3139677', whatsapp: '052-3139677' },
+      { id: 'ashdod-functional', name: 'פונקציונלי אשדוד', address: 'רחוב היידן 3, אשדוד', phone: '052-3139677', whatsapp: '052-3139677' },
+      { id: 'ashdod-combined', name: 'מנוי משולב סניפים', address: 'כל הסניפים באשדוד', phone: '052-3139677', whatsapp: '052-3139677' }
     ]
   }
 
