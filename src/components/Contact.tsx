@@ -262,21 +262,20 @@ export default function Contact() {
       <motion.div
         ref={bgRef}
         style={{ y }}
-        className="pointer-events-none select-none absolute inset-0 w-full h-full z-0"
+        className="pointer-events-none select-none absolute left-0 right-0 top-[-120px] bottom-[-120px] w-full h-[calc(100%+240px)] z-0"
         aria-hidden="true"
       >
         <Image
           src={require('../../public/galleryi tlv p y/RASHTA-08886.jpg')}
           alt="רקע מגניב תל אביב"
           fill
-          className="object-cover"
+          className="object-cover opacity-60"
           priority
+          style={{objectPosition: 'center'}}
         />
-        {/* שכבת overlay כהה מאוד */}
-        <div className="absolute inset-0 bg-black/80" />
-        {/* שכבת overlay לבהירות */}
-        <div className="absolute inset-0 bg-white/60 bg-gradient-to-b from-white/80 to-white/60" />
+        {/* overlay לבהירות רק על התוכן */}
       </motion.div>
+      <div className="absolute left-0 right-0 top-0 bottom-0 pointer-events-none z-10" style={{background: 'linear-gradient(to bottom, rgba(255,255,255,0.7) 60%, rgba(255,255,255,0.3) 100%)'}} />
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           variants={containerVariants}

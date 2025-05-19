@@ -172,7 +172,7 @@ export default function Faq() {
       <motion.div
         ref={bgRef}
         style={{ y }}
-        className="pointer-events-none select-none absolute inset-0 w-full h-full z-0"
+        className="pointer-events-none select-none absolute left-0 right-0 top-[-120px] bottom-[-120px] w-full h-[calc(100%+240px)] z-0"
         aria-hidden="true"
       >
         <Image
@@ -181,10 +181,12 @@ export default function Faq() {
           fill
           className="object-cover opacity-60"
           priority
+          style={{objectPosition: 'center'}}
         />
-        {/* שכבת overlay לבהירות בלבד */}
-        <div className="absolute inset-0 bg-white/60" />
+        {/* overlay לבהירות רק על התוכן */}
       </motion.div>
+      {/* overlay לבהירות רק על התוכן */}
+      <div className="absolute left-0 right-0 top-0 bottom-0 pointer-events-none z-10" style={{background: 'linear-gradient(to bottom, rgba(255,255,255,0.7) 60%, rgba(255,255,255,0.3) 100%)'}} />
       <div className="max-w-4xl mx-auto px-4 relative z-10">
         <motion.div
           variants={containerVariants}
