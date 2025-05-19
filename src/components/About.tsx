@@ -240,8 +240,8 @@ export default function About() {
               <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
                 <Image 
                   src="/our story/RASHTA-00323.jpg"
-                  alt="סטודיו MA TEAM"
-                  width={600}
+                  alt="סטודיו MA TEAM" 
+                  width={600} 
                   height={450}
                   className="w-full h-auto object-cover"
                 />
@@ -350,16 +350,16 @@ export default function About() {
                           transition={{ duration: 0.8 }}
                           className="w-full h-full absolute inset-0"
                         >
-                          <Image
+                    <Image
                             src={classTypes[activeClass].images[classImageIndexes[activeClass]]}
-                            alt={classTypes[activeClass].name}
+                      alt={classTypes[activeClass].name}
                             width={600}
                             height={800}
                             className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
                             onError={e => { e.currentTarget.style.display = 'none'; }}
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                          <div className="absolute inset-0 bg-gradient-to-r from-[#8BA888]/20 to-transparent mix-blend-overlay"></div>
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#8BA888]/20 to-transparent mix-blend-overlay"></div>
                         </motion.div>
                       </AnimatePresence>
                     ) : (

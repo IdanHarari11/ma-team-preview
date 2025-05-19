@@ -70,7 +70,7 @@ export default function Header() {
             width={210}
             height={60}
             className="h-18 w-auto [filter:drop-shadow(0_0_3px_rgba(255,255,255,0.7))] transition-all duration-300 md:hidden"
-          />
+            />
         </Link>
         :
         <Link href="/" className="flex items-center">
@@ -81,9 +81,9 @@ export default function Header() {
             height={120}
             className="h-36 w-auto hidden md:block"
           />
-          <Image
+          <Image 
             src="/images/ma-logo.png"
-            alt="MA TEAM"
+            alt="MA TEAM" 
             width={210}
             height={60}
             className="h-18 w-auto md:hidden"

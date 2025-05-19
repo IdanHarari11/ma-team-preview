@@ -56,7 +56,7 @@ export default function Hero() {
       setPrevImage(currentImage);
       setIsFading(true);
       setTimeout(() => {
-        setCurrentImage((prev) => (prev + 1) % slideshowImages.length);
+      setCurrentImage((prev) => (prev + 1) % slideshowImages.length);
         setIsFading(false);
       }, 800);
     }, 3000);

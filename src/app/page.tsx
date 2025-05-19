@@ -2,7 +2,6 @@ import Hero from '@/components/Hero'
 import Stats from '@/components/Stats'
 import About from '@/components/About'
 import BranchSelector from '@/components/BranchSelector'
-import BranchGallerySelector from '@/components/BranchGallerySelector'
 import Gallery from '@/components/Gallery'
 import Faq from '@/components/Faq'
 import Contact from '@/components/Contact'
@@ -14,7 +13,6 @@ export default function Home() {
       <Stats />
       <About />
       <BranchSelector />
-      <BranchGallerySelector />
       <Gallery />
       <Faq />
       <Contact />
