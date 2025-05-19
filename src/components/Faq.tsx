@@ -38,7 +38,7 @@ export default function Faq() {
               </a>
             </li>
             <li>
-              <b>סניף תל אביב</b> – כולל פילאטיס מכשירים, פילאטיס מזרן ויוגה.
+              <b>סניף תל אביב</b> – כולל פילאטיס מכשירים, פילאטיס מזרן ויוגה. (נמצא במקווה ישראל 4, תל אביב)
               <a
                 href="https://maps.google.com/?q=מקווה ישראל 4, תל אביב"
                 target="_blank"
@@ -60,7 +60,7 @@ export default function Faq() {
           לאחר ההיכרות, תהליך ההרשמה פשוט ומהיר – ניתן לרכוש כרטיסיית היכרות, שיעור ניסיון או להירשם ישירות למנוי או כרטיסייה לפי בחירתכם.<br />
           <a
             href="#contact"
-            className="inline-block mt-2 bg-ma-primary text-white px-4 py-2 rounded-full font-medium hover:bg-ma-primary/80 transition-colors"
+            className="inline-block mt-2 bg-ma-primary text-white px-4 py-2 rounded-full font-medium hover:bg-ma-primary/80 transition-colors mr-2"
           >
             השאירו פרטים כאן
           </a>

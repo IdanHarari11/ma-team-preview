@@ -33,6 +33,7 @@ export default function Gallery({ selectedBranchId }: GalleryProps) {
   const longPressTimerRef = useRef<NodeJS.Timeout | null>(null)
   const STORY_DURATION = 5000 // 5 seconds per image
   const LONG_PRESS_DURATION = 200 // 200ms to detect a long press
+  const [imageErrorCount, setImageErrorCount] = useState(0)
   
   // Mock data - this would be replaced with actual data from your application
   const branchGalleries: BranchGallery[] = [
@@ -297,6 +298,20 @@ export default function Gallery({ selectedBranchId }: GalleryProps) {
     }
   }, [])
   
+  useEffect(() => {
+    setImageErrorCount(0); // reset error count when image changes
+  }, [currentImageIndex, currentBranchIndex]);
+  
+  const handleImageError = () => {
+    // דלג אוטומטית לתמונה הבאה
+    if (imageErrorCount < currentImages.length - 1) {
+      setImageErrorCount(prev => prev + 1);
+      goToNextImage();
+    } else {
+      setImageErrorCount(currentImages.length); // כל התמונות נכשלו
+    }
+  };
+  
   if (!currentBranch || currentImages.length === 0) {
     return <div className="flex items-center justify-center h-96">אין תמונות זמינות</div>
   }
@@ -374,13 +389,21 @@ export default function Gallery({ selectedBranchId }: GalleryProps) {
             onPointerLeave={handlePointerLeave}
           >
             <div className="relative w-full aspect-[9/16] max-w-[400px] max-h-[90vh] mx-auto bg-black rounded-xl overflow-hidden shadow-lg">
-              <Image 
-                src={currentImages?.[currentImageIndex]?.src}
-                alt={currentImages?.[currentImageIndex]?.alt}
-                fill
-                className="object-cover"
-                priority
-              />
+              {imageErrorCount < currentImages.length ? (
+                <Image 
+                  src={currentImages?.[currentImageIndex]?.src}
+                  alt={currentImages?.[currentImageIndex]?.alt}
+                  fill
+                  className="object-cover"
+                  priority
+                  onError={handleImageError}
+                />
+              ) : (
+                <div className="w-full h-full flex flex-col items-center justify-center bg-gray-900 text-white text-lg gap-2">
+                  <svg className="w-12 h-12 mb-2 text-white/60" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" /></svg>
+                  <span>לא ניתן להציג תמונות כרגע</span>
+                </div>
+              )}
             </div>
           </motion.div>
         </AnimatePresence>
