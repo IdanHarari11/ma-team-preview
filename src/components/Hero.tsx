@@ -34,6 +34,8 @@ export default function Hero() {
     '/hero/RASHTA-00647.jpg',
   ];
   const [currentImage, setCurrentImage] = useState(0);
+  const [prevImage, setPrevImage] = useState<number|null>(null);
+  const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -45,36 +47,55 @@ export default function Hero() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % slideshowImages.length);
+      setPrevImage(currentImage);
+      setIsFading(true);
+      setTimeout(() => {
+        setCurrentImage((prev) => (prev + 1) % slideshowImages.length);
+        setIsFading(false);
+      }, 800);
     }, 3000);
     return () => clearInterval(interval);
-  }, [slideshowImages.length]);
+  }, [currentImage, slideshowImages.length]);
 
   return (
     <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden w-full">
       {/* Background Slideshow with overlays */}
       <div className="absolute inset-0 z-0 w-full h-full">
-        {/* Slideshow images */}
-        {slideshowImages.map((src, idx) => (
+        {/* Crossfade: רק שתי תמונות מוצגות */}
+        {prevImage !== null && isFading && (
           <motion.div
-            key={src}
-            style={{ zIndex: currentImage === idx ? 2 : 1 }}
-            initial={false}
-            animate={{ opacity: currentImage === idx ? 1 : 0 }}
+            key={prevImage}
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
-            className={`w-full h-full absolute inset-0 ${currentImage === idx ? 'pointer-events-auto' : 'pointer-events-none'}`}
+            className="w-full h-full absolute inset-0"
+            style={{ zIndex: 1 }}
           >
-            {currentImage === idx && (
-              <Image
-                src={src}
-                alt="MA TEAM Studio Slide"
-                fill
-                priority
-                className="object-cover transition-opacity duration-700"
-              />
-            )}
+            <Image
+              src={slideshowImages[prevImage]}
+              alt="MA TEAM Studio Slide"
+              fill
+              priority
+              className="object-cover transition-opacity duration-700"
+            />
           </motion.div>
-        ))}
+        )}
+        <motion.div
+          key={currentImage}
+          initial={{ opacity: isFading ? 0 : 1 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, ease: 'easeInOut' }}
+          className="w-full h-full absolute inset-0"
+          style={{ zIndex: 2 }}
+        >
+          <Image
+            src={slideshowImages[currentImage]}
+            alt="MA TEAM Studio Slide"
+            fill
+            priority
+            className="object-cover transition-opacity duration-700"
+          />
+        </motion.div>
         {/* Overlay gradients */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60 backdrop-blur-[1px]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.5)_70%)]" />
