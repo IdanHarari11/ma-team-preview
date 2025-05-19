@@ -337,7 +337,7 @@ export default function Gallery({ selectedBranchId }: GalleryProps) {
           <div dir="rtl" className="flex items-center bg-ma-black/50 backdrop-blur-sm p-1.5 pr-4 rounded-full">
             <div dir="rtl" className="text-white ml-2">
               {/* Instagram handle first without @ and in bold */}
-              <p className="text-sm font-bold text-right">{currentBranch.instagramHandle}</p>
+              <p className="text-sm font-bold text-right">m.a team</p>
               {/* Location tag style */}
               <p className="text-xs opacity-70 text-right flex items-center">
                 <svg className="w-3 h-3 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
