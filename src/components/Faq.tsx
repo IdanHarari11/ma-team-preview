@@ -1,12 +1,18 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import Image from 'next/image'
 
 export default function Faq() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+
+  // פרלקסה ל-background
+  const bgRef = useRef<HTMLDivElement>(null)
+  const { scrollY } = useScroll({ target: bgRef })
+  const y = useTransform(scrollY, [0, 400], [0, 80])
 
   const faqs = [
     {
@@ -161,8 +167,27 @@ export default function Faq() {
   }
 
   return (
-    <div ref={ref} className="w-full py-16 bg-ma-primary" id="faq">
-      <div className="max-w-4xl mx-auto px-4">
+    <div ref={ref} className="w-full py-16 relative overflow-hidden" id="faq">
+      {/* רקע עם תמונה ואנימציה */}
+      <motion.div
+        ref={bgRef}
+        style={{ y }}
+        className="pointer-events-none select-none absolute inset-0 w-full h-full z-0"
+        aria-hidden="true"
+      >
+        <Image
+          src={require('../../public/ashdod function/RASHTA-00244.jpg')}
+          alt="רקע מגניב אשדוד"
+          fill
+          className="object-cover opacity-60"
+          priority
+        />
+        {/* שכבת overlay כהה ועדינה */}
+        <div className="absolute inset-0 bg-black/30" />
+        {/* שכבת overlay לבהירות */}
+        <div className="absolute inset-0 bg-white/60 bg-gradient-to-b from-white/80 to-white/60" />
+      </motion.div>
+      <div className="max-w-4xl mx-auto px-4 relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -171,7 +196,7 @@ export default function Faq() {
         >
           <motion.h2
             variants={itemVariants} 
-            className="text-3xl md:text-4xl font-bold text-ma-light text-center mb-12"
+            className="text-3xl md:text-4xl font-bold text-[#8BA888] text-center mb-12"
           >
             שאלות נפוצות – סטודיו M.A
           </motion.h2>

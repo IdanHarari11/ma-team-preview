@@ -2,6 +2,9 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { useRef } from 'react'
+import { useScroll, useTransform } from 'framer-motion'
 
 interface FormData {
   fullName: string
@@ -248,9 +251,31 @@ export default function Contact() {
     }
   }
 
+  // פרלקסה ל-background
+  const bgRef = useRef<HTMLDivElement>(null)
+  const { scrollY } = useScroll({ target: bgRef })
+  const y = useTransform(scrollY, [0, 400], [0, 80])
+
   return (
-    <section id="contact" className="py-16 md:py-24 bg-ma-light">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="py-16 md:py-24 bg-ma-light relative overflow-hidden">
+      {/* רקע עם תמונה ואנימציה */}
+      <motion.div
+        ref={bgRef}
+        style={{ y }}
+        className="pointer-events-none select-none absolute inset-0 w-full h-full z-0"
+        aria-hidden="true"
+      >
+        <Image
+          src={require('../../public/galleryi tlv p y/RASHTA-08886.jpg')}
+          alt="רקע מגניב תל אביב"
+          fill
+          className="object-cover opacity-30"
+          priority
+        />
+        {/* שכבת overlay לבהירות */}
+        <div className="absolute inset-0 bg-white/60 bg-gradient-to-b from-white/80 to-white/60" />
+      </motion.div>
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
