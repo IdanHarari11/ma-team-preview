@@ -11,8 +11,7 @@ export default function Footer() {
   // Social media links
   const socialLinks = [
     { name: 'Instagram', icon: '/images/icons/instagram.svg', url: 'https://instagram.com/' },
-    { name: 'Facebook', icon: '/images/icons/facebook.svg', url: 'https://facebook.com/' },
-    { name: 'WhatsApp', icon: '/images/icons/whatsapp.svg', url: 'https://wa.me/972123456789' },
+    { name: 'Facebook', icon: '/images/icons/facebook.svg', url: 'https://facebook.com/' }
   ]
   
   // Quick links

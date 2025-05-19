@@ -5,7 +5,6 @@ import BranchSelector from '@/components/BranchSelector'
 import Gallery from '@/components/Gallery'
 import Faq from '@/components/Faq'
 import Contact from '@/components/Contact'
-import WhatsAppButton from '@/components/WhatsAppButton'
 
 export default function Home() {
   return (
@@ -17,10 +16,6 @@ export default function Home() {
       <Gallery />
       <Faq />
       <Contact />
-      {/* WhatsApp כפתור מתחת לטופס */}
-      <div className="m-8 mt-2 flex justify-center">
-        <WhatsAppButton className=" max-w-sm" />
-      </div>
     </main>
   )
 }
