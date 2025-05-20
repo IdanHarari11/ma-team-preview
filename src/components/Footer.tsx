@@ -41,9 +41,9 @@ export default function Footer() {
               <Image 
                 src="/images/ma-logo.png"
                 alt="MA TEAM"
-                width={140}
-                height={50}
-                className="h-12 w-auto"
+                width={100}
+                height={36}
+                className="h-8 w-auto sm:h-12 mb-2"
               />
             </Link>
             <p className="text-white/70 text-sm mb-6">

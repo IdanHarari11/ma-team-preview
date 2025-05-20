@@ -109,36 +109,36 @@ export default function Stats() {
   }
 
   return (
-    <div ref={ref} className="w-full py-16 bg-[#F5F2EA]">
-      <div className="max-w-6xl mx-auto px-4">
+    <div ref={ref} className="w-full py-16 bg-[#F5F2EA] mt-8 sm:mt-0">
+      <div className="max-w-6xl mx-auto px-2 sm:px-4">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
-          <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold text-ma-black mb-4">
+          <motion.h2 variants={itemVariants} className="text-2xl sm:text-3xl md:text-4xl font-bold text-ma-black mb-4">
             נתונים עלינו
           </motion.h2>
         </motion.div>
 
         <motion.div
           variants={containerVariants}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4"
         >
           {stats.map((stat) => (
             <motion.a
               key={stat.id}
               href={stat.href}
               variants={itemVariants}
-              className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow cursor-pointer group"
+              className="bg-white rounded-2xl p-3 sm:p-6 shadow-lg hover:shadow-xl transition-shadow cursor-pointer group min-h-[120px] flex flex-col justify-center"
             >
-              <div className="flex flex-col items-center space-y-4">
-                <div className="w-12 h-12 rounded-full bg-ma-primary/10 text-ma-primary flex items-center justify-center group-hover:bg-ma-primary group-hover:text-white transition-colors">
+              <div className="flex flex-col items-center space-y-2 sm:space-y-4">
+                <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-ma-primary/10 text-ma-primary flex items-center justify-center group-hover:bg-ma-primary group-hover:text-white transition-colors">
                   {stat.icon}
                 </div>
-                <div className="text-3xl font-bold text-ma-primary">{stat.value}</div>
-                <div className="text-ma-black/70 text-sm font-medium">{stat.label}</div>
+                <div className="text-xl sm:text-3xl font-bold text-ma-primary">{stat.value}</div>
+                <div className="text-ma-black/70 text-xs sm:text-sm font-medium text-center">{stat.label}</div>
               </div>
             </motion.a>
           ))}

@@ -261,9 +261,9 @@ export default function About() {
             <Image 
               src="/images/logo-green.png"
               alt="MA Team Logo"
-              width={140}
-              height={140}
-              className="h-auto w-auto max-h-[2.5em] -mr-2 drop-shadow-[0_0_10px_rgba(139,168,136,0.5)]"
+              width={80}
+              height={80}
+              className="h-8 w-8 sm:h-auto sm:w-auto sm:max-h-[2.5em] -mr-2 drop-shadow-[0_0_10px_rgba(139,168,136,0.5)]"
             />
           </h2>
           

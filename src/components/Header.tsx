@@ -53,7 +53,7 @@ export default function Header() {
       }`}
     >
       <div className="w-full max-w-6xl mx-auto px-4">
-        <div className="flex items-center justify-between h-28 w-full">
+        <div className="flex items-center justify-between h-20 sm:h-28 w-full">
         {/* Logo */}
         {isScrolled ? 
           <Link href="/" className="flex items-center">
@@ -84,9 +84,9 @@ export default function Header() {
           <Image 
             src="/images/ma-logo.png"
             alt="MA TEAM" 
-            width={210}
-            height={60}
-            className="h-18 w-auto md:hidden"
+            width={140}
+            height={70}
+            className="w-[120px] h-auto mt-2 md:hidden"
           />
         </Link>
         }
