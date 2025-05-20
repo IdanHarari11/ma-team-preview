@@ -210,15 +210,13 @@ export default function Faq() {
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full px-6 py-4 flex items-center justify-between text-right hover:bg-white/50 transition-colors"
+                  className="w-full px-6 py-4 flex items-center justify-between text-right transition-none"
                 >
                   <span className="text-lg font-medium text-ma-black">
                     {faq.question}
                   </span>
                   <svg
-                    className={`w-5 h-5 transform transition-transform ${
-                      openIndex === index ? 'rotate-180' : ''
-                    }`}
+                    className={`w-5 h-5 transform ${openIndex === index ? 'rotate-180' : ''}`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
