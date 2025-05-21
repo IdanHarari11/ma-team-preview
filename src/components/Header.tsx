@@ -63,6 +63,7 @@ export default function Header() {
             width={390}
             height={120}
             className="h-36 w-auto [filter:drop-shadow(0_0_3px_rgba(255,255,255,0.7))] transition-all duration-300 hidden md:block"
+            priority
           />
           <Image
             src="/images/logo-green.png"
@@ -70,6 +71,7 @@ export default function Header() {
             width={210}
             height={60}
             className="h-18 w-auto [filter:drop-shadow(0_0_3px_rgba(255,255,255,0.7))] transition-all duration-300 md:hidden"
+            priority
             />
         </Link>
         :
@@ -80,6 +82,7 @@ export default function Header() {
             width={390}
             height={120}
             className="h-36 w-auto hidden md:block"
+            priority
           />
           <Image 
             src="/images/ma-logo.png"
@@ -87,6 +90,7 @@ export default function Header() {
             width={140}
             height={70}
             className="w-[120px] h-auto mt-2 md:hidden"
+            priority
           />
         </Link>
         }

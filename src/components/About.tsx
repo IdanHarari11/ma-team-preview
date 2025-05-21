@@ -244,6 +244,7 @@ export default function About() {
                   width={600} 
                   height={450}
                   className="w-full h-auto object-cover"
+                  priority
                 />
               </div>
               <div className="absolute top-0 right-0 w-full h-full -mr-4 -mt-4 rounded-2xl bg-[#8BA888]/20 -z-10" />
@@ -264,6 +265,7 @@ export default function About() {
               width={80}
               height={80}
               className="h-8 w-8 sm:h-auto sm:w-auto sm:max-h-[2.5em] -mr-2 drop-shadow-[0_0_10px_rgba(139,168,136,0.5)]"
+              priority
             />
           </h2>
           

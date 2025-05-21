@@ -155,6 +155,7 @@ export default function Hero() {
                 width={210}
                 height={105}
                 className="shadow-2xl border-2 border-white/20 hover:scale-105 transition-transform duration-300 mb-2 sm:mb-0 w-[180px] h-auto sm:w-[330px]"
+                priority
                 style={{
                   maskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%), linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)',
                   WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%), linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)',

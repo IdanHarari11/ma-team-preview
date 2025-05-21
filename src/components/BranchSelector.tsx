@@ -252,23 +252,42 @@ export default function BranchSelector() {
 
                   <div className="p-6">
                     <div className="mb-6 border-b border-gray-200">
-                      <div className="flex justify-between">
+                      <div className="flex justify-center space-x-4 rtl:space-x-reverse">
                         {['schedule', 'prices'].map((tab) => (
                           <button
                             key={tab}
                             onClick={() => handleTabChange(branch.id, tab as 'schedule' | 'prices')}
-                            className={`pb-3 px-2 font-medium transition-all relative ${
-                              branchActiveTab === tab
-                                ? 'text-ma-primary'
-                                : 'text-ma-black/60 hover:text-ma-black'
-                            }`}
+                            className={`
+                              py-2.5 px-6 font-medium transition-all duration-300 relative flex items-center gap-2
+                              rounded-t-lg shadow-sm border-t border-l border-r border-gray-200
+                              ${branchActiveTab === tab
+                                ? 'bg-white text-ma-primary translate-y-0.5 shadow-md'
+                                : 'text-ma-black/70 bg-gray-50 hover:bg-gray-100 hover:-translate-y-1 hover:shadow-md'
+                              }
+                            `}
+                            aria-selected={branchActiveTab === tab}
+                            role="tab"
                           >
-                            {tab === 'schedule' && 'לו״ז שיעורים'}
-                            {tab === 'prices' && 'מחירון'}
+                            {tab === 'schedule' && (
+                              <>
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                <span>לו״ז שיעורים</span>
+                              </>
+                            )}
+                            {tab === 'prices' && (
+                              <>
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>מחירון</span>
+                              </>
+                            )}
                             {branchActiveTab === tab && (
                               <motion.div
                                 layoutId={`tabIndicator-${branch.id}`}
-                                className="absolute bottom-0 left-0 right-0 h-0.5 bg-ma-primary"
+                                className="absolute bottom-0 left-0 right-0 h-1 bg-ma-primary"
                                 transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                               />
                             )}

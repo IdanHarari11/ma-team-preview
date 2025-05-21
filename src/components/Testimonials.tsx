@@ -175,9 +175,10 @@ export default function Testimonials() {
                     <Image
                       src={review.photoUrl}
                       alt={review.name}
-                    width={48}
-                    height={48}
+                      width={48}
+                      height={48}
                       className="object-cover"
+                      loading="lazy"
                     />
                   </div>
                   <div>
