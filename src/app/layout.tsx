@@ -40,11 +40,12 @@ export default function RootLayout({
          `}} />
        </head>
       <body className={`${rubik.className} ${rubik.variable} text-ma-black antialiased`}>
+        <NagishLi />
         <Header />
         {children}
         <Footer />
         <ScrollToTop />
-        <div className="fixed bottom-6 right-6 z-50">
+        <div className="fixed bottom-16 right-6 z-50">
           <a
             href="https://linktr.ee/M.A_STUDIO_LINKS"
             target="_blank"
