@@ -17,6 +17,16 @@ export const metadata: Metadata = {
   title: "MA TEAM - סטודיו לפילאטיס, יוגה ואימון פונקציונלי",
   description: "סטודיו MA TEAM מציע חוויית אימון אישית של פילאטיס, יוגה ואימון פונקציונלי באווירה משפחתית ומקצועית עם מדריכים מנוסים.",
   keywords: "פילאטיס, יוגה, אימון פונקציונלי, תל אביב, אשדוד, סטודיו, כושר, בריאות, סטודיו לפילאטיס",
+  icons: {
+    icon: [
+      { url: '/images/ma-logo.png', sizes: '32x32', type: 'image/png' },
+      { url: '/images/ma-logo.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/images/ma-logo.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/images/ma-logo.png',
+  },
 };
 
 export default function RootLayout({
@@ -27,6 +37,16 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl" className="scroll-smooth">
       <head>
+         {/* Favicon and app icons */}
+         <link rel="icon" type="image/png" sizes="32x32" href="/images/ma-logo.png" />
+         <link rel="icon" type="image/png" sizes="16x16" href="/images/ma-logo.png" />
+         <link rel="apple-touch-icon" sizes="180x180" href="/images/ma-logo.png" />
+         <link rel="shortcut icon" href="/images/ma-logo.png" />
+         <link rel="manifest" href="/manifest.json" />
+         <meta name="msapplication-TileImage" content="/images/ma-logo.png" />
+         <meta name="msapplication-TileColor" content="#8BA888" />
+         <meta name="theme-color" content="#8BA888" />
+         
          {/* הגדרות בסיסיות עבור נגיש לי */}
          <script dangerouslySetInnerHTML={{ __html: `
            var nl_lang = 'he';
