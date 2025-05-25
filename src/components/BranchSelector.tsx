@@ -40,7 +40,7 @@ export default function BranchSelector() {
           'יוגה',
           'מוביליטי'
         ],
-        scheduleEmbed: '',
+        scheduleEmbed: 'https://gvjcxnmn.web.arboxapp.com/group?whitelabel=Arbox&amp;lang=he&amp;location=18873&amp;referrer=PLUGIN',
         priceListEmbed: ''
       }
     ],
@@ -253,7 +253,7 @@ export default function BranchSelector() {
                   <div className="p-6">
                     <div className="mb-6 border-b border-gray-200">
                       <div className="flex justify-center space-x-4 rtl:space-x-reverse">
-                        {['schedule', 'prices'].map((tab) => (
+                        {['schedule', ...(branch.priceListEmbed ? ['prices'] : [])].map((tab) => (
                           <button
                             key={tab}
                             onClick={() => handleTabChange(branch.id, tab as 'schedule' | 'prices')}
