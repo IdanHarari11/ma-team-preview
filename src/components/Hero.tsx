@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useEffect, useState } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -40,8 +40,6 @@ export default function Hero() {
     '/tlv p y/RASHTA-09041.jpg',
   ];
   const [currentImage, setCurrentImage] = useState(0);
-  const [prevImage, setPrevImage] = useState<number|null>(null);
-  const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -53,90 +51,41 @@ export default function Hero() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setPrevImage(currentImage);
-      setIsFading(true);
-      setTimeout(() => {
       setCurrentImage((prev) => (prev + 1) % slideshowImages.length);
-        setIsFading(false);
-      }, 800);
-    }, 3000);
+    }, 4000);
     return () => clearInterval(interval);
-  }, [currentImage, slideshowImages.length]);
+  }, [slideshowImages.length]);
 
   return (
     <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden w-full">
       {/* Background Slideshow with overlays */}
       <div className="absolute inset-0 z-0 w-full h-full">
-        {/* Crossfade: רק שתי תמונות מוצגות */}
-        {prevImage !== null && isFading && (
+        {/* All images rendered with opacity animation */}
+        {slideshowImages.map((image, index) => (
           <motion.div
-            key={prevImage}
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: 'easeInOut' }}
+            key={index}
             className="w-full h-full absolute inset-0"
-            style={{ zIndex: 1 }}
+            animate={{ 
+              opacity: index === currentImage ? 1 : 0 
+            }}
+            transition={{ 
+              duration: 1.5, 
+              ease: "easeInOut"
+            }}
+            style={{ zIndex: index === currentImage ? 2 : 1 }}
           >
             <Image
-              src={slideshowImages[prevImage]}
+              src={image}
               alt="MA TEAM Studio Slide"
               fill
-              priority
-              className="object-cover transition-opacity duration-700"
+              priority={index < 3}
+              className="object-cover"
             />
           </motion.div>
-        )}
-        <motion.div
-          key={currentImage}
-          initial={{ opacity: isFading ? 0 : 1 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
-          className="w-full h-full absolute inset-0"
-          style={{ zIndex: 2 }}
-        >
-          <Image
-            src={slideshowImages[currentImage]}
-            alt="MA TEAM Studio Slide"
-            fill
-            priority
-            className="object-cover transition-opacity duration-700"
-          />
-        </motion.div>
-        {/* Overlay gradients */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60 backdrop-blur-[1px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.5)_70%)]" />
-        {/* Contrast overlay */}
-        <div className="absolute inset-0 bg-[#8BA888]/20 mix-blend-multiply" />
-        {/* Futuristic geometric elements */}
-        <motion.div 
-          style={{ scale: circleScale, opacity: circleOpacity }}
-          className="absolute top-1/4 -right-40 w-96 h-96 rounded-full bg-[#8BA888]/20 backdrop-blur-lg"
-        />
-        <motion.div 
-          style={{ scale: circleScale, opacity: circleOpacity }}
-          className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-white/10 backdrop-blur-lg"
-        />
-        {/* Triangular element */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 0.4, scale: 1 }}
-          transition={{ duration: 1.5, delay: 0.5 }}
-          className="absolute top-20 left-[20%] w-32 h-32"
-          style={{ 
-            clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)', 
-            background: 'linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2))',
-            backdropFilter: 'blur(4px)'
-          }}
-        />
-        {/* Rectangular element */}
-        <motion.div 
-          initial={{ opacity: 0, rotate: -20 }}
-          animate={{ opacity: 0.3, rotate: 0 }}
-          transition={{ duration: 1.5, delay: 0.7 }}
-          className="absolute bottom-40 right-[15%] w-40 h-20 backdrop-blur-sm bg-white/10 border border-white/20 rounded"
-        />
-        {/* Flowing particle effect */}
-        <div className="absolute inset-0 bg-[url('/images/noise.png')] opacity-10 mix-blend-overlay" />
+        ))}
+        
+        {/* Light overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/20" style={{ zIndex: 3 }} />
       </div>
 
       {/* Content */}
