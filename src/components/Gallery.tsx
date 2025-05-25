@@ -136,16 +136,16 @@ export default function Gallery({ selectedBranchId }: GalleryProps) {
   ]
   
   const storyImages: GalleryImage[] = [
-    { src: '/pilates ashdod/DSC_8491.JPG', alt: 'סטודיו פילאטיס אשדוד - מבט נוסף', width: 1200, height: 800 },
-    { src: '/pilates ashdod/DSC_8272.JPG', alt: 'סטודיו פילאטיס אשדוד - מבט נוסף', width: 1200, height: 800 },
-    { src: '/pilates ashdod/DSC_8150.JPG', alt: 'סטודיו פילאטיס אשדוד - מבט נוסף', width: 1200, height: 800 },
-    { src: '/function ashdod/DANI2841_Original.jpg', alt: 'סטודיו פונקציונלי אשדוד - מבט נוסף', width: 1200, height: 800 },
-    { src: '/function ashdod/Facetune_26-10-2022-16-57-39_Original.jpg', alt: 'סטודיו פונקציונלי אשדוד - מבט נוסף', width: 1200, height: 800 },
-    { src: '/pilates tlv/RASHTA-09076.jpg', alt: 'סטודיו תל אביב - מבט נוסף', width: 1200, height: 800 },
-    { src: '/pilates tlv/RASHTA-09070.jpg', alt: 'סטודיו תל אביב - מבט נוסף', width: 1200, height: 800 },
-    { src: '/pilates tlv/RASHTA-09059.jpg', alt: 'סטודיו תל אביב - מבט נוסף', width: 1200, height: 800 },
-    { src: '/pilates tlv/RASHTA-08992.jpg', alt: 'סטודיו תל אביב - מבט נוסף', width: 1200, height: 800 },
-    { src: '/pilates tlv/RASHTA-08975.jpg', alt: 'סטודיו תל אביב - מבט נוסף', width: 1200, height: 800 },
+    { src: '/pilates-ashdod/DSC_8491.JPG', alt: 'סטודיו פילאטיס אשדוד - מבט נוסף', width: 1200, height: 800 },
+    { src: '/pilates-ashdod/DSC_8272.JPG', alt: 'סטודיו פילאטיס אשדוד - מבט נוסף', width: 1200, height: 800 },
+    { src: '/pilates-ashdod/DSC_8150.JPG', alt: 'סטודיו פילאטיס אשדוד - מבט נוסף', width: 1200, height: 800 },
+    { src: '/function-ashdod/DANI2841_Original.jpg', alt: 'סטודיו פונקציונלי אשדוד - מבט נוסף', width: 1200, height: 800 },
+    { src: '/function-ashdod/Facetune_26-10-2022-16-57-39_Original.jpg', alt: 'סטודיו פונקציונלי אשדוד - מבט נוסף', width: 1200, height: 800 },
+    { src: '/pilates-tlv/RASHTA-09076.jpg', alt: 'סטודיו תל אביב - מבט נוסף', width: 1200, height: 800 },
+    { src: '/pilates-tlv/RASHTA-09070.jpg', alt: 'סטודיו תל אביב - מבט נוסף', width: 1200, height: 800 },
+    { src: '/pilates-tlv/RASHTA-09059.jpg', alt: 'סטודיו תל אביב - מבט נוסף', width: 1200, height: 800 },
+    { src: '/pilates-tlv/RASHTA-08992.jpg', alt: 'סטודיו תל אביב - מבט נוסף', width: 1200, height: 800 },
+    { src: '/pilates-tlv/RASHTA-08975.jpg', alt: 'סטודיו תל אביב - מבט נוסף', width: 1200, height: 800 },
   ];
   
   // Find the correct branch to display based on selectedBranchId

@@ -33,7 +33,7 @@ export default function BranchSelector() {
         details: 'בניין בוטיק, חניה בשפע בתשלום, קרוב לרכבת',
         phone: '050-9222062',
         whatsapp: '050-9222062',
-        image: '/pilates tlv/RASHTA-09094.jpg',
+        image: '/pilates-tlv/RASHTA-08909.jpg',
         trainingTypes: [
           'פילאטיס מכשירים',
           'פילאטיס מזרן',
@@ -52,7 +52,7 @@ export default function BranchSelector() {
         details: 'בית קרקע, חניה בשפע ללא עלות',
         phone: '052-3139677',
         whatsapp: '052-3139677',
-        image: '/function ashdod/IMG_0524_Facetune_26-10-2022-15-52-19_Original.jpg',
+        image: '/function-ashdod/DANI2841_Original.jpg',
         trainingTypes: [
           'אימון כוח פונקציונלי',
           'מוביליטי'
@@ -67,7 +67,7 @@ export default function BranchSelector() {
         details: 'בית קרקע, חנייה ללא עלות בבית קפה דוגה/פארינו והסביבה - לא בתוך הרחוב',
         phone: '052-3139677',
         whatsapp: '052-3139677',
-        image: '/pilates ashdod/DSC_8603.JPG',
+        image: '/pilates-ashdod/DSC_8871.JPG',
         trainingTypes: [
           'פילאטיס מכשירים',
           'פילאטיס מזרן',

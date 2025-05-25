@@ -13,7 +13,7 @@ const GALLERIES: GalleryData[] = [
   {
     id: 'ashdod-function',
     label: 'פונקציונלי אשדוד',
-    folder: '/gallery ashdod function1/',
+    folder: '/gallery-ashdod-function1/',
     images: [
       'fftscmg27cnxi5ujodtj.webp',
       'cjsmsm9na2csxbwbjyln.webp',
@@ -32,7 +32,7 @@ const GALLERIES: GalleryData[] = [
   {
     id: 'ashdod-py',
     label: 'פילאטיס ויוגה אשדוד',
-    folder: '/gallery ashdod py1/',
+    folder: '/gallery-ashdod-py1/',
     images: [
       'b30vzaaiax5tmnjyco8g.webp',
       'eymco2u7rem5nqhrwenx.webp',
@@ -49,7 +49,7 @@ const GALLERIES: GalleryData[] = [
   {
     id: 'tlv-py',
     label: 'פילאטיס ויוגה תל אביב',
-    folder: '/gallery tlv py1/',
+    folder: '/gallery-tlv-py1/',
     images: [
       'fbglchqizpaumnvh2kk3.webp',
       'iqltheejhnx1w92faeak.webp',
