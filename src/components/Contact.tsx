@@ -474,7 +474,7 @@ export default function Contact() {
                 <p className="text-xs text-gray-500 mb-4">
                   <span className="text-red-500">*</span> שדות חובה
                 </p>
-                <div className="flex justify-center">
+                <div className="flex flex-col gap-3 justify-center items-center mt-2">
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
@@ -498,6 +498,15 @@ export default function Contact() {
                     </span>
                     <div className="absolute inset-0 bg-gradient-to-r from-[#8BA888] to-[#9DB89A] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </motion.button>
+                  <a
+                    href="https://linktr.ee/M.A_STUDIO_LINKS"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full md:w-auto px-10 py-3 border-2 border-[#8BA888] text-[#8BA888] rounded-xl font-medium text-center transition-all hover:bg-[#8BA888]/10 focus:outline-none"
+                    style={{marginTop: '0.5rem'}}
+                  >
+                    שלחו הודעה
+                  </a>
                 </div>
               </div>
             </motion.form>
