@@ -72,7 +72,27 @@ const GALLERIES: GalleryData[] = [
 
 export default function GalleryTabs() {
   const [selected, setSelected] = useState('ashdod-function');
+  const [startIdx, setStartIdx] = useState(0);
   const gallery = GALLERIES.find(g => g.id === selected);
+  const visibleCount = 3;
+  const images = gallery?.images || [];
+  const total = images.length;
+
+  const handlePrev = () => {
+    setStartIdx((prev) => (prev - 1 + total) % total);
+  };
+  const handleNext = () => {
+    setStartIdx((prev) => (prev + 1) % total);
+  };
+  const getVisibleImages = () => {
+    if (total <= visibleCount) return images;
+    const end = startIdx + visibleCount;
+    if (end <= total) {
+      return images.slice(startIdx, end);
+    } else {
+      return [...images.slice(startIdx), ...images.slice(0, end - total)];
+    }
+  };
 
   return (
     <section className="w-full py-16 bg-ma-light" id="gallery-tabs">
@@ -82,27 +102,35 @@ export default function GalleryTabs() {
           {GALLERIES.map(g => (
             <button
               key={g.id}
-              onClick={() => setSelected(g.id)}
+              onClick={() => { setSelected(g.id); setStartIdx(0); }}
               className={`px-6 py-2 rounded-full font-medium transition-all duration-200 border-2 ${selected === g.id ? 'bg-ma-primary text-white border-ma-primary' : 'bg-white text-ma-black border-ma-primary/30 hover:border-ma-primary'}`}
             >
               {g.label}
             </button>
           ))}
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {gallery?.images.map((img, i) => (
-            <div key={gallery.id + '-' + img} className="aspect-[9/16] w-full rounded-xl overflow-hidden bg-gray-200 shadow relative">
-              <Image
-                src={gallery.folder + img}
-                alt={gallery.label + ' תמונה ' + (i+1)}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                priority={i < 2}
-                unoptimized
-              />
-            </div>
-          ))}
+        <div className="flex items-center justify-center gap-2">
+          <button onClick={handlePrev} aria-label="הקודם" className="p-2 rounded-full bg-white shadow hover:bg-ma-primary/10 transition disabled:opacity-50">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+          </button>
+          <div className="flex gap-4">
+            {getVisibleImages().map((img, i) => (
+              <div key={gallery.id + '-' + img} className="aspect-[9/16] w-32 sm:w-48 rounded-xl overflow-hidden bg-gray-200 shadow relative">
+                <Image
+                  src={gallery.folder + img}
+                  alt={gallery.label + ' תמונה ' + ((startIdx + i) % total + 1)}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                  priority={i < 2}
+                  unoptimized
+                />
+              </div>
+            ))}
+          </div>
+          <button onClick={handleNext} aria-label="הבא" className="p-2 rounded-full bg-white shadow hover:bg-ma-primary/10 transition disabled:opacity-50">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+          </button>
         </div>
       </div>
     </section>
