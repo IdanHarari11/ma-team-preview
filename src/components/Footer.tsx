@@ -26,8 +26,9 @@ export default function Footer() {
   
   // Branch info
   const branches = [
-    { name: 'תל אביב', address: 'רחוב הברזל 30, תל אביב', phone: '050-9222062', whatsapp: '050-9222062' },
-    { name: 'אשדוד', address: 'רחוב האורגים 15, אשדוד', phone: '052-3139677', whatsapp: '052-3139677' },
+    { name: 'סטודיו תל אביב', address: 'מקווה ישראל 4, תל אביב', phone: '050-9222062', whatsapp: '050-9222062' },
+    { name: 'פונקציונלי אשדוד', address: 'רחוב היידן 3, אשדוד', phone: '052-3139677', whatsapp: '052-3139677' },
+    { name: 'פילאטיס ויוגה אשדוד', address: 'רחוב התאנה, אשדוד', phone: '052-3139677', whatsapp: '052-3139677' },
   ]
   
   return (
@@ -107,7 +108,7 @@ export default function Footer() {
                     {branch.phone}
                   </a>
                   <a
-                    href={`https://wa.me/972${branch.whatsapp.replace(/^0/, '')}`}
+                    href={`https://wa.me/972${branch.whatsapp.replace(/^0/, '').replace(/[^0-9]/g, '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 mt-1 text-[#25D366] hover:text-[#128C7E] text-sm"
@@ -154,14 +155,6 @@ export default function Footer() {
                 הרשמה
               </button>
             </form>
-          </div>
-        </div>
-        
-        {/* Branch Galleries Placeholder */}
-        <div className="mt-10">
-          <h4 className="text-lg font-semibold mb-4">גלריה מהסניפים</h4>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 min-h-[120px] bg-white/5 rounded-lg p-4">
-            {/* כאן ייכנסו תמונות הגלריה של כל סניף */}
           </div>
         </div>
         
