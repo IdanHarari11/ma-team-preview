@@ -257,14 +257,14 @@ export default function About() {
           <div className="absolute -inset-4 bg-gradient-to-r from-[#8BA888]/10 via-[#9DB89A]/30 to-[#8BA888]/10 rounded-3xl blur-xl -z-10"></div>
           <div className="absolute -inset-8 bg-[url('/images/noise.png')] opacity-30 mix-blend-soft-light"></div>
           
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2C3338] mb-8 text-center flex items-center justify-center gap-0 relative">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#2C3338] mb-8 flex items-center justify-center gap-2 text-center">
             <span className="drop-shadow-[0_0_15px_rgba(139,168,136,0.3)]">סוגי השיעורים ב</span>
             <Image 
               src="/images/logo-green.png"
               alt="MA Team Logo"
-              width={80}
-              height={80}
-              className="h-8 w-8 sm:h-auto sm:w-auto sm:max-h-[2.5em] -mr-2 drop-shadow-[0_0_10px_rgba(139,168,136,0.5)]"
+              width={64}
+              height={64}
+              className="h-16 w-16 align-middle inline-block drop-shadow-[0_0_10px_rgba(139,168,136,0.5)]"
               priority
             />
           </h2>
