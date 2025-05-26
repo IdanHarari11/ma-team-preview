@@ -24,13 +24,6 @@ export default function Footer() {
     { name: 'צור קשר', href: '#contact' },
   ]
   
-  // Branch info
-  const branches = [
-    { name: 'סטודיו תל אביב', address: 'מקווה ישראל 4, תל אביב', phone: '050-9222062', whatsapp: '050-9222062' },
-    { name: 'פונקציונלי אשדוד', address: 'רחוב היידן 3, אשדוד', phone: '052-3139677', whatsapp: '052-3139677' },
-    { name: 'פילאטיס ויוגה אשדוד', address: 'רחוב התאנה, אשדוד', phone: '052-3139677', whatsapp: '052-3139677' },
-  ]
-  
   return (
     <footer className="bg-ma-black text-white pt-16 pb-8">
       <div className="max-w-6xl mx-auto px-4">
@@ -94,33 +87,84 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-6">צור קשר</h3>
             <ul className="space-y-4">
-              {branches.map((branch, index) => (
-                <li key={index} className="mb-4">
-                  <p className="font-medium mb-1">{branch.name}</p>
-                  <p className="text-white/70 text-sm mb-1">{branch.address}</p>
-                  <a 
-                    href={`tel:${branch.phone}`}
-                    className="text-white/70 hover:text-white transition-colors text-sm inline-flex items-center"
-                  >
-                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    {branch.phone}
-                  </a>
-                  <a
-                    href={`https://wa.me/972${branch.whatsapp.replace(/^0/, '').replace(/[^0-9]/g, '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 mt-1 text-[#25D366] hover:text-[#128C7E] text-sm"
-                    aria-label={`שלח הודעת וואטסאפ לסניף ${branch.name}`}
-                  >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path fillRule="evenodd" clipRule="evenodd" d="M17.415 14.382c-.298-.149-1.759-.867-2.031-.967-.272-.099-.47-.148-.669.149-.198.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.57-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M11.999 1C5.869 1 1 5.869 1 12s4.869 11 10.999 11C18.131 23 23 18.131 23 12S18.131 1 11.999 1M12 21.5c-5.246 0-9.5-4.253-9.5-9.5S6.754 2.5 12 2.5 21.5 6.754 21.5 12s-4.254 9.5-9.5 9.5" />
-                    </svg>
-                    וואטסאפ
-                  </a>
-                </li>
-              ))}
+              {/* תל אביב */}
+              <li className="mb-4">
+                <p className="font-medium mb-1">סטודיו תל אביב</p>
+                <p className="text-white/70 text-sm mb-1">מקווה ישראל 4, תל אביב</p>
+                <a 
+                  href="tel:050-9222062"
+                  className="text-white/70 hover:text-white transition-colors text-sm inline-flex items-center"
+                >
+                  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  050-9222062
+                </a>
+                <a
+                  href="https://wa.me/972509222062"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-1 text-[#25D366] hover:text-[#128C7E] text-sm"
+                  aria-label="שלח הודעת וואטסאפ לסניף תל אביב"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M17.415 14.382c-.298-.149-1.759-.867-2.031-.967-.272-.099-.47-.148-.669.149-.198.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.57-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M11.999 1C5.869 1 1 5.869 1 12s4.869 11 10.999 11C18.131 23 23 18.131 23 12S18.131 1 11.999 1M12 21.5c-5.246 0-9.5-4.253-9.5-9.5S6.754 2.5 12 2.5 21.5 6.754 21.5 12s-4.254 9.5-9.5 9.5" />
+                  </svg>
+                  וואטסאפ
+                </a>
+              </li>
+              {/* פונקציונלי אשדוד */}
+              <li className="mb-4">
+                <p className="font-medium mb-1">פונקציונלי אשדוד</p>
+                <p className="text-white/70 text-sm mb-1">רחוב היידן 3, אשדוד</p>
+                <a 
+                  href="tel:052-3139677"
+                  className="text-white/70 hover:text-white transition-colors text-sm inline-flex items-center"
+                >
+                  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  052-3139677
+                </a>
+                <a
+                  href="https://wa.me/972523139677"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-1 text-[#25D366] hover:text-[#128C7E] text-sm"
+                  aria-label="שלח הודעת וואטסאפ לסניף פונקציונלי אשדוד"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M17.415 14.382c-.298-.149-1.759-.867-2.031-.967-.272-.099-.47-.148-.669.149-.198.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.57-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M11.999 1C5.869 1 1 5.869 1 12s4.869 11 10.999 11C18.131 23 23 18.131 23 12S18.131 1 11.999 1M12 21.5c-5.246 0-9.5-4.253-9.5-9.5S6.754 2.5 12 2.5 21.5 6.754 21.5 12s-4.254 9.5-9.5 9.5" />
+                  </svg>
+                  וואטסאפ
+                </a>
+              </li>
+              {/* פילאטיס ויוגה אשדוד */}
+              <li className="mb-4">
+                <p className="font-medium mb-1">פילאטיס ויוגה אשדוד</p>
+                <p className="text-white/70 text-sm mb-1">רחוב התאנה, אשדוד</p>
+                <a 
+                  href="tel:052-3139677"
+                  className="text-white/70 hover:text-white transition-colors text-sm inline-flex items-center"
+                >
+                  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  052-3139677
+                </a>
+                <a
+                  href="https://wa.me/972523139677"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-1 text-[#25D366] hover:text-[#128C7E] text-sm"
+                  aria-label="שלח הודעת וואטסאפ לסניף פילאטיס ויוגה אשדוד"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M17.415 14.382c-.298-.149-1.759-.867-2.031-.967-.272-.099-.47-.148-.669.149-.198.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.57-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M11.999 1C5.869 1 1 5.869 1 12s4.869 11 10.999 11C18.131 23 23 18.131 23 12S18.131 1 11.999 1M12 21.5c-5.246 0-9.5-4.253-9.5-9.5S6.754 2.5 12 2.5 21.5 6.754 21.5 12s-4.254 9.5-9.5 9.5" />
+                  </svg>
+                  וואטסאפ
+                </a>
+              </li>
               <li>
                 <p className="font-medium mb-1">דוא"ל</p>
                 <a 

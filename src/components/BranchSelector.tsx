@@ -33,7 +33,7 @@ export default function BranchSelector() {
         details: 'בניין בוטיק, חניה בשפע בתשלום, קרוב לרכבת',
         phone: '050-9222062',
         whatsapp: '050-9222062',
-        image: '/pilates-tlv/RASHTA-08909.jpg',
+        image: '/tlv-shipuz.webp',
         trainingTypes: [
           'פילאטיס מכשירים',
           'פילאטיס מזרן',
@@ -52,7 +52,7 @@ export default function BranchSelector() {
         details: 'בית קרקע, חניה בשפע ללא עלות',
         phone: '052-3139677',
         whatsapp: '052-3139677',
-        image: '/function-ashdod/DANI2841_Original.jpg',
+        image: '/functional-shipuz.webp',
         trainingTypes: [
           'אימון כוח פונקציונלי',
           'מוביליטי'
@@ -61,13 +61,13 @@ export default function BranchSelector() {
         priceListEmbed: 'https://aZTOzQDI.web.arboxapp.com/membership?whitelabel=Arbox&lang=he&location=8394&referrer=PLUGIN'
       },
       {
-        id: 'ashdod-pilates',
+        id: 'ashdod-yoga',
         name: 'פילאטיס ויוגה אשדוד',
         address: 'רחוב התאנה, אשדוד',
         details: 'בית קרקע, חנייה ללא עלות בבית קפה דוגה/פארינו והסביבה - לא בתוך הרחוב',
         phone: '052-3139677',
         whatsapp: '052-3139677',
-        image: '/pilates-ashdod/DSC_8871.JPG',
+        image: '/ashdod-shipuz.webp',
         trainingTypes: [
           'פילאטיס מכשירים',
           'פילאטיס מזרן',
@@ -157,12 +157,16 @@ export default function BranchSelector() {
                   className="bg-white rounded-xl overflow-hidden shadow-lg"
                 >
                   <div className="relative h-[750px] overflow-hidden">
-                    <Image
-                      src={branch.image}
-                      alt={branch.name}
-                      fill
-                      className="object-cover transition-transform duration-500 hover:scale-105"
-                    />
+                    <div className="absolute inset-0 bg-gray-200 border border-gray-300">
+                      <Image
+                        src={branch.image}
+                        alt={branch.name}
+                        fill
+                        className="object-cover transition-transform duration-500 hover:scale-105"
+                        unoptimized
+                        onError={e => { e.currentTarget.style.display = 'none'; }}
+                      />
+                    </div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6">
                       <div className="bg-black/30 backdrop-blur-sm p-4 rounded-lg shadow-lg">
                         <h3 className="text-2xl font-bold text-white mb-2">{branch.name}</h3>
