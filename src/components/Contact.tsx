@@ -276,7 +276,19 @@ export default function Contact() {
         {/* overlay לבהירות רק על התוכן */}
       </motion.div>
       <div className="absolute left-0 right-0 top-0 bottom-0 pointer-events-none z-10" style={{background: 'linear-gradient(to bottom, rgba(255,255,255,0.7) 60%, rgba(255,255,255,0.3) 100%)'}} />
-      <div className="container mx-auto px-4 relative z-10">
+      <style jsx>{`
+        @media (max-width: 640px) {
+          .contact-mobile-fullwidth {
+            max-width: 100vw !important;
+            width: 100vw !important;
+            margin: 0 !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            overflow-x: hidden !important;
+          }
+        }
+      `}</style>
+      <div className="container mx-auto px-2 sm:px-4 relative z-10 contact-mobile-fullwidth">
         <motion.div
           variants={containerVariants}
           initial="hidden"

@@ -57,7 +57,7 @@ export default function Hero() {
   }, [slideshowImages.length]);
 
   return (
-    <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden w-full">
+    <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden w-full hero-mobile-fullwidth">
       {/* Background Slideshow with overlays */}
       <div className="absolute inset-0 z-0 w-full h-full">
         {/* All images rendered with opacity animation */}
@@ -91,11 +91,49 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 w-full flex justify-center items-center px-4">
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 shadow-2xl [box-shadow:_0_0_30px_rgba(139,168,136,0.3)] max-w-xl mx-auto w-full" style={{paddingBottom: '2.5rem'}}>
+          {/* Responsive width fix for mobile */}
+          <style jsx>{`
+            @media (max-width: 640px) {
+              section.hero-mobile-fullwidth, .hero-mobile-fullwidth, .hero-center-box-narrow {
+                max-width: 100vw !important;
+                width: 100vw !important;
+                overflow-x: hidden !important;
+                margin: 0 !important;
+                padding: 0 !important;
+              }
+              .hero-center-box-narrow {
+                max-width: 320px;
+                width: 90vw;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 0.75rem 0.5rem !important;
+                min-height: unset !important;
+              }
+              .hero-center-box-narrow-blur {
+                backdrop-filter: blur(18px) !important;
+                -webkit-backdrop-filter: blur(18px) !important;
+                background: rgba(255,255,255,0.10) !important;
+              }
+              .hero-center-box-narrow p, .hero-center-box-narrow .hero-text-sm {
+                font-size: 0.95rem !important;
+                line-height: 1.4 !important;
+                margin-top: 0.5rem !important;
+                margin-bottom: 0.5rem !important;
+              }
+              .hero-center-box-narrow .hero-logo {
+                margin-bottom: 0.5rem !important;
+              }
+              .hero-center-box-narrow .hero-btn {
+                margin-top: 0.5rem !important;
+              }
+            }
+          `}</style>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="space-y-6 flex flex-col items-center text-center"
+            className="flex flex-col items-center text-center hero-center-box-narrow hero-center-box-narrow-blur hero-mobile-fullwidth"
+            className="space-y-6 flex flex-col items-center text-center hero-center-box-narrow hero-center-box-narrow-blur hero-mobile-fullwidth"
           >
             <div className="relative flex flex-col items-center">
               <Image 
