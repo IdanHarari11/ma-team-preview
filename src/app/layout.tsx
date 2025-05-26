@@ -59,7 +59,7 @@ export default function RootLayout({
            var nl_contact = '0543199489';
          `}} />
        </head>
-      <body className={`${rubik.className} ${rubik.variable} text-ma-black antialiased`}>
+      <body className={`${rubik.className} ${rubik.variable} text-ma-black antialiased overflow-x-hidden w-full`}>
         <NagishLi />
         <Header />
         {children}
