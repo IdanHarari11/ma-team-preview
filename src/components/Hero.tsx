@@ -132,7 +132,6 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="flex flex-col items-center text-center hero-center-box-narrow hero-center-box-narrow-blur hero-mobile-fullwidth"
             className="space-y-6 flex flex-col items-center text-center hero-center-box-narrow hero-center-box-narrow-blur hero-mobile-fullwidth"
           >
             <div className="relative flex flex-col items-center">

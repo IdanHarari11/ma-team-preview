@@ -94,6 +94,8 @@ export default function GalleryTabs() {
     }
   };
 
+  if (!gallery) return null;
+
   return (
     <section className="w-full py-16 bg-ma-light" id="gallery-tabs">
       <div className="max-w-6xl mx-auto px-4">
