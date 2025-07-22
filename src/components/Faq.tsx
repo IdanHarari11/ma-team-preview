@@ -3,8 +3,10 @@
 import { useState, useRef } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
+import { useLanguage } from '../hooks/useLanguage';
 
 export default function Faq() {
+  const { t } = useLanguage();
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const [openIndex, setOpenIndex] = useState<number | null>(null)
@@ -16,131 +18,44 @@ export default function Faq() {
 
   const faqs = [
     {
-      question: "כמה סניפים יש ל-M.A והיכן הם נמצאים?",
-      answer: (
-        <div>
-          נכון להיום יש לנו שלושה סניפים פעילים:<br />
-          <ul className="list-disc pr-4 mt-2 space-y-2">
-            <li>
-              <b>סניף אשדוד פילאטיס מכשירים, פילאטיס מזרן, יוגה ומוביליטי</b> (נמצא ברחוב התאנה, אשדוד)
-              <a
-                href="https://maps.google.com/?q=רחוב התאנה, אשדוד"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ml-2 inline-block bg-ma-primary text-white px-3 py-1 rounded-full text-xs hover:bg-ma-primary/80 transition-colors"
-              >
-                מפה
-              </a>
-            </li>
-            <li>
-              <b>סניף אשדוד כוח פונקציונלי</b> (נמצא ברחוב היידן, אשדוד)
-              <a
-                href="https://maps.google.com/?q=רחוב היידן, אשדוד"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ml-2 inline-block bg-ma-primary text-white px-3 py-1 rounded-full text-xs hover:bg-ma-primary/80 transition-colors"
-              >
-                מפה
-              </a>
-            </li>
-            <li>
-              <b>סניף תל אביב</b> – כולל פילאטיס מכשירים, פילאטיס מזרן ויוגה. (נמצא במקווה ישראל 4, תל אביב)
-              <a
-                href="https://maps.google.com/?q=מקווה ישראל 4, תל אביב"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ml-2 inline-block bg-ma-primary text-white px-3 py-1 rounded-full text-xs hover:bg-ma-primary/80 transition-colors"
-              >
-                מפה
-              </a>
-            </li>
-          </ul>
-        </div>
-      )
+      question: t('faq.q1'),
+      answer: t('faq.a1'),
     },
     {
-      question: "איך נרשמים לשיעור?",
-      answer: (
-        <span>
-          אנחנו קודם כל משפחה – ולפני ההרשמה, חשוב לנו להכיר אתכם, להבין את הצרכים שלכם ולתכנן יחד את האימון שמתאים לכם.<br />
-          לאחר ההיכרות, תהליך ההרשמה פשוט ומהיר – ניתן לרכוש כרטיסיית היכרות, שיעור ניסיון או להירשם ישירות למנוי או כרטיסייה לפי בחירתכם.<br />
-          <a
-            href="#contact"
-            className="inline-block mt-2 bg-ma-primary text-white px-4 py-2 rounded-full font-medium hover:bg-ma-primary/80 transition-colors mr-2"
-          >
-            השאירו פרטים כאן
-          </a>
-          ונחזור אליכם עוד היום.
-        </span>
-      )
+      question: t('faq.q2'),
+      answer: t('faq.a2'),
     },
     {
-      question: "האם ניתן להגיע לשיעור ניסיון?",
-      answer: "בוודאי. יש אפשרות לשיעור ניסיון בודד, או לרכוש כרטיסיית היכרות הכוללת שני שיעורים – כדי לחוות לעומק את הסטודיו, האווירה והצוות."
+      question: t('faq.q3'),
+      answer: t('faq.a3'),
     },
     {
-      question: "כמה משתתפים יש בכל שיעור?",
-      answer: (
-        <span>
-          השיעורים מתקיימים בקבוצות קטנות ואינטימיות:<br />
-          – באימוני כוח פונקציונליים: בין 3 ל-7 משתתפים<br />
-          – בפילאטיס וביוגה: עד 8 משתתפים בשיעור<br />
-          הדגש שלנו הוא על איכות, יחס אישי ודיוק מקצועי.
-        </span>
-      )
+      question: t('faq.q4'),
+      answer: t('faq.a4'),
     },
     {
-      question: "האם יש מנויים מוזלים?",
-      answer: (
-        <span>
-          כן. בכל מנוי קיימת אפשרות להתחייב לתקופה ארוכה יותר (3, 6 או 12 חודשים) ולקבל הנחה של עד 25% מהמחיר הרגיל.<br />
-          בנוסף, חיילים בשירות סדיר זכאים ל-10% הנחה קבועה.
-        </span>
-      )
+      question: t('faq.q5'),
+      answer: t('faq.a5'),
     },
     {
-      question: "האם יש מנוי משולב של אימוני כוח ופילאטיס?",
-      answer: (
-        <span>
-          כן. בסניפי אשדוד בלבד ניתן להצטרף למנוי משולב שמאפשר להשתתף גם באימוני כוח פונקציונליים וגם בשיעורי פילאטיס – במחיר מוזל ושווה במיוחד.<br />
-          כמו כן, ניתן לרכוש כרטיסיית היכרות הכוללת שני שיעורים בכל תחום.
-        </span>
-      )
+      question: t('faq.q6'),
+      answer: t('faq.a6'),
     },
     {
-      question: "האם צריך ניסיון קודם לפני שמצטרפים?",
-      answer: (
-        <span>
-          ממש לא. בגלל שאנחנו סטודיו בוטיק עם קבוצות קטנות, אנחנו יודעים לקבל כל רמה – ממתחילים ועד מתקדמים – ולהתאים לכל אחד ואחת את הקצב, ההכוונה והיחס האישי.
-        </span>
-      )
+      question: t('faq.q7'),
+      answer: t('faq.a7'),
     },
     {
-      question: "מאיזה גיל אפשר להצטרף?",
-      answer: (
-        <span>
-          האימונים הקבוצתיים מתאימים לגילאי 12 ומעלה.<br />
-          אימונים אישיים ניתן להתחיל כבר מגיל 6. אנחנו מתאימים את סוג האימון לכל גיל ולפי הצרכים של כל מתאמן.
-        </span>
-      )
+      question: t('faq.q8'),
+      answer: t('faq.a8'),
     },
     {
-      question: "האם הסטודיו מתאים גם לגברים?",
-      answer: (
-        <span>
-          בוודאי. הסטודיו פתוח לנשים ולגברים כאחד, ויש לנו מגוון רחב של מתאמנים ומתאמנות מכל הגילאים והרמות.
-        </span>
-      )
+      question: t('faq.q9'),
+      answer: t('faq.a9'),
     },
     {
-      question: "האם יש חניה באיזור?",
-      answer: (
-        <div>
-          <b>סניף אשדוד פילאטיס מכשירים:</b> חנייה בשפע ללא עלות באזור הדוגה / פארינו (אסור לחנות ברחוב התאנה)<br />
-          <b>סניף אשדוד כוח פונקציונלי:</b> חנייה בשפע ללא עלות, רק לא לחסום את כניסת הרחוב והכורכר<br />
-          <b>בתל אביב:</b> תחנת רכבת הקלה "אלנבי" ממש על הכניסה לסטודיו, קיימת חניה בשפע כחול לבן וחניונים בתשלום בחלק משעות היום, ויש נגישות גבוהה לתחבורה ציבורית/קורקינט/אופניים.
-        </div>
-      )
+      question: t('faq.q10'),
+      answer: t('faq.a10'),
     },
   ]
 
@@ -198,7 +113,7 @@ export default function Faq() {
             variants={itemVariants} 
             className="text-3xl md:text-4xl font-bold text-[#8BA888] text-center mb-12"
           >
-            שאלות נפוצות – סטודיו M.A
+            {t('faq.title')}
           </motion.h2>
 
           <div className="space-y-4">

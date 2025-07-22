@@ -4,8 +4,10 @@ import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useLanguage } from '@/hooks/useLanguage';
 
 export default function BranchSelector() {
+  const { t } = useLanguage();
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const [selectedCity, setSelectedCity] = useState<'tel-aviv' | 'ashdod'>('tel-aviv')
@@ -28,18 +30,13 @@ export default function BranchSelector() {
     'tel-aviv': [
       {
         id: 'telaviv',
-        name: 'סטודיו פילאטיס ויוגה תל אביב',
-        address: 'מקווה ישראל 4, תל אביב',
-        details: 'בניין בוטיק, חניה בשפע בתשלום, קרוב לרכבת',
-        phone: '050-9222062',
-        whatsapp: '050-9222062',
+        name: t('branch.tlv.title'),
+        address: t('branch.tlv.address').split('\n')[0],
+        details: t('branch.tlv.address').split('\n')[1],
+        phone: t('branch.tlv.phone'),
+        whatsapp: t('branch.tlv.phone'),
         image: '/tlv-shipuz.webp',
-        trainingTypes: [
-          'פילאטיס מכשירים',
-          'פילאטיס מזרן',
-          'יוגה',
-          'מוביליטי'
-        ],
+        trainingTypes: t('branch.tlv.tags'),
         scheduleEmbed: 'https://gvjcxnmn.web.arboxapp.com/group?whitelabel=Arbox&amp;lang=he&amp;location=18873&amp;referrer=PLUGIN',
         priceListEmbed: ''
       }
@@ -47,33 +44,25 @@ export default function BranchSelector() {
     'ashdod': [
       {
         id: 'ashdod-functional',
-        name: 'פונקציונלי אשדוד',
-        address: 'רחוב היידן 3, אשדוד',
-        details: 'בית קרקע, חניה בשפע ללא עלות',
-        phone: '052-3139677',
-        whatsapp: '052-3139677',
+        name: t('branch.ashdod2.title'),
+        address: t('branch.ashdod2.address').split('\n')[0],
+        details: t('branch.ashdod2.address').split('\n')[1],
+        phone: t('branch.ashdod2.phone'),
+        whatsapp: t('branch.ashdod2.phone'),
         image: '/functional-shipuz.webp',
-        trainingTypes: [
-          'אימון כוח פונקציונלי',
-          'מוביליטי'
-        ],
+        trainingTypes: t('branch.ashdod2.tags'),
         scheduleEmbed: 'https://aZTOzQDI.web.arboxapp.com/group?whitelabel=Arbox&lang=he&location=8394&referrer=PLUGIN',
         priceListEmbed: 'https://aZTOzQDI.web.arboxapp.com/membership?whitelabel=Arbox&lang=he&location=8394&referrer=PLUGIN'
       },
       {
         id: 'ashdod-yoga',
-        name: 'פילאטיס ויוגה אשדוד',
-        address: 'רחוב התאנה, אשדוד',
-        details: 'בית קרקע, חנייה ללא עלות בבית קפה דוגה/פארינו והסביבה - לא בתוך הרחוב',
-        phone: '052-3139677',
-        whatsapp: '052-3139677',
+        name: t('branch.ashdod1.title'),
+        address: t('branch.ashdod1.address').split('\n')[0],
+        details: t('branch.ashdod1.address').split('\n')[1],
+        phone: t('branch.ashdod1.phone'),
+        whatsapp: t('branch.ashdod1.phone'),
         image: '/ashdod-shipuz.webp',
-        trainingTypes: [
-          'פילאטיס מכשירים',
-          'פילאטיס מזרן',
-          'יוגה',
-          'מוביליטי'
-        ],
+        trainingTypes: t('branch.ashdod1.tags'),
         scheduleEmbed: 'https://aZTOzQDI.web.arboxapp.com/group?whitelabel=Arbox&lang=he&location=8394&referrer=PLUGIN',
         priceListEmbed: 'https://aZTOzQDI.web.arboxapp.com/membership?whitelabel=Arbox&lang=he&location=8394&referrer=PLUGIN'
       }
@@ -116,23 +105,23 @@ export default function BranchSelector() {
               variants={itemVariants}
               className="text-3xl md:text-4xl font-bold text-ma-black"
             >
-              הסניפים שלנו
+              {t('branches.title')}
             </motion.h2>
 
             <motion.div variants={itemVariants} className="flex justify-center">
               <div className="inline-flex p-1.5 rounded-full bg-gray-100 shadow-inner">
-                {['tel-aviv', 'ashdod'].map((city) => (
+                {[{key: 'tel-aviv', label: t('branches.tab.telAviv')}, {key: 'ashdod', label: t('branches.tab.ashdod')}].map((city) => (
                   <button
-                    key={city}
-                    onClick={() => setSelectedCity(city as 'tel-aviv' | 'ashdod')}
+                    key={city.key}
+                    onClick={() => setSelectedCity(city.key as 'tel-aviv' | 'ashdod')}
                     className={`relative px-6 py-2.5 rounded-full font-medium transition-all duration-300 ${
-                      selectedCity === city 
+                      selectedCity === city.key 
                         ? 'text-white z-10' 
                         : 'text-ma-black/70 hover:text-ma-black'
                     }`}
                   >
-                    {city === 'tel-aviv' ? 'תל אביב' : 'אשדוד'}
-                    {selectedCity === city && (
+                    {city.label}
+                    {selectedCity === city.key && (
                       <motion.div
                         layoutId="cityIndicator"
                         className="absolute inset-0 bg-ma-primary rounded-full -z-10 shadow-md"
@@ -171,14 +160,14 @@ export default function BranchSelector() {
                       <div className="bg-black/30 backdrop-blur-sm p-4 rounded-lg shadow-lg">
                         <h3 className="text-2xl font-bold text-white mb-2">{branch.name}</h3>
                         <div className="flex flex-wrap gap-2 mb-3">
-                          {branch.trainingTypes.map((type, index) => (
+                          {Array.isArray(branch.trainingTypes) ? branch.trainingTypes.map((type, index) => (
                             <span 
                               key={index} 
                               className="bg-ma-primary/90 px-3 py-1 rounded-full text-sm text-white"
                             >
                               {type}
                             </span>
-                          ))}
+                          )) : null}
                         </div>
                         
                         <div className="space-y-3 text-white">
@@ -237,7 +226,7 @@ export default function BranchSelector() {
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                               </svg>
-                              <span>מפה</span>
+                              <span>{t('branch.buttons.map')}</span>
                             </a>
                             <a
                               href="#contact"
@@ -246,7 +235,7 @@ export default function BranchSelector() {
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                               </svg>
-                              <span>שיעור ניסיון</span>
+                              <span>{t('branch.buttons.trial')}</span>
                             </a>
                           </div>
                         </div>
@@ -257,38 +246,38 @@ export default function BranchSelector() {
                   <div className="p-6">
                     <div className="mb-6 border-b border-gray-200">
                       <div className="flex justify-center space-x-4 rtl:space-x-reverse">
-                        {['schedule', ...(branch.priceListEmbed ? ['prices'] : [])].map((tab) => (
+                        {[{tab: 'schedule', label: t('branch.buttons.schedule')}, ...(branch.priceListEmbed ? [{tab: 'prices', label: t('branch.buttons.pricing')}] : [])].map((tabObj) => (
                           <button
-                            key={tab}
-                            onClick={() => handleTabChange(branch.id, tab as 'schedule' | 'prices')}
+                            key={tabObj.tab}
+                            onClick={() => handleTabChange(branch.id, tabObj.tab as 'schedule' | 'prices')}
                             className={`
                               py-2.5 px-6 font-medium transition-all duration-300 relative flex items-center gap-2
                               rounded-t-lg shadow-sm border-t border-l border-r border-gray-200
-                              ${branchActiveTab === tab
+                              ${branchActiveTab === tabObj.tab
                                 ? 'bg-white text-ma-primary translate-y-0.5 shadow-md'
                                 : 'text-ma-black/70 bg-gray-50 hover:bg-gray-100 hover:-translate-y-1 hover:shadow-md'
                               }
                             `}
-                            aria-selected={branchActiveTab === tab}
+                            aria-selected={branchActiveTab === tabObj.tab}
                             role="tab"
                           >
-                            {tab === 'schedule' && (
+                            {tabObj.tab === 'schedule' && (
                               <>
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
-                                <span>לו״ז שיעורים</span>
+                                <span>{t('branch.buttons.schedule')}</span>
                               </>
                             )}
-                            {tab === 'prices' && (
+                            {tabObj.tab === 'prices' && (
                               <>
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <span>מחירון</span>
+                                <span>{t('branch.buttons.pricing')}</span>
                               </>
                             )}
-                            {branchActiveTab === tab && (
+                            {branchActiveTab === tabObj.tab && (
                               <motion.div
                                 layoutId={`tabIndicator-${branch.id}`}
                                 className="absolute bottom-0 left-0 right-0 h-1 bg-ma-primary"
@@ -356,8 +345,8 @@ export default function BranchSelector() {
               href="mailto:mafstudio3@gmail.com"
               className="flex items-center gap-2 text-ma-black/80 hover:text-ma-primary transition-colors"
             >
-              <span>לשאלות ופרטים נוספים:</span>
-              <span className="font-medium">mafstudio3@gmail.com</span>
+              <span>{t('branches.contact.question')}:</span>
+              <span className="font-medium">{t('branches.contact.email')}</span>
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>

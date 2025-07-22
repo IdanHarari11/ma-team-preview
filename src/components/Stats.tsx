@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useLanguage } from '@/hooks/useLanguage';
 
 const CountUp = ({ end, duration = 2000 }: { end: number, duration?: number }) => {
   const [count, setCount] = useState(0)
@@ -38,12 +39,13 @@ const CountUp = ({ end, duration = 2000 }: { end: number, duration?: number }) =
 export default function Stats() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const { t } = useLanguage();
 
   const stats = [
     {
       id: 1,
       value: '5+',
-      label: 'שנות ניסיון',
+      label: t('stats.experience'),
       href: '#about',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -54,7 +56,7 @@ export default function Stats() {
     {
       id: 2,
       value: '97%',
-      label: 'שביעות רצון',
+      label: t('stats.satisfaction'),
       href: '#testimonials',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -65,7 +67,7 @@ export default function Stats() {
     {
       id: 3,
       value: '3-8',
-      label: 'מתאמנים בקבוצה',
+      label: t('stats.groupTraining'),
       href: '#branches',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -76,7 +78,7 @@ export default function Stats() {
     {
       id: 4,
       value: '3',
-      label: 'מספר סניפים',
+      label: t('stats.branches'),
       href: '#branches',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,7 +120,7 @@ export default function Stats() {
           className="text-center mb-8 sm:mb-12"
         >
           <motion.h2 variants={itemVariants} className="text-2xl sm:text-3xl md:text-4xl font-bold text-ma-black mb-4">
-            נתונים עלינו
+            {t('stats.title')}
           </motion.h2>
         </motion.div>
 

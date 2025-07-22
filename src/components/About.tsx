@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface TeamMember {
   name: string
@@ -20,6 +21,7 @@ export default function About() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.1 })
   const [activeClass, setActiveClass] = useState(0)
+  const { t } = useLanguage();
   
   const teamMembers: TeamMember[] = [
     {
@@ -109,37 +111,37 @@ export default function About() {
   // Class types data
   const classTypes = [
     {
-      name: "פילאטיס מכשירים",
+      name: t('classSection.reformer.title'),
       images: ["/pilates/RASHTA-00526.jpg"],
-      description: "האימון הכי מדויק שיש – על מיטות רפורמר מקצועיות מבית align. כאן עובדים על חיזוק עמוק, ייצוב, טווחי תנועה גמישות ושרירי ליבה. מתאים לכל רמות הכושר, גם למי שצריכה שיקום או התאמות. שורף לאורך כל השיעור, אבל ההרגשה אחרי זה שווה הכל!",
-      locations: "זמין בסניפי אשדוד ותל אביב"
+      description: t('classSection.reformer.text'),
+      locations: t('classSection.availabilityLabel')
     },
     {
-      name: "פונקציונלי",
+      name: t('classSection.functional.title'),
       images: ["/function/RASHTA-00254.jpg"],
-      description: "אימון פונקציונלי המשלב תרגילים מגוונים לשיפור כוח, סיבולת, יציבות ותנועה יומיומית. מתאים לכל הרמות, משפר ביצועים ומונע פציעות.",
-      locations: "זמין בסניפי אשדוד ותל אביב"
+      description: t('classSection.functional.text'),
+      locations: t('classSection.availabilityLabel')
     },
     {
-      name: "יוגה",
+      name: t('classSection.yoga.title'),
       images: ["/yoga/RASHTA-09041.jpg", "/yoga/RASHTA-00594.jpg"],
-      description: 'כאן כל הקסם קורה, בעזרת הסטודיואים הנעימים שהכנו עבורכם בשילוב המדריכות המיוחדות ביותר תחוו שיעור שמחזק, מגמיש ומחזיר לגוף שלך את מה שהוא צריך. עובדים על תנועות זורמות, נשימה נכונה, שיווי משקל ויציבה – בקצב נעים שמתאים לכולם. זה הזמן שלך לעצור רגע, להזיז את הגוף, ולהרגיש יותר קליל, פתוח ונינוח – גם בגוף וגם בראש. מתאים לכל רמה ומומלץ לכל מי שאומר עכשיו ״אולי זה לא בשבילי"',
-      locations: "זמין בסניפי אשדוד ותל אביב"
+      description: t('classSection.yoga.text'),
+      locations: t('classSection.availabilityLabel')
     },
     {
-      name: "פילאטיס מזרן",
+      name: t('classSection.mat.title'),
       images: [
         "/RASHTA-00476.jpg",
         "/RASHTA-08927.jpg"
       ],
-      description: "בלי מכשירים – רק את/ה, המזרן, והנשימה שלך. אך אל תתנו למזרן להטעות אתכם, יש האומרים שזה השיעור הקשה והמהנה ביותר. עובדים על ליבה חזקה, גמישות, יציבה ודיוק בתנועה. זה שיעור שמחזק מבפנים, ומרגיש קצת כמו מדיטציה בתנועה.",
-      locations: "זמין בסניפי אשדוד ותל אביב"
+      description: t('classSection.mat.text'),
+      locations: t('classSection.availabilityLabel')
     },
     {
-      name: "מוביליטי",
+      name: t('classSection.mobility.title'),
       images: ["/mobility/RASHTA-00416.jpg"],
-      description: "תנועה, שחרור וטווחים פתוחים יותר. זה שיעור שמשפר את התנועה שלך באימונים, במדרגות, ואפילו כשתרים את הקניות. עובדים על מפרקים, גידים וטווחי תנועה – בצורה בטוחה ונעימה. קליל, אפקטיבי, והכי חשוב – מרגישים תוצאות.",
-      locations: "זמין בסניפי אשדוד"
+      description: t('classSection.mobility.text'),
+      locations: t('classSection.availabilityLabel')
     }
   ];
   
@@ -181,42 +183,16 @@ export default function About() {
         {/* About Studio */}
         <motion.div variants={itemVariants} className="mb-20">
           <h2 className="text-3xl md:text-4xl font-bold text-[#2C3338] mb-8 text-center">
-            הסיפור שלנו
+            {t('about.title')}
           </h2>
-          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1 space-y-4">
-              <h3 className="text-2xl font-semibold text-[#2C3338]">סטודיו MA TEAM</h3>
-              <p className="text-[#4A5568] leading-relaxed">
-                איזה כיף שהגעתם למשפחה שלנו!
-                אנחנו מעוז ואיה – אחים, משפחה על אמת.
-                את הרשת שלנו - M.A (כן, שם די מקורי…), הקמנו ב-2020.
-              </p>
-              <p className="text-[#4A5568] leading-relaxed md:block hidden">
-                הסטודיו הראשון נולד מתוך תחביב בזמן הקורונה, ממש בבית שלנו – בלי תוכניות גדולות, רק עם רצון לתת מקום לתנועה, לחיבור ולאנשים.
-                מסתבר שהקלישאה "תעשה מה שאתה אוהב – וזה יצליח" באמת עבדה.
-                בלי לשים לב, גדלנו - שלושה סניפים, אלפי מתאמנים, קהילה עצומה, ואהבה אחת גדולה שממשיכה להניע אותנו כל יום מחדש.
-              </p>
-              <p className="text-[#4A5568] leading-relaxed block md:hidden">
-                הסטודיו הראשון נולד מתוך תחביב בזמן הקורונה, ובלי לשים לב, גדלנו לשלושה סניפים, אלפי מתאמנים וקהילה עצומה.
-              </p>
-              <p className="text-[#4A5568] leading-relaxed md:block hidden">
-                אנחנו מאמינים באיכות על פני כמות.
-                לכן אנחנו עובדים בקבוצות קטנות, עם צוות מאמנים שעבר הכשרה ייחודית – כדי שנוכל באמת לגעת בכל אחד ואחת, להתאים את האימון לצרכים שלך, וללוות אותך עם היחס הכי אישי שניתן לאורך כל הדרך.
-              </p>
-              <p className="text-[#4A5568] leading-relaxed block md:hidden">
-                אנחנו מאמינים באיכות על פני כמות - קבוצות קטנות, צוות מיומן, ויחס אישי לכל מתאמן.
-              </p>
-              <p className="text-[#4A5568] leading-relaxed md:block hidden">
-                אצלנו לא תמצאו הבטחות לתוצאות תוך שבועיים.
-                מה שכן תמצאו, זו דרך – כזו שתגרום לך להנות מהאימונים כמו שמעולם לא חווית.
-                ובזכות ההנאה הזו, לאמץ אורח חיים בריא, ספורטיבי ומאוזן – כזה שיביא אותך בדיוק להרגשה ולגוף שתמיד חלמת.
-                בזמן שלך, בקצב שלך, ובאהבה גדולה.
-              </p>
-              <p className="text-[#4A5568] leading-relaxed block md:hidden">
-                אצלנו תמצאו דרך להנות מאימונים כמו שמעולם לא חווית, ולאמץ אורח חיים בריא ומאוזן - בזמן שלך, בקצב שלך, ובאהבה גדולה.
-              </p>
-              
+              <div className="text-2xl font-bold text-[#2C3338] mb-2 text-center md:text-right">
+                {t('about.storyTitle')}
+              </div>
+              <div className="text-[#4A5568] leading-relaxed whitespace-pre-line">
+                {t('about.storyText')}
+              </div>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -228,7 +204,7 @@ export default function About() {
                   }
                 }}
               >
-                <span className="relative z-10">הסניפים שלנו</span>
+                <span className="relative z-10">{t('about.branchesButton')}</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#8BA888] to-[#9DB89A] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </motion.button>
             </div>
@@ -258,7 +234,7 @@ export default function About() {
           <div className="absolute -inset-8 bg-[url('/images/noise.png')] opacity-30 mix-blend-soft-light"></div>
           
           <h2 className="text-3xl md:text-4xl font-bold text-[#2C3338] mb-8 flex items-center justify-center gap-2 text-center">
-            <span className="drop-shadow-[0_0_15px_rgba(139,168,136,0.3)]">סוגי השיעורים ב</span>
+            <span className="drop-shadow-[0_0_15px_rgba(139,168,136,0.3)]">{t('classSection.title')}</span>
             <Image 
               src="/images/logo-green.png"
               alt="MA Team Logo"
@@ -401,7 +377,7 @@ export default function About() {
                       whileTap={{ scale: 0.97 }}
                       className="inline-block mt-4 px-6 py-3 bg-gradient-to-r from-[#8BA888]/90 to-[#9DB89A]/90 text-white rounded-xl font-medium shadow-md hover:shadow-xl transition-all relative group overflow-hidden backdrop-blur-md"
                     >
-                      <span className="relative z-10">לשיעור ניסיון חינם</span>
+                      <span className="relative z-10">{t('classSection.trialButton')}</span>
                       <div className="absolute inset-0 bg-gradient-to-r from-[#8BA888] to-[#9DB89A] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
                     </motion.a>

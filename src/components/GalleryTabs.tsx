@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
+import { useLanguage } from '../hooks/useLanguage';
 
 interface GalleryData {
   id: string;
@@ -12,7 +13,7 @@ interface GalleryData {
 const GALLERIES: GalleryData[] = [
   {
     id: 'ashdod-function',
-    label: 'פונקציונלי אשדוד',
+    label: 'gallery.button.functional', // use translation key
     folder: '/gallery-ashdod-function1/',
     images: [
       'fftscmg27cnxi5ujodtj.webp',
@@ -31,7 +32,7 @@ const GALLERIES: GalleryData[] = [
   },
   {
     id: 'ashdod-py',
-    label: 'פילאטיס ויוגה אשדוד',
+    label: 'gallery.button.ashdod', // use translation key
     folder: '/gallery-ashdod-py1/',
     images: [
       'b30vzaaiax5tmnjyco8g.webp',
@@ -48,7 +49,7 @@ const GALLERIES: GalleryData[] = [
   },
   {
     id: 'tlv-py',
-    label: 'פילאטיס ויוגה תל אביב',
+    label: 'gallery.button.tlv', // use translation key
     folder: '/gallery-tlv-py1/',
     images: [
       'fbglchqizpaumnvh2kk3.webp',
@@ -71,6 +72,7 @@ const GALLERIES: GalleryData[] = [
 ];
 
 export default function GalleryTabs() {
+  const { t } = useLanguage();
   const [selected, setSelected] = useState('ashdod-function');
   const [startIdx, setStartIdx] = useState(0);
   const gallery = GALLERIES.find(g => g.id === selected);
@@ -102,17 +104,26 @@ export default function GalleryTabs() {
   return (
     <section className="w-full py-10 md:py-16 bg-ma-light" id="gallery-tabs">
       <div className="max-w-6xl mx-auto px-2 md:px-4">
-        <h2 className="text-2xl md:text-4xl font-bold text-center mb-6 md:mb-8 text-ma-black">גלריה</h2>
+        <h2 className="text-2xl md:text-4xl font-bold text-center mb-6 md:mb-8 text-ma-black">{t('gallery.title')}</h2>
         <div className="flex justify-center gap-2 mb-6 md:mb-8 flex-wrap">
-          {GALLERIES.map(g => (
-            <button
-              key={g.id}
-              onClick={() => { setSelected(g.id); setStartIdx(0); }}
-              className={`px-4 md:px-6 py-2 rounded-full font-medium transition-all duration-200 border-2 text-sm md:text-base ${selected === g.id ? 'bg-ma-primary text-white border-ma-primary' : 'bg-white text-ma-black border-ma-primary/30 hover:border-ma-primary'}`}
-            >
-              {g.label}
-            </button>
-          ))}
+          <button
+            onClick={() => { setSelected('tlv-py'); setStartIdx(0); }}
+            className={`px-4 md:px-6 py-2 rounded-full font-medium transition-all duration-200 border-2 text-sm md:text-base ${selected === 'tlv-py' ? 'bg-ma-primary text-white border-ma-primary' : 'bg-white text-ma-black border-ma-primary/30 hover:border-ma-primary'}`}
+          >
+            {t('gallery.button.tlv')}
+          </button>
+          <button
+            onClick={() => { setSelected('ashdod-py'); setStartIdx(0); }}
+            className={`px-4 md:px-6 py-2 rounded-full font-medium transition-all duration-200 border-2 text-sm md:text-base ${selected === 'ashdod-py' ? 'bg-ma-primary text-white border-ma-primary' : 'bg-white text-ma-black border-ma-primary/30 hover:border-ma-primary'}`}
+          >
+            {t('gallery.button.ashdod')}
+          </button>
+          <button
+            onClick={() => { setSelected('ashdod-function'); setStartIdx(0); }}
+            className={`px-4 md:px-6 py-2 rounded-full font-medium transition-all duration-200 border-2 text-sm md:text-base ${selected === 'ashdod-function' ? 'bg-ma-primary text-white border-ma-primary' : 'bg-white text-ma-black border-ma-primary/30 hover:border-ma-primary'}`}
+          >
+            {t('gallery.button.functional')}
+          </button>
         </div>
         <div className="relative flex items-center justify-center w-full">
           {/* חץ קודם */}

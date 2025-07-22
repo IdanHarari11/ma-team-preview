@@ -4,10 +4,12 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLanguage } from '@/hooks/useLanguage';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const { language, setLanguage, t } = useLanguage();
   
   // Handle scroll event to change header style
   useEffect(() => {
@@ -102,7 +104,7 @@ export default function Header() {
               isScrolled ? 'text-ma-black hover:text-ma-primary' : 'text-white hover:text-ma-primary'
             }`}
           >
-              מי אנחנו
+            {t('navbar.about')}
           </Link>
           <Link 
               href="#training"
@@ -110,7 +112,7 @@ export default function Header() {
               isScrolled ? 'text-ma-black hover:text-ma-primary' : 'text-white hover:text-ma-primary'
             }`}
           >
-            סוגי אימונים
+            {t('navbar.trainings')}
           </Link>
           <Link 
             href="#branches"
@@ -118,7 +120,7 @@ export default function Header() {
               isScrolled ? 'text-ma-black hover:text-ma-primary' : 'text-white hover:text-ma-primary'
             }`}
           >
-            הסניפים שלנו
+            {t('navbar.branches')}
           </Link>
           <Link 
               href="#gallery"
@@ -126,7 +128,7 @@ export default function Header() {
               isScrolled ? 'text-ma-black hover:text-ma-primary' : 'text-white hover:text-ma-primary'
             }`}
           >
-              גלריה
+            {t('navbar.gallery')}
           </Link>
           <Link 
             href="#contact"
@@ -134,7 +136,7 @@ export default function Header() {
               isScrolled ? 'text-ma-black hover:text-ma-primary' : 'text-white hover:text-ma-primary'
             }`}
           >
-            צור קשר
+            {t('navbar.contact')}
           </Link>
           <a 
               href="#contact"
@@ -144,8 +146,16 @@ export default function Header() {
                 : 'bg-white/20 backdrop-blur-md text-white border border-white/30'
             } font-medium transition-all duration-300 hover:scale-105 hover:shadow-xl`}
           >
-              בואו נתחיל
+            {t('navbar.start')}
           </a>
+          {/* Language Switch Button */}
+          <button
+            onClick={() => setLanguage(language === 'he' ? 'en' : 'he')}
+            className="ml-4 px-3 py-1 rounded border border-ma-primary bg-white/80 text-ma-primary font-bold text-sm hover:bg-ma-primary hover:text-white transition-colors duration-200"
+            aria-label="שנה שפה"
+          >
+            {language === 'he' ? 'English' : 'עברית'}
+          </button>
         </nav>
         
         {/* Mobile Menu Button */}
@@ -175,7 +185,7 @@ export default function Header() {
                   onClick={handleMenuItemClick}
                     className="text-xl font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
                 >
-                    מי אנחנו
+                    {t('navbar.about')}
                 </Link>
                 <Link
                     href="#training"
@@ -196,7 +206,7 @@ export default function Header() {
                   onClick={handleMenuItemClick}
                     className="text-xl font-medium text-ma-black hover:text-ma-primary transition-all duration-300 hover:scale-110"
                 >
-                    גלריה
+                    {t('navbar.gallery')}
                 </Link>
                 <Link
                   href="#contact"
@@ -211,6 +221,14 @@ export default function Header() {
                 >
                     בואו נתחיל
                 </a>
+                {/* Language Switch Button Mobile */}
+                <button
+                  onClick={() => setLanguage(language === 'he' ? 'en' : 'he')}
+                  className="mt-6 px-4 py-2 rounded border border-ma-primary bg-white/80 text-ma-primary font-bold text-lg hover:bg-ma-primary hover:text-white transition-colors duration-200"
+                  aria-label="שנה שפה"
+                >
+                  {language === 'he' ? 'English' : 'עברית'}
+                </button>
               </nav>
             </motion.div>
           )}

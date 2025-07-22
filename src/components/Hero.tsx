@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useLanguage } from '@/hooks/useLanguage';
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -40,6 +41,7 @@ export default function Hero() {
     '/tlv p y/RASHTA-09041.jpg',
   ];
   const [currentImage, setCurrentImage] = useState(0);
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (videoRef.current) {
@@ -151,7 +153,7 @@ export default function Hero() {
               />
             </div>
             <p className="text-lg md:text-2xl text-white/90 drop-shadow-lg [text-shadow:_0_0_8px_rgba(139,168,136,0.4)] max-w-md leading-relaxed tracking-wide" style={{ marginTop: '-1.2rem'}}>
-              ברוכים הבאים לבית החדש שלך.<br/>רשת הבוטיק המשלבת את כל העולמות – באווירה משפחתית ואינטימית
+              {t('hero.title')}<br/>{t('hero.subtitle')}
             </p>
             <div className="mt-6 flex justify-center">
               <motion.button
@@ -165,7 +167,7 @@ export default function Hero() {
                   }
                 }}
               >
-                <span className="relative z-10">לאימון ניסיון</span>
+                <span className="relative z-10">{t('hero.cta')}</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#8BA888] to-[#9DB89A] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="absolute inset-0 rounded-xl bg-white/20 blur-xl group-hover:bg-white/40 transition-all duration-300"></div>
               </motion.button>

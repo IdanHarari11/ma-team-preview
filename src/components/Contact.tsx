@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { useRef } from 'react'
 import { useScroll, useTransform } from 'framer-motion'
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface FormData {
   fullName: string
@@ -18,6 +19,7 @@ interface FormData {
 }
 
 export default function Contact() {
+  const { t, language } = useLanguage();
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     phone: '',
@@ -36,20 +38,20 @@ export default function Contact() {
 
   const studios = {
     'tel-aviv': [
-      { id: 'telaviv', name: 'סטודיו פילאטיס ויוגה תל אביב', address: 'מקווה ישראל 4, תל אביב', phone: '050-9222062', whatsapp: '050-9222062' }
+      { id: 'telaviv', name: t('contact.studio.telaviv') }
     ],
     'ashdod': [
-      { id: 'ashdod-pilates', name: 'סטודיו פילאטיס ויוגה', address: 'רחוב התאנה, אשדוד', phone: '052-3139677', whatsapp: '052-3139677' },
-      { id: 'ashdod-functional', name: 'פונקציונלי אשדוד', address: 'רחוב היידן 3, אשדוד', phone: '052-3139677', whatsapp: '052-3139677' },
-      { id: 'ashdod-combined', name: 'מנוי משולב סניפים', address: 'כל הסניפים באשדוד', phone: '052-3139677', whatsapp: '052-3139677' }
+      { id: 'ashdodPilates', name: t('contact.studio.ashdodPilates') },
+      { id: 'ashdodFunctional', name: t('contact.studio.ashdodFunctional') },
+      { id: 'ashdodCombined', name: t('contact.studio.ashdodCombined') }
     ]
   }
 
   const trainingTypes = {
-    'telaviv': ['פילאטיס מכשירים', 'פילאטיס בר', 'פילאטיס מזרן', 'יוגה'],
-    'ashdod-pilates': ['פילאטיס מכשירים', 'פילאטיס מזרן', 'יוגה', 'מוביליטי/תנועה'],
-    'ashdod-functional': ['אימון כח פונקציונלי', 'מוביליטי/תנועה'],
-    'ashdod-combined': ['מנוי לכל סוגי האימונים בשני הסניפים']
+    'telaviv': [t('contact.trainingType.telaviv.0'), t('contact.trainingType.telaviv.1'), t('contact.trainingType.telaviv.2'), t('contact.trainingType.telaviv.3')],
+    'ashdodPilates': [t('contact.trainingType.ashdodPilates.0'), t('contact.trainingType.ashdodPilates.1'), t('contact.trainingType.ashdodPilates.2'), t('contact.trainingType.ashdodPilates.3')],
+    'ashdodFunctional': [t('contact.trainingType.ashdodFunctional.0'), t('contact.trainingType.ashdodFunctional.1')],
+    'ashdodCombined': [t('contact.trainingType.ashdodCombined.0')]
   }
 
   const validateForm = () => {
@@ -57,19 +59,19 @@ export default function Contact() {
     
     // בדיקה שהשם אינו ריק
     if (!formData.fullName.trim()) {
-      newErrors.fullName = 'נא להזין שם מלא'
+      newErrors.fullName = t('contact.error.fullName')
     }
     
     // בדיקת פורמט אימייל
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(formData.email)) {
-      newErrors.email = 'כתובת אימייל לא תקינה'
+      newErrors.email = t('contact.error.email')
     }
     
     // בדיקת מספר טלפון - מספרים בלבד ואורך תקין
     const phoneRegex = /^0\d{8,9}$/ // מתחיל ב-0 ולאחריו 8-9 ספרות
     if (!phoneRegex.test(formData.phone)) {
-      newErrors.phone = 'מספר טלפון לא תקין (יש להזין מספר ישראלי תקין)'
+      newErrors.phone = t('contact.error.phone')
     }
     
     setErrors(newErrors)
@@ -301,10 +303,10 @@ export default function Contact() {
             variants={titleVariants}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-ma-black mb-2">
-              רוצים להצטרף?
+              {t('contact.title')}
             </h2>
             <p className="text-ma-black/70 mx-auto">
-              השאירו פרטים ונחזור אליכם מיד לתיאום שיעור ניסיון
+              {t('contact.desc')}
             </p>
           </motion.div>
 
@@ -321,9 +323,9 @@ export default function Contact() {
                   </svg>
                 </div>
               </div>
-              <h3 className="text-xl font-bold">מעולה! הפרטים נשלחו</h3>
-              <p>נחזור אליך בהקדם כדי לתאם שיעור ניסיון</p>
-              {formData.wantConsultation && <p className="font-medium">שיחת הייעוץ שביקשת תתואם בהקדם.</p>}
+              <h3 className="text-xl font-bold">{t('contact.success.title')}</h3>
+              <p>{t('contact.success.desc')}</p>
+              {formData.wantConsultation && <p className="font-medium">{t('contact.success.consultation')}</p>}
             </motion.div>
           ) : (
             <motion.form 
@@ -333,15 +335,15 @@ export default function Contact() {
             >
               {submitError && (
                 <div className="bg-red-50 text-red-700 p-4 rounded-xl mb-6 border border-red-200">
-                  <p className="font-medium">שגיאה בשליחת הטופס</p>
-                  <p className="text-sm">{submitError}</p>
+                  <p className="font-medium">{t('contact.error.submitTitle')}</p>
+                  <p className="text-sm">{submitError || t('contact.error.submit')}</p>
                 </div>
               )}
             
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <motion.div variants={formItemVariants} className="space-y-2">
                   <label htmlFor="fullName" className="block text-sm font-medium text-ma-black">
-                    שם מלא<span className="text-red-500">*</span>
+                    {t('contact.label.fullName')}<span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -350,16 +352,17 @@ export default function Contact() {
                     required
                     value={formData.fullName}
                     onChange={handleChange}
+                    placeholder={t('contact.placeholder.fullName')}
                     className={`w-full px-4 py-3 rounded-xl bg-white/70 backdrop-blur-sm border ${
                       errors.fullName ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : 'border-gray-200 focus:border-[#8BA888] focus:ring-[#8BA888]/20'
                     } transition-colors`}
                   />
-                  {errors.fullName && <p className="text-red-500 text-xs">{errors.fullName}</p>}
+                  {errors.fullName && <p className="text-red-500 text-xs">{t('contact.error.fullName')}</p>}
                 </motion.div>
                 
                 <motion.div variants={formItemVariants} className="space-y-2">
                   <label htmlFor="phone" className="block text-sm font-medium text-ma-black">
-                    טלפון<span className="text-red-500">*</span>
+                    {t('contact.label.phone')}<span className="text-red-500">*</span>
                   </label>
                   <input
                     type="tel"
@@ -368,16 +371,17 @@ export default function Contact() {
                     required
                     value={formData.phone}
                     onChange={handleChange}
+                    placeholder={t('contact.placeholder.phone')}
                     className={`w-full px-4 py-3 rounded-xl bg-white/70 backdrop-blur-sm border ${
                       errors.phone ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : 'border-gray-200 focus:border-[#8BA888] focus:ring-[#8BA888]/20'
                     } transition-colors`}
                   />
-                  {errors.phone && <p className="text-red-500 text-xs">{errors.phone}</p>}
+                  {errors.phone && <p className="text-red-500 text-xs">{t('contact.error.phone')}</p>}
                 </motion.div>
                 
                 <motion.div variants={formItemVariants} className="space-y-2">
                   <label htmlFor="email" className="block text-sm font-medium text-ma-black">
-                    אימייל<span className="text-red-500">*</span>
+                    {t('contact.label.email')}<span className="text-red-500">*</span>
                   </label>
                   <input
                     type="email"
@@ -386,16 +390,17 @@ export default function Contact() {
                     required
                     value={formData.email}
                     onChange={handleChange}
+                    placeholder={t('contact.placeholder.email')}
                     className={`w-full px-4 py-3 rounded-xl bg-white/70 backdrop-blur-sm border ${
                       errors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : 'border-gray-200 focus:border-[#8BA888] focus:ring-[#8BA888]/20'
                     } transition-colors`}
                   />
-                  {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
+                  {errors.email && <p className="text-red-500 text-xs">{t('contact.error.email')}</p>}
                 </motion.div>
                 
                 <motion.div variants={formItemVariants} className="space-y-2">
                   <label htmlFor="city" className="block text-sm font-medium text-ma-black">
-                    עיר<span className="text-red-500">*</span>
+                    {t('contact.label.city')}<span className="text-red-500">*</span>
                   </label>
                   <select
                     id="city"
@@ -405,15 +410,15 @@ export default function Contact() {
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl bg-white/70 backdrop-blur-sm border border-gray-200 focus:border-[#8BA888] focus:ring-2 focus:ring-[#8BA888]/20 transition-colors"
                   >
-                    <option value="">בחרו עיר</option>
-                    <option value="tel-aviv">תל אביב</option>
-                    <option value="ashdod">אשדוד</option>
+                    <option value="">{t('contact.placeholder.city')}</option>
+                    <option value="tel-aviv">{t('contact.city.telAviv')}</option>
+                    <option value="ashdod">{t('contact.city.ashdod')}</option>
                   </select>
                 </motion.div>
                 
                 <motion.div variants={formItemVariants} className="space-y-2">
                   <label htmlFor="studio" className="block text-sm font-medium text-ma-black">
-                    סטודיו<span className="text-red-500">*</span>
+                    {t('contact.label.studio')}<span className="text-red-500">*</span>
                   </label>
                   <select
                     id="studio"
@@ -423,10 +428,10 @@ export default function Contact() {
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl bg-white/70 backdrop-blur-sm border border-gray-200 focus:border-[#8BA888] focus:ring-2 focus:ring-[#8BA888]/20 transition-colors"
                   >
-                    <option value="">בחרו סטודיו</option>
+                    <option value="">{t('contact.placeholder.studio')}</option>
                     {formData.city && studios[formData.city].map(studio => (
                       <option key={studio.id} value={studio.id}>
-                        {studio.name} - {studio.address}
+                        {studio.name}
                       </option>
                     ))}
                   </select>
@@ -434,7 +439,7 @@ export default function Contact() {
                 
                 <motion.div variants={formItemVariants} className="space-y-2">
                   <label htmlFor="trainingType" className="block text-sm font-medium text-ma-black">
-                    סוג אימון<span className="text-red-500">*</span>
+                    {t('contact.label.trainingType')}<span className="text-red-500">*</span>
                   </label>
                   <select
                     id="trainingType"
@@ -444,9 +449,9 @@ export default function Contact() {
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl bg-white/70 backdrop-blur-sm border border-gray-200 focus:border-[#8BA888] focus:ring-2 focus:ring-[#8BA888]/20 transition-colors"
                   >
-                    <option value="">בחרו סוג אימון</option>
-                    {formData.studio && trainingTypes[formData.studio as keyof typeof trainingTypes]?.map(type => (
-                      <option key={type} value={type}>
+                    <option value="">{t('contact.placeholder.trainingType')}</option>
+                    {formData.studio && trainingTypes[formData.studio as keyof typeof trainingTypes]?.map((type, idx) => (
+                      <option key={type + idx} value={type}>
                         {type}
                       </option>
                     ))}
@@ -456,7 +461,7 @@ export default function Contact() {
 
               <motion.div variants={formItemVariants} className="mt-5">
                 <label htmlFor="message" className="block text-sm font-medium text-ma-black mb-2">
-                  הערות נוספות
+                  {t('contact.label.message')}
                 </label>
                 <textarea
                   id="message"
@@ -464,6 +469,7 @@ export default function Contact() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={3}
+                  placeholder={t('contact.placeholder.message')}
                   className="w-full px-4 py-3 rounded-xl bg-white/70 backdrop-blur-sm border border-gray-200 focus:border-[#8BA888] focus:ring-2 focus:ring-[#8BA888]/20 transition-colors"
                 ></textarea>
               </motion.div>
@@ -478,13 +484,13 @@ export default function Contact() {
                   className="w-4 h-4 text-[#8BA888] rounded-full border-gray-300 focus:ring-[#8BA888]/30"
                 />
                 <label htmlFor="wantConsultation" className="text-ma-black mr-2 text-sm">
-                  אני מעוניין/ת בשיחת ייעוץ אישית חינם
+                  {t('contact.label.wantConsultation')}
                 </label>
               </motion.div>
 
               <div className="border-t border-gray-200 pt-5 mt-6">
                 <p className="text-xs text-gray-500 mb-4">
-                  <span className="text-red-500">*</span> שדות חובה
+                  <span className="text-red-500">*</span> {t('contact.label.required')}
                 </p>
                 <div className="flex flex-col gap-3 justify-center items-center mt-2">
                   <motion.button
@@ -502,10 +508,10 @@ export default function Contact() {
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                           </svg>
-                          שולח...
+                          {t('contact.button.sending')}
                         </span>
                       ) : (
-                        'שליחה'
+                        t('contact.button.submit')
                       )}
                     </span>
                     <div className="absolute inset-0 bg-gradient-to-r from-[#8BA888] to-[#9DB89A] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -517,7 +523,7 @@ export default function Contact() {
                     className="w-full md:w-auto px-10 py-3 border-2 border-[#8BA888] text-[#8BA888] rounded-xl font-medium text-center transition-all hover:bg-[#8BA888]/10 focus:outline-none"
                     style={{marginTop: '0.5rem'}}
                   >
-                    שלחו הודעה
+                    {t('contact.button.sendMessage')}
                   </a>
                 </div>
               </div>
