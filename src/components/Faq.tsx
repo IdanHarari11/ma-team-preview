@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { useLanguage } from '../hooks/useLanguage';
 
 export default function Faq() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const [openIndex, setOpenIndex] = useState<number | null>(null)
@@ -147,32 +147,105 @@ export default function Faq() {
                 <div
                   className={`px-6 transition-all duration-300 ease-in-out ${
                     openIndex === index
-                      ? 'max-h-96 py-4 opacity-100'
+                      ? 'max-h-[800px] py-4 opacity-100'
                       : 'max-h-0 py-0 opacity-0'
                   }`}
                 >
-                  <div className="text-ma-black/80 text-right whitespace-pre-line">
-                    {faq.answer.split('\n').map((line, lineIndex) => {
-                      if (line.startsWith('**') && line.endsWith('**')) {
-                        // Bold text
-                        const boldText = line.slice(2, -2);
-                        return (
-                          <div key={lineIndex} className="font-bold text-ma-black mb-2">
-                            {boldText}
+                                    <div className="text-ma-black/80" dir={language === 'he' ? 'rtl' : 'ltr'}>
+                    {index === 0 ? (
+                      <div className="space-y-6">
+                        <div className="font-medium">{t('faq.branches.intro')}</div>
+                        
+                        <div className="space-y-6">
+                          {/* סניף אשדוד פילאטיס */}
+                          <div className="bg-white/50 rounded-lg p-4 border-r-4 border-[#A8C3A1]">
+                            <div className="font-bold text-lg text-[#2C3338] mb-2">
+                              {t('faq.branches.ashdodPilates.title')}
+                            </div>
+                            <div className="text-[#666] mb-3 mr-4">
+                              {t('faq.branches.ashdodPilates.address')}
+                            </div>
+                            <a
+                              href={language === 'he' ? "https://maps.google.com/?q=רחוב התחנה, אשדוד" : "https://maps.google.com/?q=HaTachana St., Ashdod"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center bg-[#A8C3A1] text-white text-sm px-4 py-2 rounded-lg font-bold hover:bg-[#90AC8F] transition-colors shadow-sm"
+                            >
+                              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                              </svg>
+                              {t('faq.branches.mapButton')}
+                            </a>
                           </div>
-                        );
-                      } else if (line.trim() === '') {
-                        // Empty line for spacing
-                        return <div key={lineIndex} className="h-2"></div>;
-                      } else {
-                        // Regular text
-                        return (
-                          <div key={lineIndex} className="mb-1">
-                            {line}
+
+                          {/* סניף אשדוד פונקציונלי */}
+                          <div className="bg-white/50 rounded-lg p-4 border-r-4 border-[#A8C3A1]">
+                            <div className="font-bold text-lg text-[#2C3338] mb-2">
+                              {t('faq.branches.ashdodFunctional.title')}
+                            </div>
+                            <div className="text-[#666] mb-3 mr-4">
+                              {t('faq.branches.ashdodFunctional.address')}
+                            </div>
+                            <a
+                              href={language === 'he' ? "https://maps.google.com/?q=רחוב הרידינג, אשדוד" : "https://maps.google.com/?q=HaYarden St., Ashdod"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center bg-[#A8C3A1] text-white text-sm px-4 py-2 rounded-lg font-bold hover:bg-[#90AC8F] transition-colors shadow-sm"
+                            >
+                              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                              </svg>
+                              {t('faq.branches.mapButton')}
+                            </a>
                           </div>
-                        );
-                      }
-                    })}
+
+                          {/* סניף תל אביב */}
+                          <div className="bg-white/50 rounded-lg p-4 border-r-4 border-[#A8C3A1]">
+                            <div className="font-bold text-lg text-[#2C3338] mb-2">
+                              {t('faq.branches.telAviv.title')}
+                            </div>
+                            <div className="text-[#666] mb-3 mr-4">
+                              {t('faq.branches.telAviv.address')}
+                            </div>
+                            <a
+                              href={language === 'he' ? "https://maps.google.com/?q=מקווה ישראל 4, תל אביב" : "https://maps.google.com/?q=4 Mikveh Israel St., Tel Aviv"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center bg-[#A8C3A1] text-white text-sm px-4 py-2 rounded-lg font-bold hover:bg-[#90AC8F] transition-colors shadow-sm"
+                            >
+                              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                              </svg>
+                              {t('faq.branches.mapButton')}
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                        <div 
+                          className="whitespace-pre-line"
+                          dangerouslySetInnerHTML={{
+                            __html: faq.answer
+                              .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                              .replace(/\n/g, '<br />')
+                          }}
+                        />
+                        {index === 1 && (
+                          <div className="pt-4">
+                            <a
+                              href="#contact"
+                              className="inline-flex items-center bg-[#A8C3A1] text-white text-sm px-6 py-3 rounded-lg font-bold hover:bg-[#90AC8F] transition-colors shadow-sm"
+                            >
+                              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                              {t('faq.registerButton')}
+                            </a>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               </motion.div>

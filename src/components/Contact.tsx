@@ -108,7 +108,7 @@ export default function Contact() {
         
         // מיקום
         businessName: studioInfo?.name || '',
-        businessLocation: studioInfo?.address || '',
+        businessLocation: formData.city === 'tel-aviv' ? 'Tel Aviv' : 'Ashdod',
         
         // פרטים נוספים
         wantConsultation: formData.wantConsultation,

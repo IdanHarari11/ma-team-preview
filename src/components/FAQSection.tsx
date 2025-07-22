@@ -4,46 +4,73 @@ const faqs = [
   {
     question: "כמה סניפים יש ל־M.A והיכן הם נמצאים?",
     answer: (
-      <div dir="rtl" className="space-y-4 text-[16px] md:text-[18px] text-[#333] leading-relaxed">
-        <div>נכון להיום יש לנו שלושה סניפים פעילים:</div>
-        <ul className="mt-2 space-y-4">
-          <li>
-            <span className="font-bold">סניף אשדוד פילאטיס מכשירים, פילאטיס מזרן, יוגה ומוביליטי</span>
-            <span> (נמצא ברחוב התחנה, אשדוד) </span>
+      <div dir="rtl" className="space-y-6 text-[16px] md:text-[18px] text-[#333] leading-relaxed">
+        <div className="font-medium">נכון להיום יש לנו שלושה סניפים פעילים:</div>
+        
+        <div className="space-y-6">
+          {/* סניף אשדוד פילאטיס */}
+          <div className="bg-white/50 rounded-lg p-4 border-r-4 border-[#A8C3A1]">
+            <div className="font-bold text-lg text-[#2C3338] mb-2">
+              • סניף אשדוד פילאטיס מכשירים, פילאטיס מזרן, יוגה ומוביליטי
+            </div>
+            <div className="text-[#666] mb-3 mr-4">
+              נמצא ברחוב התחנה, אשדוד
+            </div>
             <a
               href="https://maps.google.com/?q=רחוב התחנה, אשדוד"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block align-middle bg-[#A8C3A1] text-white text-sm px-4 py-1 rounded-full font-bold hover:bg-[#90AC8F] transition-colors ml-2"
+              className="inline-flex items-center bg-[#A8C3A1] text-white text-sm px-4 py-2 rounded-lg font-bold hover:bg-[#90AC8F] transition-colors shadow-sm"
             >
-              מפה
+              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+              פתח במפה
             </a>
-          </li>
-          <li>
-            <span className="font-bold">סניף אשדוד פונקציונלי</span>
-            <span> (נמצא ברחוב הרידינג, אשדוד) </span>
+          </div>
+
+          {/* סניף אשדוד פונקציונלי */}
+          <div className="bg-white/50 rounded-lg p-4 border-r-4 border-[#A8C3A1]">
+            <div className="font-bold text-lg text-[#2C3338] mb-2">
+              • סניף אשדוד פונקציונלי
+            </div>
+            <div className="text-[#666] mb-3 mr-4">
+              נמצא ברחוב הרידינג, אשדוד
+            </div>
             <a
               href="https://maps.google.com/?q=רחוב הרידינג, אשדוד"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block align-middle bg-[#A8C3A1] text-white text-sm px-4 py-1 rounded-full font-bold hover:bg-[#90AC8F] transition-colors ml-2"
+              className="inline-flex items-center bg-[#A8C3A1] text-white text-sm px-4 py-2 rounded-lg font-bold hover:bg-[#90AC8F] transition-colors shadow-sm"
             >
-              מפה
+              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+              פתח במפה
             </a>
-          </li>
-          <li>
-            <span className="font-bold">סניף תל אביב</span>
-            <span> – כולל פילאטיס מכשירים, פילאטיס מזרן ויוגה (מקווה ישראל 4, תל אביב) </span>
+          </div>
+
+          {/* סניף תל אביב */}
+          <div className="bg-white/50 rounded-lg p-4 border-r-4 border-[#A8C3A1]">
+            <div className="font-bold text-lg text-[#2C3338] mb-2">
+              • סניף תל אביב
+            </div>
+            <div className="text-[#666] mb-3 mr-4">
+              כולל פילאטיס מכשירים, פילאטיס מזרן ויוגה (מקווה ישראל 4, תל אביב)
+            </div>
             <a
               href="https://maps.google.com/?q=מקווה ישראל 4, תל אביב"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block align-middle bg-[#A8C3A1] text-white text-sm px-4 py-1 rounded-full font-bold hover:bg-[#90AC8F] transition-colors ml-2"
+              className="inline-flex items-center bg-[#A8C3A1] text-white text-sm px-4 py-2 rounded-lg font-bold hover:bg-[#90AC8F] transition-colors shadow-sm"
             >
-              מפה
+              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+              פתח במפה
             </a>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     ),
   },
