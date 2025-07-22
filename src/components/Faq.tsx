@@ -151,8 +151,28 @@ export default function Faq() {
                       : 'max-h-0 py-0 opacity-0'
                   }`}
                 >
-                  <div className="text-ma-black/80 text-right">
-                    {faq.answer}
+                  <div className="text-ma-black/80 text-right whitespace-pre-line">
+                    {faq.answer.split('\n').map((line, lineIndex) => {
+                      if (line.startsWith('**') && line.endsWith('**')) {
+                        // Bold text
+                        const boldText = line.slice(2, -2);
+                        return (
+                          <div key={lineIndex} className="font-bold text-ma-black mb-2">
+                            {boldText}
+                          </div>
+                        );
+                      } else if (line.trim() === '') {
+                        // Empty line for spacing
+                        return <div key={lineIndex} className="h-2"></div>;
+                      } else {
+                        // Regular text
+                        return (
+                          <div key={lineIndex} className="mb-1">
+                            {line}
+                          </div>
+                        );
+                      }
+                    })}
                   </div>
                 </div>
               </motion.div>
