@@ -142,7 +142,7 @@
     "contact.error.submit": "אירעה שגיאה בשליחת הטופס",
     "contact.error.fullName": "נא להזין שם מלא",
     "contact.error.email": "כתובת אימייל לא תקינה",
-    "contact.error.phone": "מספר טלפון לא תקין (יש להזין מספר ישראלי תקין)"
+    "contact.error.phone": "מספר טלפון לא תקין (יש להזין מספר טלפון תקין)"
   },
   "en": {
     "navbar.about": "About Us",
@@ -287,6 +287,6 @@
     "contact.error.submit": "An error occurred while submitting the form",
     "contact.error.fullName": "Please enter your full name",
     "contact.error.email": "Invalid email address",
-    "contact.error.phone": "Invalid phone number (please enter a valid Israeli number)"
+    "contact.error.phone": "Invalid phone number (please enter a valid phone number)"
   }
 }

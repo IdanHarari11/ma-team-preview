@@ -9,7 +9,8 @@ import { useLanguage } from '@/hooks/useLanguage';
 
 interface FormData {
   fullName: string
-  phone: string
+  countryCode: string
+  phoneNumber: string
   email: string
   city: 'tel-aviv' | 'ashdod'
   studio: string
@@ -22,7 +23,8 @@ export default function Contact() {
   const { t, language } = useLanguage();
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
-    phone: '',
+    countryCode: '+972',
+    phoneNumber: '',
     email: '',
     city: 'tel-aviv',
     studio: '',
@@ -35,6 +37,20 @@ export default function Contact() {
   const [errors, setErrors] = useState<Partial<FormData>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
+
+  // מערך קידומות בינלאומיות
+  const countryCodes = [
+    { code: '+972', country: 'Israel', flag: '🇮🇱' },
+    { code: '+1', country: 'United States', flag: '🇺🇸' },
+    { code: '+33', country: 'France', flag: '🇫🇷' },
+    { code: '+7', country: 'Russia', flag: '🇷🇺' },
+    { code: '+44', country: 'United Kingdom', flag: '🇬🇧' },
+    { code: '+49', country: 'Germany', flag: '🇩🇪' },
+    { code: '+39', country: 'Italy', flag: '🇮🇹' },
+    { code: '+380', country: 'Ukraine', flag: '🇺🇦' },
+    { code: '+48', country: 'Poland', flag: '🇵🇱' },
+    { code: '+55', country: 'Brazil', flag: '🇧🇷' }
+  ]
 
   const studios = {
     'tel-aviv': [
@@ -69,9 +85,9 @@ export default function Contact() {
     }
     
     // בדיקת מספר טלפון - מספרים בלבד ואורך תקין
-    const phoneRegex = /^0\d{8,9}$/ // מתחיל ב-0 ולאחריו 8-9 ספרות
-    if (!phoneRegex.test(formData.phone)) {
-      newErrors.phone = t('contact.error.phone')
+    const phoneRegex = /^\d{7,15}$/ // 7-15 ספרות
+    if (!phoneRegex.test(formData.phoneNumber)) {
+      newErrors.phoneNumber = t('contact.error.phone')
     }
     
     setErrors(newErrors)
@@ -98,7 +114,7 @@ export default function Contact() {
         // פרטים בסיסיים
         name: formData.fullName,
         email: formData.email,
-        phone: formData.phone,
+        phone: formData.countryCode + formData.phoneNumber,
         
         // פרטי פעילות
         city: formData.city === "tel-aviv" ? "תל אביב" : 
@@ -138,7 +154,8 @@ export default function Contact() {
         setIsSubmitted(false)
         setFormData({
           fullName: '',
-          phone: '',
+          countryCode: '+972',
+          phoneNumber: '',
           email: '',
           city: 'tel-aviv',
           studio: '',
@@ -364,19 +381,38 @@ export default function Contact() {
                   <label htmlFor="phone" className="block text-sm font-medium text-ma-black">
                     {t('contact.label.phone')}<span className="text-red-500">*</span>
                   </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder={t('contact.placeholder.phone')}
-                    className={`w-full px-4 py-3 rounded-xl bg-white/70 backdrop-blur-sm border ${
-                      errors.phone ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : 'border-gray-200 focus:border-[#8BA888] focus:ring-[#8BA888]/20'
-                    } transition-colors`}
-                  />
-                  {errors.phone && <p className="text-red-500 text-xs">{t('contact.error.phone')}</p>}
+                  <div className={`flex gap-2 ${language === 'en' ? 'flex-row-reverse' : 'flex-row'}`}>
+                    {/* Input למספר הטלפון */}
+                    <input
+                      type="tel"
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      required
+                      value={formData.phoneNumber}
+                      onChange={handleChange}
+                      placeholder={language === 'en' ? 'Insert phone number' : 'הכנס את מספר הטלפון שלך'}
+                      className={`w-[70%] px-4 py-3 rounded-xl bg-white/70 backdrop-blur-sm border ${
+                        errors.phoneNumber ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : 'border-gray-200 focus:border-[#8BA888] focus:ring-[#8BA888]/20'
+                      } transition-colors ${language === 'en' ? 'text-left' : 'text-right'}`}
+                    />
+                    
+                    {/* Dropdown לקידומת בינלאומית */}
+                    <select
+                      id="countryCode"
+                      name="countryCode"
+                      required
+                      value={formData.countryCode}
+                      onChange={handleChange}
+                      className={`w-[30%] px-3 py-3 rounded-xl bg-white/70 backdrop-blur-sm border border-gray-200 focus:border-[#8BA888] focus:ring-2 focus:ring-[#8BA888]/20 transition-colors ${language === 'en' ? 'text-left' : 'text-right'}`}
+                    >
+                      {countryCodes.map((country) => (
+                        <option key={country.code} value={country.code}>
+                          {country.flag} {country.code}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  {errors.phoneNumber && <p className="text-red-500 text-xs">{t('contact.error.phone')}</p>}
                 </motion.div>
                 
                 <motion.div variants={formItemVariants} className="space-y-2">
