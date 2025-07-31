@@ -9,11 +9,13 @@ import ScrollToTop from '@/components/ScrollToTop';
 export default function ClientRoot({ children, rubikClass }: { children: React.ReactNode, rubikClass: string }) {
   const { language } = useLanguage();
   
-  // עדכון ה-HTML tag לפי השפה
+  // עדכון ה-HTML tag לפי השפה - רק בצד הלקוח
   useEffect(() => {
-    const htmlElement = document.documentElement;
-    htmlElement.lang = language;
-    htmlElement.dir = language === 'he' ? 'rtl' : 'ltr';
+    if (typeof window !== 'undefined') {
+      const htmlElement = document.documentElement;
+      htmlElement.lang = language;
+      htmlElement.dir = language === 'he' ? 'rtl' : 'ltr';
+    }
   }, [language]);
   
   return (
