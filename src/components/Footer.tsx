@@ -209,12 +209,20 @@ export default function Footer() {
           </p>
           
           <div className="flex items-center space-x-6 space-x-reverse">
-            <Link href="/privacy-policy" className="text-white/50 hover:text-white text-sm transition-colors">
+            <button 
+              type="button"
+              onClick={() => window.openLegal && window.openLegal("privacy")} 
+              className="text-white/50 hover:text-white text-sm transition-colors cursor-pointer"
+            >
               מדיניות פרטיות
-            </Link>
-            <Link href="/terms" className="text-white/50 hover:text-white text-sm transition-colors">
+            </button>
+            <button 
+              type="button"
+              onClick={() => window.openLegal && window.openLegal("terms")} 
+              className="text-white/50 hover:text-white text-sm transition-colors cursor-pointer"
+            >
               תנאי שימוש
-            </Link>
+            </button>
             <Link href="/accessibility" className="text-white/50 hover:text-white text-sm transition-colors">
               הצהרת נגישות
             </Link>

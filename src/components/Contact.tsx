@@ -98,6 +98,18 @@ export default function Contact() {
     e.preventDefault()
     setSubmitError(null)
     
+    // בדיקת הסכמה משפטית
+    const form = e.currentTarget;
+    const consent = form.querySelector<HTMLInputElement>('input[name="legalConsent"]');
+    if (!consent?.checked) { 
+      e.preventDefault(); 
+      alert("יש לאשר את מדיניות הפרטיות ותנאי השימוש"); 
+      return; 
+    }
+    
+    // הזרקת זמן הסכמה
+    (form.querySelector('input[name="consentAt"]') as HTMLInputElement).value = new Date().toISOString();
+    
     if (!validateForm()) {
       return
     }
@@ -128,7 +140,12 @@ export default function Contact() {
         
         // פרטים נוספים
         wantConsultation: formData.wantConsultation,
-        notes: formData.message || ""
+        notes: formData.message || "",
+        
+        // פרטי הסכמה משפטית
+        consentAt: (form.querySelector('input[name="consentAt"]') as HTMLInputElement).value,
+        privacyVersion: (form.querySelector('input[name="privacyVersion"]') as HTMLInputElement).value,
+        termsVersion: (form.querySelector('input[name="termsVersion"]') as HTMLInputElement).value
       }
 
       // שליחת הנתונים ל-API
@@ -523,6 +540,42 @@ export default function Contact() {
                   {t('contact.label.wantConsultation')}
                 </label>
               </motion.div>
+
+              {/* צ'קבוקס הסכמה משפטית */}
+              <motion.div variants={formItemVariants} className="mt-5">
+                <label className="flex items-start gap-2 text-sm mt-3">
+                  <input 
+                    type="checkbox" 
+                    name="legalConsent" 
+                    required 
+                    className="w-4 h-4 text-[#8BA888] rounded-full border-gray-300 focus:ring-[#8BA888]/30 mt-0.5"
+                  />
+                  <span className="text-ma-black">
+                    אני מאשר/ת את{" "}
+                    <button 
+                      type="button" 
+                      className="underline text-[#8BA888] hover:text-[#6e8c6e] transition-colors" 
+                      onClick={() => window.openLegal && window.openLegal("privacy")}
+                    >
+                      מדיניות הפרטיות
+                    </button>
+                    {" "}ו{" "}
+                    <button 
+                      type="button" 
+                      className="underline text-[#8BA888] hover:text-[#6e8c6e] transition-colors" 
+                      onClick={() => window.openLegal && window.openLegal("terms")}
+                    >
+                      תנאי השימוש
+                    </button>
+                    .
+                  </span>
+                </label>
+              </motion.div>
+
+              {/* שדות מוסתרים לתיעוד הסכמה */}
+              <input type="hidden" name="consentAt" />
+              <input type="hidden" name="privacyVersion" value="2025-08" />
+              <input type="hidden" name="termsVersion" value="2025-08" />
 
               <div className="border-t border-gray-200 pt-5 mt-6">
                 <p className="text-xs text-gray-500 mb-4">

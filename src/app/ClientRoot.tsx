@@ -5,6 +5,7 @@ import NagishLi from '@/components/ui/NagishLi';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
+import LegalCenter from '@/components/LegalCenter';
 
 export default function ClientRoot({ children, rubikClass }: { children: React.ReactNode, rubikClass: string }) {
   const { language } = useLanguage();
@@ -43,6 +44,7 @@ export default function ClientRoot({ children, rubikClass }: { children: React.R
           </svg>
         </a>
       </div>
+      <LegalCenter />
     </body>
   );
 } 
