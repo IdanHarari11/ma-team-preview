@@ -145,7 +145,7 @@ export default function About() {
     }
   ];
   
-  // קרוסלה פנימית לכל שיעור עם יותר מתמונה אחת
+  // קרוסלה פנימית לכל שיעור עם כמה תמונות
   const [classImageIndexes, setClassImageIndexes] = useState(classTypes.map(() => 0));
   useEffect(() => {
     const intervals: NodeJS.Timeout[] = [];
