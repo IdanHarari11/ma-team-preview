@@ -166,7 +166,7 @@ export default function Faq() {
                               {t('faq.branches.ashdodPilates.address')}
                             </div>
                             <a
-                              href={language === 'he' ? "https://maps.google.com/?q=רחוב התחנה, אשדוד" : "https://maps.google.com/?q=HaTachana St., Ashdod"}
+                              href={t('branch.ashdod1.mapUrl')}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="inline-flex items-center bg-[#A8C3A1] text-white text-sm px-4 py-2 rounded-lg font-bold hover:bg-[#90AC8F] transition-colors shadow-sm"
@@ -187,7 +187,7 @@ export default function Faq() {
                               {t('faq.branches.ashdodFunctional.address')}
                             </div>
                             <a
-                              href={language === 'he' ? "https://maps.google.com/?q=רחוב הרידינג, אשדוד" : "https://maps.google.com/?q=HaYarden St., Ashdod"}
+                              href={t('branch.ashdod2.mapUrl')}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="inline-flex items-center bg-[#A8C3A1] text-white text-sm px-4 py-2 rounded-lg font-bold hover:bg-[#90AC8F] transition-colors shadow-sm"
@@ -208,7 +208,7 @@ export default function Faq() {
                               {t('faq.branches.telAviv.address')}
                             </div>
                             <a
-                              href={language === 'he' ? "https://maps.google.com/?q=מקווה ישראל 4, תל אביב" : "https://maps.google.com/?q=4 Mikveh Israel St., Tel Aviv"}
+                              href={t('branch.tlv.mapUrl')}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="inline-flex items-center bg-[#A8C3A1] text-white text-sm px-4 py-2 rounded-lg font-bold hover:bg-[#90AC8F] transition-colors shadow-sm"
