@@ -8,16 +8,16 @@ const faqs = [
         <div className="font-medium">נכון להיום יש לנו שלושה סניפים פעילים:</div>
         
         <div className="space-y-6">
-          {/* סניף אשדוד פילאטיס */}
+          {/* סניף אשדוד פילאטיס ויוגה */}
           <div className="bg-white/50 rounded-lg p-4 border-r-4 border-[#A8C3A1]">
             <div className="font-bold text-lg text-[#2C3338] mb-2">
-              • סניף אשדוד פילאטיס מכשירים, פילאטיס מזרן, יוגה ומוביליטי
+              • סניף אשדוד – יוגה ופילאטיס
             </div>
             <div className="text-[#666] mb-3 mr-4">
-              נמצא ברחוב התחנה, אשדוד
+              נמצא ברחוב התאנה 8, אשדוד
             </div>
             <a
-              href="https://maps.google.com/?q=רחוב התחנה, אשדוד"
+              href="https://maps.google.com/?q=%D7%A8%D7%97%D7%95%D7%91%20%D7%94%D7%AA%D7%90%D7%A0%D7%94%208%2C%20%D7%90%D7%A9%D7%93%D7%95%D7%93"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center bg-[#A8C3A1] text-white text-sm px-4 py-2 rounded-lg font-bold hover:bg-[#90AC8F] transition-colors shadow-sm"
@@ -35,10 +35,10 @@ const faqs = [
               • סניף אשדוד פונקציונלי
             </div>
             <div className="text-[#666] mb-3 mr-4">
-              נמצא ברחוב הרידינג, אשדוד
+              נמצא ברחוב היידן 3, אשדוד
             </div>
             <a
-              href="https://maps.google.com/?q=רחוב הרידינג, אשדוד"
+              href="https://share.google/qP4j2ZhpbRP6p35eM"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center bg-[#A8C3A1] text-white text-sm px-4 py-2 rounded-lg font-bold hover:bg-[#90AC8F] transition-colors shadow-sm"
@@ -56,10 +56,10 @@ const faqs = [
               • סניף תל אביב
             </div>
             <div className="text-[#666] mb-3 mr-4">
-              כולל פילאטיס מכשירים, פילאטיס מזרן ויוגה (מקווה ישראל 4, תל אביב)
+              כולל פילאטיס מכשירים, פילאטיס בר, פילאטיס מזרן ויוגה (מקווה ישראל 4, תל אביב)
             </div>
             <a
-              href="https://maps.google.com/?q=מקווה ישראל 4, תל אביב"
+              href="https://share.google/11WZzUz5HpWt0V46P"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center bg-[#A8C3A1] text-white text-sm px-4 py-2 rounded-lg font-bold hover:bg-[#90AC8F] transition-colors shadow-sm"
@@ -80,7 +80,7 @@ const faqs = [
       <div dir="rtl" className="space-y-4 text-[16px] md:text-[18px] text-[#333] leading-relaxed">
         <div>
           אנחנו קודם כל משפחה – ולפני ההרשמה, חשוב לנו להכיר אתכם, להבין את הצרכים שלכם ולתכנן יחד את האימון שמתאים לכם.<br />
-          לאחר ההיכרות, התהליך פשוט ומהיר – ניתן לרכוש כרטיסיית היכרות, שיעור ניסיון או להירשם למנוי או כרטיסייה לפי בחירתכם.
+          לאחר ההיכרות, התהליך פשוט ומהיר – ניתן לרכוש חבילת 3 שיעורי ניסיון ב־99₪, כרטיסיית היכרות, או להירשם למנוי או כרטיסייה לפי בחירתכם.
         </div>
         <div>
           <a
@@ -99,7 +99,7 @@ const faqs = [
     answer: (
       <div dir="rtl" className="space-y-2 text-[16px] md:text-[18px] text-[#333] leading-relaxed">
         <div>
-          בודאי. יש אפשרות לשיעור ניסיון בודד, או לרכוש כרטיסיית היכרות הכוללת שני שיעורים – כדי לחוות לעומק את הסטודיו, האווירה והצוות.
+          בודאי. מציעים חבילת 3 שיעורי ניסיון ב־99₪. בנוסף, ניתן לרכוש כרטיסיית היכרות הכוללת שני שיעורים בתחום שתבחרו – כדי לחוות לעומק את הסטודיו, האווירה והצוות.
         </div>
       </div>
     ),
@@ -170,8 +170,8 @@ const faqs = [
     question: "האם יש חניה באזור?",
     answer: (
       <div dir="rtl" className="space-y-2 text-[16px] md:text-[18px] text-[#333] leading-relaxed">
-        <div><span className="font-bold">סניף אשדוד פילאטיס מכשירים:</span> חניה בשפע ללא עלות באזור הדוגה / פארינו (אסור לחנות ברחוב התחנה)</div>
-        <div><span className="font-bold">סניף אשדוד פונקציונלי:</span> חניה בשפע ללא עלות, רק לא לחסום את כניסת הרחוב והחניון</div>
+        <div><span className="font-bold">סניף אשדוד – יוגה ופילאטיס (התאנה 8):</span> חניה בשפע ללא עלות באזור הדוגה / פארינו (יש לשמור על חוקי החניה המקומיים)</div>
+        <div><span className="font-bold">סניף אשדוד פונקציונלי (היידן 3):</span> חניה בשפע ללא עלות, רק לא לחסום את כניסת הרחוב והחניון</div>
         <div><span className="font-bold">בתל אביב:</span> חניית רכבת הקלה 'אליפלט' ממש על הכניסה לסטודיו. קיימת חניה בשפע כחול לבן וחניונים בתשלום בחלק משעות היום, ויש נגישות גבוהה לתחבורה ציבורית/קורקינטים/אופניים.</div>
       </div>
     ),
