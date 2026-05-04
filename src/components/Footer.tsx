@@ -142,7 +142,7 @@ export default function Footer() {
               {/* פילאטיס ויוגה אשדוד */}
               <li className="mb-4">
                 <p className="font-medium mb-1">פילאטיס ויוגה אשדוד</p>
-                <p className="text-white/70 text-sm mb-1">רחוב התאנה, אשדוד</p>
+                <p className="text-white/70 text-sm mb-1">רחוב התאנה 8, אשדוד</p>
                 <a 
                   href="tel:052-3139677"
                   className="text-white/70 hover:text-white transition-colors text-sm inline-flex items-center"

@@ -38,7 +38,8 @@ export default function BranchSelector() {
         image: '/tlv-shipuz.webp',
         trainingTypes: t('branch.tlv.tags'),
         scheduleEmbed: 'https://gvjcxnmn.web.arboxapp.com/group?whitelabel=Arbox&amp;lang=he&amp;location=18873&amp;referrer=PLUGIN',
-        priceListEmbed: ''
+        priceListEmbed: '',
+        mapUrl: t('branch.tlv.mapUrl')
       }
     ],
     'ashdod': [
@@ -52,7 +53,8 @@ export default function BranchSelector() {
         image: '/functional-shipuz.webp',
         trainingTypes: t('branch.ashdod2.tags'),
         scheduleEmbed: 'https://aZTOzQDI.web.arboxapp.com/group?whitelabel=Arbox&lang=he&location=8394&referrer=PLUGIN',
-        priceListEmbed: 'https://aZTOzQDI.web.arboxapp.com/membership?whitelabel=Arbox&lang=he&location=8394&referrer=PLUGIN'
+        priceListEmbed: 'https://aZTOzQDI.web.arboxapp.com/membership?whitelabel=Arbox&lang=he&location=8394&referrer=PLUGIN',
+        mapUrl: t('branch.ashdod2.mapUrl')
       },
       {
         id: 'ashdod-yoga',
@@ -64,7 +66,8 @@ export default function BranchSelector() {
         image: '/ashdod-shipuz.webp',
         trainingTypes: t('branch.ashdod1.tags'),
         scheduleEmbed: 'https://aZTOzQDI.web.arboxapp.com/group?whitelabel=Arbox&lang=he&location=8394&referrer=PLUGIN',
-        priceListEmbed: 'https://aZTOzQDI.web.arboxapp.com/membership?whitelabel=Arbox&lang=he&location=8394&referrer=PLUGIN'
+        priceListEmbed: 'https://aZTOzQDI.web.arboxapp.com/membership?whitelabel=Arbox&lang=he&location=8394&referrer=PLUGIN',
+        mapUrl: t('branch.ashdod1.mapUrl')
       }
     ]
   }
@@ -218,7 +221,7 @@ export default function BranchSelector() {
                           
                           <div className="pt-3 flex flex-wrap gap-2">
                             <a
-                              href={`https://maps.google.com/?q=${encodeURIComponent(branch.address)}`}
+                              href={branch.mapUrl || `https://maps.google.com/?q=${encodeURIComponent(branch.address)}`}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors text-sm"
