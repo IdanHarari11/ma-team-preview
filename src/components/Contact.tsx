@@ -65,9 +65,28 @@ export default function Contact() {
 
   const trainingTypes = {
     'telaviv': [t('contact.trainingType.telaviv.0'), t('contact.trainingType.telaviv.1'), t('contact.trainingType.telaviv.2'), t('contact.trainingType.telaviv.3')],
-    'ashdodPilates': [t('contact.trainingType.ashdodPilates.0'), t('contact.trainingType.ashdodPilates.1'), t('contact.trainingType.ashdodPilates.2'), t('contact.trainingType.ashdodPilates.3')],
+    'ashdodPilates': [t('contact.trainingType.ashdodPilates.0'), t('contact.trainingType.ashdodPilates.1'), t('contact.trainingType.ashdodPilates.2'), t('contact.trainingType.ashdodPilates.3'), t('contact.trainingType.ashdodPilates.4')],
     'ashdodFunctional': [t('contact.trainingType.ashdodFunctional.0'), t('contact.trainingType.ashdodFunctional.1')],
     'ashdodCombined': [t('contact.trainingType.ashdodCombined.0')]
+  }
+
+  const isPhoneValid = (countryCode: string, phoneNumber: string) => {
+    const nationalDigits = phoneNumber.replace(/\D/g, '')
+    if (countryCode === '+972') {
+      return (
+        nationalDigits.length === 9 ||
+        (nationalDigits.length === 10 && nationalDigits.startsWith('0'))
+      )
+    }
+    return nationalDigits.length >= 7 && nationalDigits.length <= 15
+  }
+
+  const validatePhoneField = () => {
+    if (isPhoneValid(formData.countryCode, formData.phoneNumber)) {
+      setErrors((prev) => ({ ...prev, phoneNumber: undefined }))
+    } else {
+      setErrors((prev) => ({ ...prev, phoneNumber: t('contact.error.phone') }))
+    }
   }
 
   const validateForm = () => {
@@ -84,9 +103,7 @@ export default function Contact() {
       newErrors.email = t('contact.error.email')
     }
     
-    // בדיקת מספר טלפון - מספרים בלבד ואורך תקין
-    const phoneRegex = /^\d{7,15}$/ // 7-15 ספרות
-    if (!phoneRegex.test(formData.phoneNumber)) {
+    if (!isPhoneValid(formData.countryCode, formData.phoneNumber)) {
       newErrors.phoneNumber = t('contact.error.phone')
     }
     
@@ -407,6 +424,7 @@ export default function Contact() {
                       required
                       value={formData.phoneNumber}
                       onChange={handleChange}
+                      onBlur={validatePhoneField}
                       placeholder={language === 'en' ? 'Insert phone number' : 'הכנס את מספר הטלפון שלך'}
                       className={`w-[70%] px-4 py-3 rounded-xl bg-white/70 backdrop-blur-sm border ${
                         errors.phoneNumber ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : 'border-gray-200 focus:border-[#8BA888] focus:ring-[#8BA888]/20'
@@ -420,6 +438,7 @@ export default function Contact() {
                       required
                       value={formData.countryCode}
                       onChange={handleChange}
+                      onBlur={validatePhoneField}
                       className={`w-[30%] px-3 py-3 rounded-xl bg-white/70 backdrop-blur-sm border border-gray-200 focus:border-[#8BA888] focus:ring-2 focus:ring-[#8BA888]/20 transition-colors ${language === 'en' ? 'text-left' : 'text-right'}`}
                     >
                       {countryCodes.map((country) => (
