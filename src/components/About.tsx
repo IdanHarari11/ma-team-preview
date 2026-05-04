@@ -117,6 +117,12 @@ export default function About() {
       locations: t('classSection.availabilityLabel')
     },
     {
+      name: t('classSection.bar.title'),
+      images: ["/pilates/RASHTA-00526.jpg"],
+      description: t('classSection.bar.text'),
+      locations: t('classSection.bar.locations')
+    },
+    {
       name: t('classSection.functional.title'),
       images: ["/function/RASHTA-00254.jpg"],
       description: t('classSection.functional.text'),
