@@ -8,7 +8,8 @@
     "build": "node api.js && next build",
     "start": "node api.js && next start",
     "lint": "next lint",
-    "clean": "rm -rf .next && rm -rf node_modules/.cache"
+    "clean": "rm -rf .next && rm -rf node_modules/.cache",
+    "security:check-no-loader": "node scripts/check-no-loader.mjs"
   },
   "dependencies": {
     "critters": "^0.0.23",
